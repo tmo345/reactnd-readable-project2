@@ -52,6 +52,68 @@ type State = {
   }
 }
 
+const initialState = {
+  category: {},
+  posts: {
+    "abcdefg": {
+      id: "abcdefg",
+      timestamp: 42,
+      title: 'title',
+      body: 'body',
+      author: 'author',
+      category: 'category',
+      votedScore: 2,
+      deleted: false
+    }
+  },
+  comments: {}
+}
 
+export default function reducer(state: State = initialState, action: Action): State {
+  switch (action.type) {
 
+    case UP_VOTE_POST:
+      const id = action.id;
+      return {
+        ...state,
+        'posts': {
+          ...state['posts'],
+          [ id ]: {
+            ...state['posts'][ id ],
+            'votedScore': state['posts'][id]['votedScore'] + 1
+          }
+        }
+      }
+
+    case DOWN_VOTE_POST:
+      return state;
+
+    case UP_VOTE_COMMENT:
+      return state;
+
+    case DOWN_VOTE_COMMENT:
+      return state;
+
+    case ADD_POST:
+      return state;
+
+    case EDIT_POST:
+      return state;
+
+    case DELETE_POST:
+      return state;
+
+    case ADD_COMMENT:
+      return state;
+
+    case EDIT_COMMENT:
+      return state;
+
+    case DELETE_COMMENT:
+      return state;
+
+    default:
+      return state;
+  }
+}
 
