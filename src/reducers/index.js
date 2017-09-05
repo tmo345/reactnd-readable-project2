@@ -42,13 +42,13 @@ type Comment = {
 
 type State = {
   +category: {
-    [categoryName: string]: Category
+    [name: string]: Category
   },
   +posts: {
-    [postId: string]: Post
+    [id: string]: Post
   },
   +comments: {
-    [commentId: string]: Comment
+    [id: string]: Comment
   }
 }
 
