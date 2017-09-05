@@ -25,7 +25,7 @@ type Post = {
   +body: string,
   +author: string,
   +category: string,
-  +voteScore: number,
+  +votedScore: number,
   +deleted: boolean
 }
 
