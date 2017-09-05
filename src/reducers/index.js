@@ -30,14 +30,14 @@ type Post = {
 }
 
 type Comment = {
-  id: string,
-  parentId: string,
-  timestamp: number,
-  body: string,
-  author: string,
-  votedScore: number,
-  deleted: boolean,
-  parentDeleted: boolean
+  +id: string,
+  +parentId: string,
+  +timestamp: number,
+  +body: string,
+  +author: string,
+  +votedScore: number,
+  +deleted: boolean,
+  +parentDeleted: boolean
 }
 
 type State = {
