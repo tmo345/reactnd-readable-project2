@@ -1,5 +1,4 @@
 // @flow
-import { combineReducers } from 'redux';
 import {
   UP_VOTE_POST,
   DOWN_VOTE_POST,
@@ -10,8 +9,9 @@ import {
   DOWN_VOTE_COMMENT,
   ADD_COMMENT,
   EDIT_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
 } from '../actions'
+import type { Action } from '../actions';
 
 type Category = {
   +name: string,
