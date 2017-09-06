@@ -21,8 +21,7 @@ type Post = {|
   +author: string,
   +category: string,
   +votedScore: number,
-  +deleted: boolean
-}
+|}
 
 type Comment = {
   +id: string,
