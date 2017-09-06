@@ -11,14 +11,9 @@ import {
   EDIT_COMMENT,
   DELETE_COMMENT,
 } from '../actions'
-import type { Action } from '../actions';
+import type { PostAction, Action } from '../actions';
 
-type Category = {
-  +name: string,
-  +path: string
-}
-
-type Post = {
+type Post = {|
   +id: string,
   +timestamp: number,
   +title: string,
@@ -40,17 +35,12 @@ type Comment = {
   +parentDeleted: boolean
 }
 
-type State = {
-  +category: {
-    [name: string]: Category
+type PostState = {|
+  byId: {
+    [id: string] : Post
   },
-  +posts: {
-    [id: string]: Post
-  },
-  +comments: {
-    [id: string]: Comment
-  }
-}
+  allIds: Array<string>
+|}
 
 const initialState = {
   category: {},
