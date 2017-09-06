@@ -15,10 +15,31 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
-export type UpVotePost = { type: 'UP_VOTE_POST', id: string }
-export type DownVotePost = { type: 'DOWN_VOTE_POST', id: string }
-export type UpVoteComment = { type: 'UP_VOTE_COMMENT', id: string }
-export type DownVoteComment = { type: 'DOWN_VOTE_COMMENT', id: string }
+export type UpVotePost = {|
+  type: typeof UP_VOTE_POST,
+  id: string
+|};
+
+export type DownVotePost = {|
+  type: typeof DOWN_VOTE_POST,
+  id: string
+|};
+
+export type UpVoteComment = {|
+  type: typeof UP_VOTE_COMMENT,
+  id: string
+|};
+
+export type DownVoteComment = {|
+  type: typeof DOWN_VOTE_COMMENT,
+  id: string
+|};
+
+export type VoteAction =
+  | UpVotePost
+  | DownVotePost
+  | UpVoteComment
+  | DownVoteComment
 
 export type AddPost = {|
   type: typeof ADD_POST,
