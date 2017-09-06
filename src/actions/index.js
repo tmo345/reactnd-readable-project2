@@ -41,6 +41,11 @@ export type DeletePost = {
   id: string
 }
 
+export type PostAction =
+  | AddPost
+  | EditPost
+  | DeletePost;
+  
 export type AddComment = {
   type: typeof ADD_COMMENT,
   id: string,
