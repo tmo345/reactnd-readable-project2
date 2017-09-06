@@ -1,4 +1,5 @@
 // @flow
+const uuidv4 = require('uuid/v4');
 
 export const UP_VOTE_POST = 'UP_VOTE_POST';
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
@@ -19,27 +20,34 @@ export type DownVotePost = { type: 'DOWN_VOTE_POST', id: string }
 export type UpVoteComment = { type: 'UP_VOTE_COMMENT', id: string }
 export type DownVoteComment = { type: 'DOWN_VOTE_COMMENT', id: string }
 
-export type AddPost = {
+export type AddPost = {|
   type: typeof ADD_POST,
-  id: string,
-  timestamp: number,
-  title: string,
-  body: string,
-  author: string,
-  category: string
-}
+  postInfo: {
+    id: string,
+    timestamp: number,
+    title: string,
+    body: string,
+    author: string,
+    category: string,
+    votedScore: number
+  }
+|}
 
-export type EditPost = {
+export type EditPost = {|
   type: typeof EDIT_POST,
-  id: string,
-  title: string,
-  body: string
-}
+  postInfo: {
+    id: string,
+    title: string,
+    body: string
+  }
+|}
 
-export type DeletePost = {
+export type DeletePost = {|
   type: typeof DELETE_POST,
-  id: string
-}
+  postInfo: {
+    id: string
+  }
+|}
 
 export type PostAction =
   | AddPost
@@ -106,31 +114,41 @@ export function downVoteComment(id: string): DownVoteComment {
   }
 }
 
-export function addPost(id: string, timestamp: number, title: string, body: string, author: string, category: string): AddPost {
+export function addPost(
+  {title, body, author, category}:
+  {title: string, body: string, author: string, category: string}
+): AddPost {
   return {
     type: ADD_POST,
-    id,
-    timestamp,
-    title,
-    body,
-    author,
-    category
+    postInfo: {
+      id: uuidv4(),
+      timestamp: Date.now(),
+      title,
+      body,
+      author,
+      category,
+      votedScore: 1
+    }
   }
 }
 
 export function editPost(id: string, title: string, body: string): EditPost {
   return {
     type: EDIT_POST,
-    id,
-    title,
-    body
+    postInfo: {
+      id,
+      title,
+      body
+    }
   }
 }
 
 export function deletePost(id: string): DeletePost {
   return {
     type: DELETE_POST,
-    id
+    postInfo: {
+      id
+    }
   }
 }
 
