@@ -25,16 +25,6 @@ type Post = {|
   +votedScore: number,
 |}
 
-type Comment = {
-  +id: string,
-  +parentId: string,
-  +timestamp: number,
-  +body: string,
-  +author: string,
-  +votedScore: number,
-  +deleted: boolean,
-  +parentDeleted: boolean
-}
 
 type PostState = {|
   byId: {
