@@ -5,6 +5,7 @@ export const UP_VOTE_POST = 'UP_VOTE_POST';
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
 
 export const ADD_POST = 'ADD_POST';
+export const ADD_VOTE_FOR_NEW_POST = 'ADD_VOTE_FOR_NEW_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const DELETE_POST = 'DELETE_POST';
 
@@ -50,7 +51,16 @@ export type AddPost = {|
     body: string,
     author: string,
     category: string,
-    votedScore: number
+    votedScore: string
+  },
+  votes: {
+    byId: {
+      [id: string]: {
+        id: string,
+        votedScore: number
+      }
+    },
+    allIds: (?string)[]
   }
 |}
 
@@ -135,21 +145,30 @@ export function downVoteComment(id: string): DownVoteComment {
   }
 }
 
-export function addPost(
-  {title, body, author, category}:
-  {title: string, body: string, author: string, category: string}
-): AddPost {
-  return {
-    type: ADD_POST,
-    postInfo: {
-      id: uuidv4(),
-      timestamp: Date.now(),
-      title,
-      body,
-      author,
-      category,
-      votedScore: 1
-    }
+export function addPost({title, body, author, category}) {
+  return (dispatch, getState) => {
+    const uniqueId = `post-${uuidv4()}`;
+    dispatch({
+      type: ADD_VOTE_FOR_NEW_POST,
+      id: uniqueId
+    })
+
+    const state = getState();
+    const votes = state.votes;
+    dispatch({
+      type: ADD_POST,
+      postInfo: {
+        id: uniqueId,
+        timestamp: Date.now(),
+        title,
+        body,
+        author,
+        category,
+      },
+      votes
+    })
+
+
   }
 }
 
