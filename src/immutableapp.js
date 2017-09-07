@@ -26,3 +26,14 @@ type State = {
       }
   }
 }
+
+const initalStateJS: State = {
+  posts: {
+  },
+  comments: {
+  }
+};
+
+const initialState: Map<string,*> = fromJS(initalStateJS);
+
+
