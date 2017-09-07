@@ -11,7 +11,7 @@ import {
   EDIT_COMMENT,
   DELETE_COMMENT,
 } from '../actions'
-import type { PostAction, Action } from '../actions';
+import type { PostAction, VoteAction, Action } from '../actions';
 
 type Post = {|
   +id: string,
@@ -109,21 +109,59 @@ const posts = (state : PostState = initalPostState, action: PostAction): PostSta
   }
 }
 
-export default function reducer(state: State = initialState, action: Action): State {
-  switch (action.type) {
 
-    case UP_VOTE_POST:
-      const id = action.id;
+ type Vote = {
+   id: string,
+   votedScore: number
+ }
+
+type VoteState = {
+  byId: {
+    [id: string]: Vote
+  },
+  allIds: (?string)[]
+}
+
+const initialVoteState = {
+  byId: {},
+  allIds: []
+};
+
+
+const votes = (state: VoteState = initialVoteState, action: VoteAction): VoteState => {
+  switch (action.type) {
+    case ADD_VOTE_FOR_NEW_POST:
       return {
-        ...state,
-        'posts': {
-          ...state['posts'],
-          [ id ]: {
-            ...state['posts'][ id ],
-            'votedScore': state['posts'][id]['votedScore'] + 1
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            id: action.id,
+            votedScore: 1
           }
-        }
+        },
+        allIds: [...state.allIds, action.id]
       }
+    case UP_VOTE_POST:
+      return state;
+      // {
+      //   ...state,
+      //   'posts': {
+      //     'byId': {
+      //       ...state['posts']['byId'],
+      //       [action.id]: {
+      //         ...state['posts'][action.id],
+      //         'votedScore': state['posts'][action.id]['votedScore'] + 1
+      //       }
+      //     },
+      //     'allIds': [...state['posts']['allIds']]
+      //   },
+      //   'votes': {
+      //     'byId': {
+      //       ...state['votes']['byId']
+      //     },
+      //     'allIds': [...state['votes']['allIds']]
+      //   }
+      // }
 
     case DOWN_VOTE_POST:
       return state;
