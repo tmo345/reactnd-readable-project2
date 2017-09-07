@@ -160,7 +160,7 @@ export function addPost({title, body, author, category}) {
 
     const state = getState();
     const votes = state.votes;
-    
+
     dispatch({
       type: ADD_POST,
       postInfo: {
