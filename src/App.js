@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { addPost } from './actions';
+import { addPost } from './immutableapp';
 import { connect } from 'react-redux';
 
 class App extends Component {
