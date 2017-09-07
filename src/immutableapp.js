@@ -132,3 +132,94 @@ type Action =
   | EditComment
   | DeleteComment
 
+export function upVotePost(id: string): UpVotePost {
+  return {
+    type: UP_VOTE_POST,
+    id
+  }
+}
+
+export function downVotePost(id: string): DownVotePost {
+  return {
+    type: DOWN_VOTE_POST,
+    id
+  }
+}
+
+export function upVoteComment(id: string): UpVoteComment {
+  return {
+    type: UP_VOTE_COMMENT,
+    id
+  }
+}
+
+export function downVoteComment(id: string): DownVoteComment {
+  return {
+    type: DOWN_VOTE_COMMENT,
+    id
+  }
+}
+
+type AddPostFunction = { title: string, body: string, author: string, category: string } => AddPost
+export const addPost: AddPostFunction = ({title, body, author, category}) => {
+    const uniqueId = `post-${uuidv4()}`;
+    return {
+      type: ADD_POST,
+      postInfo: {
+        id: uniqueId,
+        timestamp: Date.now(),
+        title,
+        body,
+        author,
+        category,
+        votedScore: 1
+      }
+    }
+}
+
+export function editPost(id: string, title: string, body: string): EditPost {
+  return {
+    type: EDIT_POST,
+    postInfo: {
+      id,
+      title,
+      body
+    }
+  }
+}
+
+export function deletePost(id: string): DeletePost {
+  return {
+    type: DELETE_POST,
+    postInfo: {
+      id
+    }
+  }
+}
+
+export function addComment(id: string, timestamp: number, body: string, author: string, parentId: string ): AddComment {
+  return {
+    type: ADD_COMMENT,
+    id,
+    timestamp,
+    body,
+    author,
+    parentId
+  }
+}
+
+export function editComment(id: string, timestamp: number, body: string ): EditComment {
+  return {
+    type: EDIT_COMMENT,
+    timestamp,
+    body
+  }
+}
+
+export function deleteComment(id: string): DeleteComment {
+  return {
+    type: DELETE_COMMENT,
+    id
+  }
+}
+
