@@ -223,3 +223,43 @@ export function deleteComment(id: string): DeleteComment {
   }
 }
 
+
+export const reducer = (state: Map<string,*> = initialState, action: Action): Map<string,*> => {
+  switch(action.type) {
+    case ADD_POST:
+      {
+        const { id, timestamp, title, body, author, category, votedScore } = action.postInfo;
+        return state.mergeDeep(fromJS({
+          posts: {
+            [id]: {
+              id,
+              timestamp,
+              title,
+              body,
+              author,
+              category,
+              votedScore
+            }
+          }
+        }));
+      }
+
+    case EDIT_POST:
+      {
+        const { id, title, body } = action.postInfo;
+        return state.setIn(['posts', id, title], title).setIn( ['posts', id, body], body);
+      }
+
+    case DELETE_POST:
+      {
+        const { id } = action.postInfo;
+        return state.deleteIn(['posts', id])
+      }
+
+    case UP_VOTE_POST:
+      return state
+
+    default:
+      return state;
+  }
+}
