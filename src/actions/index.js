@@ -123,6 +123,13 @@ export type Action =
   | EditComment
   | DeleteComment;
 
+export function addVoteForNewPost(id: string): AddVoteForNewPost {
+  return {
+    type: ADD_VOTE_FOR_NEW_POST,
+    id
+  }
+}
+
 export function upVotePost(id: string): UpVotePost {
   return {
     type: UP_VOTE_POST,
@@ -154,10 +161,8 @@ export function downVoteComment(id: string): DownVoteComment {
 export function addPost({title, body, author, category}) {
   return (dispatch, getState) => {
     const uniqueId = `post-${uuidv4()}`;
-    dispatch({
-      type: ADD_VOTE_FOR_NEW_POST,
-      id: uniqueId
-    })
+
+    dispatch(addVoteForNewPost(uniqueId))
 
     const state = getState();
     const votes = state.votes;
