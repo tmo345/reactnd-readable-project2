@@ -3,9 +3,9 @@ const uuidv4 = require('uuid/v4');
 
 export const UP_VOTE_POST = 'UP_VOTE_POST';
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
+export const ADD_VOTE_FOR_NEW_POST = 'ADD_VOTE_FOR_NEW_POST';
 
 export const ADD_POST = 'ADD_POST';
-export const ADD_VOTE_FOR_NEW_POST = 'ADD_VOTE_FOR_NEW_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const DELETE_POST = 'DELETE_POST';
 
@@ -36,7 +36,13 @@ export type DownVoteComment = {|
   id: string
 |};
 
+export type AddVoteForNewPost = {|
+  type: typeof ADD_VOTE_FOR_NEW_POST,
+  id: string,
+|}
+
 export type VoteAction =
+  | AddVoteForNewPost
   | UpVotePost
   | DownVotePost
   | UpVoteComment
