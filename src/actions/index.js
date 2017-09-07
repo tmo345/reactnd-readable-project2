@@ -112,13 +112,8 @@ export type DeleteComment = {
 }
 
 export type Action =
-  | UpVotePost
-  | DownVotePost
-  | UpVoteComment
-  | DownVoteComment
-  | AddPost
-  | EditPost
-  | DeletePost
+  | VoteAction
+  | PostAction
   | AddComment
   | EditComment
   | DeleteComment;
@@ -166,6 +161,7 @@ export function addPost({title, body, author, category}) {
 
     const state = getState();
     const votes = state.votes;
+    
     dispatch({
       type: ADD_POST,
       postInfo: {
@@ -178,8 +174,6 @@ export function addPost({title, body, author, category}) {
       },
       votes
     })
-
-
   }
 }
 
