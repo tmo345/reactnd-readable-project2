@@ -51,3 +51,84 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
+export type UpVotePost = {|
+  type: typeof UP_VOTE_POST,
+  id: string
+|};
+
+export type DownVotePost = {|
+  type: typeof DOWN_VOTE_POST,
+  id: string
+|};
+
+export type UpVoteComment = {|
+  type: typeof UP_VOTE_COMMENT,
+  id: string
+|};
+
+export type DownVoteComment = {|
+  type: typeof DOWN_VOTE_COMMENT,
+  id: string
+|};
+
+export type AddPost = {|
+  type: typeof ADD_POST,
+  postInfo: {
+    id: string,
+    timestamp: number,
+    title: string,
+    body: string,
+    author: string,
+    category: string,
+    votedScore: number
+  }
+|}
+
+export type EditPost = {|
+  type: typeof EDIT_POST,
+  postInfo: {
+    id: string,
+    title: string,
+    body: string
+  }
+|}
+
+export type DeletePost = {|
+  type: typeof DELETE_POST,
+  postInfo: {
+    id: string
+  }
+|}
+
+export type AddComment = {
+  type: typeof ADD_COMMENT,
+  id: string,
+  timestamp: number,
+  body: string,
+  author: string,
+  parentId: string
+}
+
+export type EditComment = {
+  type: typeof EDIT_COMMENT,
+  timestamp: number,
+  body: string
+}
+
+export type DeleteComment = {
+  type: typeof DELETE_COMMENT,
+  id: string
+}
+
+type Action =
+  | AddPost
+  | EditPost
+  | DeletePost
+  | UpVotePost
+  | DownVotePost
+  | UpVoteComment
+  | DownVoteComment
+  | AddComment
+  | EditComment
+  | DeleteComment
+
