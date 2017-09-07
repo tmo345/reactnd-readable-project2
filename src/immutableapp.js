@@ -132,36 +132,45 @@ type Action =
   | EditComment
   | DeleteComment
 
-export function upVotePost(id: string): UpVotePost {
-  return {
-    type: UP_VOTE_POST,
-    id
+type UpVotePostFunc = (id: string) => UpVotePost
+const upVotePost: UpVotePostFunc =
+  (id: string) => {
+    return {
+      type: UP_VOTE_POST,
+      id
+    }
   }
-}
 
-export function downVotePost(id: string): DownVotePost {
-  return {
-    type: DOWN_VOTE_POST,
-    id
+type DownVotePostFunc = (id: string) => DownVotePost
+const downVotePost: DownVotePostFunc =
+  (id) => {
+    return {
+      type: DOWN_VOTE_POST,
+      id
+    }
   }
-}
 
-export function upVoteComment(id: string): UpVoteComment {
-  return {
-    type: UP_VOTE_COMMENT,
-    id
+type UpVoteCommentFunc = (id: string) => UpVoteComment
+const upVoteComment: UpVoteCommentFunc =
+  (id) => {
+    return {
+      type: UP_VOTE_COMMENT,
+      id
+    }
   }
-}
 
-export function downVoteComment(id: string): DownVoteComment {
-  return {
-    type: DOWN_VOTE_COMMENT,
-    id
+type DownVoteCommentFunc = (id: string) => DownVoteComment
+const downVoteComment: DownVoteCommentFunc =
+  (id) => {
+    return {
+      type: DOWN_VOTE_COMMENT,
+      id
+    }
   }
-}
 
-type AddPostFunction = { title: string, body: string, author: string, category: string } => AddPost
-export const addPost: AddPostFunction = ({title, body, author, category}) => {
+type AddPostFunc = { title: string, body: string, author: string, category: string } => AddPost
+const addPost: AddPostFunc =
+  ({title, body, author, category}) => {
     const uniqueId = `post-${uuidv4()}`;
     return {
       type: ADD_POST,
@@ -175,91 +184,104 @@ export const addPost: AddPostFunction = ({title, body, author, category}) => {
         votedScore: 1
       }
     }
-}
+  }
 
-export function editPost(id: string, title: string, body: string): EditPost {
-  return {
-    type: EDIT_POST,
-    postInfo: {
+type EditPostFunc = ({id: string, title: string, body: string}) => EditPost
+const editPost: EditPostFunc =
+  ({id, title, body}) => {
+    return {
+      type: EDIT_POST,
+      postInfo: {
+        id,
+        title,
+        body
+      }
+    }
+  }
+
+type DeletePostFunc = ({id: string}) => DeletePost
+const deletePost: DeletePostFunc =
+  ({ id }) => {
+    return {
+      type: DELETE_POST,
+      postInfo: {
+        id
+      }
+    }
+  }
+
+type AddCommentFunc = ({ id: string, timestamp: number, author: string, body: string, parentId: string}) => AddComment
+const addComment: AddCommentFunc =
+  ({ id, timestamp, body, author, parentId }) => {
+    return {
+      type: ADD_COMMENT,
       id,
-      title,
+      timestamp,
+      body,
+      author,
+      parentId
+    }
+  }
+
+type EditCommentFunc = ({id: string, timestamp: number, body: string}) => EditComment
+const editComment: EditCommentFunc =
+  ({id, timestamp, body}) => {
+    return {
+      type: EDIT_COMMENT,
+      timestamp,
       body
     }
   }
-}
 
-export function deletePost(id: string): DeletePost {
-  return {
-    type: DELETE_POST,
-    postInfo: {
+type DeletCommentFunc = ({id: string}) => DeleteComment;
+const deleteComment: DeletCommentFunc =
+  ({id}) => {
+    return {
+      type: DELETE_COMMENT,
       id
     }
   }
-}
-
-export function addComment(id: string, timestamp: number, body: string, author: string, parentId: string ): AddComment {
-  return {
-    type: ADD_COMMENT,
-    id,
-    timestamp,
-    body,
-    author,
-    parentId
-  }
-}
-
-export function editComment(id: string, timestamp: number, body: string ): EditComment {
-  return {
-    type: EDIT_COMMENT,
-    timestamp,
-    body
-  }
-}
-
-export function deleteComment(id: string): DeleteComment {
-  return {
-    type: DELETE_COMMENT,
-    id
-  }
-}
 
 
-export const reducer = (state: Map<string,*> = initialState, action: Action): Map<string,*> => {
-  switch(action.type) {
-    case ADD_POST:
-      {
-        const { id, timestamp, title, body, author, category, votedScore } = action.postInfo;
-        return state.mergeDeep(fromJS({
-          posts: {
-            [id]: {
-              id,
-              timestamp,
-              title,
-              body,
-              author,
-              category,
-              votedScore
+type ReducerFunc = (state: Map<string,*>, action: Action) => Map<string,*>
+const reducer: ReducerFunc = (state = initialState, action) => {
+    switch(action.type) {
+      case ADD_POST:
+        {
+          const { id, timestamp, title, body, author, category, votedScore } = action.postInfo;
+          return state.mergeDeep(fromJS({
+            posts: {
+              [id]: {
+                id,
+                timestamp,
+                title,
+                body,
+                author,
+                category,
+                votedScore
+              }
             }
-          }
-        }));
-      }
+          }));
+        }
 
-    case EDIT_POST:
-      {
-        const { id, title, body } = action.postInfo;
-        return state.setIn(['posts', id, title], title).setIn( ['posts', id, body], body);
-      }
+      case EDIT_POST:
+        {
+          const { id, title, body } = action.postInfo;
+          return state.setIn(['posts', id, title], title).setIn( ['posts', id, body], body);
+        }
 
-    case DELETE_POST:
-      {
-        const { id } = action.postInfo;
-        return state.deleteIn(['posts', id])
-      }
+      case DELETE_POST:
+        {
+          const { id } = action.postInfo;
+          return state.deleteIn(['posts', id])
+        }
 
-    case UP_VOTE_POST:
-      return state
+      case UP_VOTE_POST:
+        return state
 
-    default:
-      return state;
+      default:
+        return state;
+    }
   }
+
 }
