@@ -1,4 +1,5 @@
 // @flow
+import { combineReducers } from 'redux';
 import {
   UP_VOTE_POST,
   DOWN_VOTE_POST,
@@ -172,14 +173,16 @@ const votes = (state: VoteState = initialVoteState, action: VoteAction): VoteSta
     case DOWN_VOTE_COMMENT:
       return state;
 
-    case ADD_POST:
+    default:
       return state;
+  }
+}
 
-    case EDIT_POST:
-      return state;
+const restReducer = (state = {}, action: Action) => {
+  switch (action.type) {
 
-    case DELETE_POST:
-      return state;
+
+
 
     case ADD_COMMENT:
       return state;
@@ -195,3 +198,9 @@ const votes = (state: VoteState = initialVoteState, action: VoteAction): VoteSta
   }
 }
 
+// reducer : (State, Action) -> State
+export const reducer = combineReducers({
+  votes,
+  posts,
+  restReducer
+});
