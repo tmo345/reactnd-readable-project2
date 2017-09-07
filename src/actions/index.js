@@ -1,4 +1,3 @@
-// @flow
 const uuidv4 = require('uuid/v4');
 
 export const UP_VOTE_POST = 'UP_VOTE_POST';
