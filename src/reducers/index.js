@@ -11,6 +11,7 @@ import {
   ADD_COMMENT,
   EDIT_COMMENT,
   DELETE_COMMENT,
+  ADD_VOTE_FOR_NEW_POST
 } from '../actions'
 import type { PostAction, VoteAction, Action } from '../actions';
 
@@ -52,7 +53,8 @@ const posts = (state : PostState = initalPostState, action: PostAction): PostSta
   switch (action.type) {
     case ADD_POST:
       { // to block scope the const declarations to this case
-        const { id, timestamp, title, body, author, category, votedScore } = action.postInfo;
+        const { id, timestamp, title, body, author, category } = action.postInfo;
+        const { votes } = action
         return {
           byId: {
             ...state.byId,
@@ -63,7 +65,7 @@ const posts = (state : PostState = initalPostState, action: PostAction): PostSta
               body,
               author,
               category,
-              votedScore
+              votedScore: votes['byId'][id]['votedScore']
             }
           },
           allIds: [
