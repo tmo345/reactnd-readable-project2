@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { addPost } from './actions'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App"
+        onClick={() => this.props.store.dispatch(addPost({ title: 'hi', body: 'hi body', author: 'author', category: 'category'}))}>
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
