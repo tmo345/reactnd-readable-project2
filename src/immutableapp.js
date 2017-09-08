@@ -228,12 +228,13 @@ const addComment: AddCommentFunc =
     }
   }
 
-type EditCommentFunc = ({id: string, timestamp: number, body: string}) => EditComment
+type EditCommentFunc = ({id: string, body: string}) => EditComment
 const editComment: EditCommentFunc =
-  ({id, timestamp, body}) => {
+  ({id, body}) => {
     return {
       type: EDIT_COMMENT,
-      timestamp,
+      id,
+      timestamp: Date.now(),
       body
     }
   }
