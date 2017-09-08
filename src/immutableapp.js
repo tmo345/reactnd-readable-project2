@@ -292,7 +292,37 @@ const reducer: ReducerFunc = (state = initialState, action) => {
         {
           const { id } = action;
           return state.updateIn(['posts', id, 'votedScore'], score => score - 1)
+      case ADD_COMMENT:
+        { // Block scope const declarations
+          const { id, timestamp, body, author, voteScore, parentId } = action;
+          return state.mergeDeepIn(['comments'], Map({
+            [id]: { parentId, id, timestamp, body, author, voteScore }
+          }));
         }
+
+      case EDIT_COMMENT:
+        return state
+          .setIn(['comments', action.id, 'body'], action.body)
+          .setIn(['comments', action.id, 'timestamp'], action.timestamp)
+
+      case DELETE_COMMENT:
+        return state
+          .deleteIn(['comments', action.id]);
+
+      case UP_VOTE_COMMENT:
+        return state
+          .updateIn(
+            ['comments', action.id, 'voteScore'],
+            (score: number) => score + 1
+          );
+
+      case DOWN_VOTE_COMMENT:
+        return state
+          .updateIn(
+            ['comments', action.id, 'voteScore'],
+            (score: number) => score - 1
+          );
+
 
       default:
         return state;
