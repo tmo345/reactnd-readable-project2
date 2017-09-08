@@ -1,223 +1,118 @@
+// @flow
+
+import { ADD_POST, EDIT_POST, DELETE_POST } from './constants';
+import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from './constants';
+import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from './constants';
+import type { AddComment, EditComment, DeleteComment } from './types';
+import type { AddPost, EditPost, DeletePost } from './types';
+import type { UpVotePost, DownVotePost, UpVoteComment, DownVoteComment } from './types';
+
+// For creating unique ids for posts and comments
 const uuidv4 = require('uuid/v4');
 
-export const UP_VOTE_POST = 'UP_VOTE_POST';
-export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
-export const ADD_VOTE_FOR_NEW_POST = 'ADD_VOTE_FOR_NEW_POST';
 
-export const ADD_POST = 'ADD_POST';
-export const EDIT_POST = 'EDIT_POST';
-export const DELETE_POST = 'DELETE_POST';
+// Types for object arguments to some action creators
 
-export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
-export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
-
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const EDIT_COMMENT = 'EDIT_COMMENT';
-export const DELETE_COMMENT = 'DELETE_COMMENT';
-
-export type UpVotePost = {|
-  type: typeof UP_VOTE_POST,
-  id: string
-|};
-
-export type DownVotePost = {|
-  type: typeof DOWN_VOTE_POST,
-  id: string
-|};
-
-export type UpVoteComment = {|
-  type: typeof UP_VOTE_COMMENT,
-  id: string
-|};
-
-export type DownVoteComment = {|
-  type: typeof DOWN_VOTE_COMMENT,
-  id: string
-|};
-
-export type AddVoteForNewPost = {|
-  type: typeof ADD_VOTE_FOR_NEW_POST,
-  id: string,
-|}
-
-export type VoteAction =
-  | AddVoteForNewPost
-  | UpVotePost
-  | DownVotePost
-  | UpVoteComment
-  | DownVoteComment
-
-export type AddPost = {|
-  type: typeof ADD_POST,
-  postInfo: {
-    id: string,
-    timestamp: number,
-    title: string,
-    body: string,
-    author: string,
-    category: string,
-    votedScore: string
-  },
-  votes: {
-    byId: {
-      [id: string]: {
-        id: string,
-        votedScore: number
-      }
-    },
-    allIds: (?string)[]
-  }
-|}
-
-export type EditPost = {|
-  type: typeof EDIT_POST,
-  postInfo: {
-    id: string,
-    title: string,
-    body: string
-  }
-|}
-
-export type DeletePost = {|
-  type: typeof DELETE_POST,
-  postInfo: {
-    id: string
-  }
-|}
-
-export type PostAction =
-  | AddPost
-  | EditPost
-  | DeletePost;
-
-export type AddComment = {
-  type: typeof ADD_COMMENT,
-  id: string,
-  timestamp: number,
+export type AddPostData = {|
+  title: string,
   body: string,
   author: string,
-  parentId: string
-}
+  category: string
+|};
 
-export type EditComment = {
-  type: typeof EDIT_COMMENT,
-  timestamp: number,
+export type EditPostData = {|
+  id: string,
+  title: string,
   body: string
-}
+|};
 
-export type DeleteComment = {
-  type: typeof DELETE_COMMENT,
-  id: string
-}
 
-export type Action =
-  | VoteAction
-  | PostAction
-  | AddComment
-  | EditComment
-  | DeleteComment;
+// Action Creators
 
-export function addVoteForNewPost(id: string): AddVoteForNewPost {
-  return {
-    type: ADD_VOTE_FOR_NEW_POST,
-    id
-  }
-}
-
-export function upVotePost(id: string): UpVotePost {
-  return {
+export const upVotePost =
+  (id: string): UpVotePost => ({
     type: UP_VOTE_POST,
     id
-  }
-}
+  });
 
-export function downVotePost(id: string): DownVotePost {
-  return {
+export const downVotePost =
+  (id: string): DownVotePost => ({
     type: DOWN_VOTE_POST,
     id
-  }
-}
+  });
 
-export function upVoteComment(id: string): UpVoteComment {
-  return {
+export const upVoteComment =
+  (id: string): UpVoteComment => ({
     type: UP_VOTE_COMMENT,
     id
-  }
-}
+  });
 
-export function downVoteComment(id: string): DownVoteComment {
-  return {
+export const downVoteComment =
+  (id: string): DownVoteComment => ({
     type: DOWN_VOTE_COMMENT,
     id
-  }
-}
+  })
 
-export function addPost({title, body, author, category}) {
-  return (dispatch, getState) => {
+export const addPost =
+  ({ title, body, author, category } : AddPostData): AddPost => {
     const uniqueId = `post-${uuidv4()}`;
-
-    dispatch(addVoteForNewPost(uniqueId))
-
-    const state = getState();
-    const votes = state.votes;
-
-    dispatch({
+    return {
       type: ADD_POST,
-      postInfo: {
-        id: uniqueId,
-        timestamp: Date.now(),
-        title,
-        body,
-        author,
-        category,
-      },
-      votes
-    })
-  }
-}
-
-export function editPost(id: string, title: string, body: string): EditPost {
-  return {
-    type: EDIT_POST,
-    postInfo: {
-      id,
+      id: uniqueId,
+      timestamp: Date.now(),
       title,
+      body,
+      author,
+      category,
+      voteScore: 1
+    }
+  }
+
+
+export const editPost =
+  ({id, title, body}: EditPostData): EditPost => ({
+    type: EDIT_POST,
+    id,
+    title,
+    body
+  });
+
+export const deletePost =
+  (id: string): DeletePost => ({
+    type: DELETE_POST,
+    id
+  });
+
+type AddCommentFunc = ({ id: string, timestamp: number, author: string, body: string, voteScore: number, parentId: string}) => AddComment
+export const addComment: AddCommentFunc =
+  ({ id, timestamp, body, author, parentId, voteScore }) => {
+    return {
+      type: ADD_COMMENT,
+      id,
+      timestamp,
+      body,
+      author,
+      parentId,
+      voteScore
+    }
+  }
+
+type EditCommentFunc = ({id: string, body: string}) => EditComment
+export const editComment: EditCommentFunc =
+  ({id, body}) => {
+    return {
+      type: EDIT_COMMENT,
+      id,
+      timestamp: Date.now(),
       body
     }
   }
-}
 
-export function deletePost(id: string): DeletePost {
-  return {
-    type: DELETE_POST,
-    postInfo: {
+type DeletCommentFunc = ({id: string}) => DeleteComment;
+export const deleteComment: DeletCommentFunc =
+  ({id}) => {
+    return {
+      type: DELETE_COMMENT,
       id
     }
   }
-}
-
-export function addComment(id: string, timestamp: number, body: string, author: string, parentId: string ): AddComment {
-  return {
-    type: ADD_COMMENT,
-    id,
-    timestamp,
-    body,
-    author,
-    parentId
-  }
-}
-
-export function editComment(id: string, timestamp: number, body: string ): EditComment {
-  return {
-    type: EDIT_COMMENT,
-    timestamp,
-    body
-  }
-}
-
-export function deleteComment(id: string): DeleteComment {
-  return {
-    type: DELETE_COMMENT,
-    id
-  }
-}

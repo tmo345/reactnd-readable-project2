@@ -1,10 +1,21 @@
+// @flow
+
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { addPost } from './immutableapp';
+import { addPost } from './actions';
 import { connect } from 'react-redux';
+import type { ReduxStore } from './index.js';
+import type { AddPost, Action } from './actions/types';
+import type { AddPostData } from './actions';
+import type { Dispatch } from 'redux';
 
-class App extends Component {
+type Props = {
+  store: ReduxStore,
+  onDivClick: (data: {title: string, body: string, author: string, category: string}) => AddPost
+}
+
+class App extends Component<Props> {
   render() {
     return (
       <div className="App"
@@ -24,10 +35,11 @@ const mapStateToProps = () => {
   return {}
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onDivClick: (data) => dispatch(addPost(data))  }
-}
+
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  onDivClick(data: AddPostData) {
+    dispatch(addPost(data))  }
+})
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
