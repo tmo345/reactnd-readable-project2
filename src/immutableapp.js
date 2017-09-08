@@ -3,36 +3,52 @@ import { fromJS, Map } from 'immutable';
 
 const uuidv4 = require('uuid/v4');
 
-type State = {
-  posts: {
-    [id: string]: {
-      id: string,
-      timestamp: number,
-      title: string,
-      body: string,
-      author: string,
-      category: string,
-      votedScore: number
-    }
-  },
-  comments: {
-    [id: string]: {
-      id: string,
-      parentId: string,
-      timestamp: string,
-      body: string,
-      author: string,
-      votedScore: number
-    }
-  }
+type Post = {
+  id: string,
+  timestamp: number,
+  title: string,
+  body: string,
+  author: string,
+  category: string,
+  voteScore: number
 }
 
+type Comment = {
+  id: string,
+  parentId: string,
+  timestamp: string,
+  body: string,
+  author: string,
+  voteScore: number
+}
+
+type State = {|
+  posts: {
+    [id: string]: Post
+  },
+  comments: {
+    [id: string]: Comment
+  }
+|}
+
 const initalStateJS: State = {
-  posts: {},
+  posts: {
+    'id1': {
+      id: 'id1',
+      timestamp: Date.now(),
+      title: 'First post',
+      body: 'First post content',
+      author: 'Author of first post',
+      category: 'Category of first post',
+      voteScore: 1
+    }
+  },
   comments: {}
 };
 
-const initialState: Map<string,*> = fromJS(initalStateJS);
+type StateMap = Map<string,(string|number|Post|Comment)>
+
+const initialState: StateMap = fromJS(initalStateJS);
 
 
 const UP_VOTE_POST = 'UP_VOTE_POST';
