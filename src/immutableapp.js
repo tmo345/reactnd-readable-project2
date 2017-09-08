@@ -275,7 +275,16 @@ const reducer: ReducerFunc = (state = initialState, action) => {
         }
 
       case UP_VOTE_POST:
-        return state
+        {
+          const { id } = action;
+          return state.updateIn(['posts', id, 'votedScore'], score => score + 1)
+        }
+
+      case DOWN_VOTE_POST:
+        {
+          const { id } = action;
+          return state.updateIn(['posts', id, 'votedScore'], score => score - 1)
+        }
 
       default:
         return state;
