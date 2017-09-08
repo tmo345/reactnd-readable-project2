@@ -253,45 +253,36 @@ type ReducerFunc = (state: StateMap, action: Action) => StateMap;
 const reducer: ReducerFunc = (state = initialState, action) => {
     switch(action.type) {
       case ADD_POST:
-        {
-          const { id, timestamp, title, body, author, category, votedScore } = action.postInfo;
-          return state.mergeDeep(fromJS({
-            posts: {
-              [id]: {
-                id,
-                timestamp,
-                title,
-                body,
-                author,
-                category,
-                votedScore
-              }
-            }
-          }));
+        { // block scope const declarations
+          const { id, timestamp, title, body, author, category, voteScore } = action;
+          return state
+            .mergeDeepIn(['posts'], Map({
+              [id]: { id, timestamp, title, body, author, category, voteScore }
+            }));
         }
 
       case EDIT_POST:
-        {
-          const { id, title, body } = action.postInfo;
-          return state.setIn(['posts', id, title], title).setIn( ['posts', id, body], body);
-        }
+        return state
+          .setIn(['posts', action.id, 'title'], action.title)
+          .setIn(['posts', action.id, 'body'], action.body);
 
       case DELETE_POST:
-        {
-          const { id } = action.postInfo;
-          return state.deleteIn(['posts', id])
-        }
+        return state
+          .deleteIn(['posts', action.id])
 
       case UP_VOTE_POST:
-        {
-          const { id } = action;
-          return state.updateIn(['posts', id, 'votedScore'], score => score + 1)
-        }
+        return state
+          .updateIn(
+            ['posts', action.id, 'voteScore'],
+            (score: number) => score + 1
+          );
 
       case DOWN_VOTE_POST:
-        {
-          const { id } = action;
-          return state.updateIn(['posts', id, 'votedScore'], score => score - 1)
+        return state.updateIn(
+          ['posts', action.id, 'voteScore'],
+          (score: number ) => score - 1
+        );
+
       case ADD_COMMENT:
         { // Block scope const declarations
           const { id, timestamp, body, author, voteScore, parentId } = action;
