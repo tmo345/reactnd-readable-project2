@@ -71,31 +71,25 @@ type DownVoteComment = {|
 
 type AddPost = {|
   type: typeof ADD_POST,
-  postInfo: {
-    id: string,
-    timestamp: number,
-    title: string,
-    body: string,
-    author: string,
-    category: string,
-    votedScore: number
-  }
+  id: string,
+  timestamp: number,
+  title: string,
+  body: string,
+  author: string,
+  category: string,
+  voteScore: number
 |}
 
 type EditPost = {|
   type: typeof EDIT_POST,
-  postInfo: {
-    id: string,
-    title: string,
-    body: string
-  }
+  id: string,
+  title: string,
+  body: string
 |}
 
 type DeletePost = {|
   type: typeof DELETE_POST,
-  postInfo: {
-    id: string
-  }
+  id: string
 |}
 
 type AddComment = {
@@ -172,15 +166,13 @@ const addPost: AddPostFunc =
     const uniqueId = `post-${uuidv4()}`;
     return {
       type: ADD_POST,
-      postInfo: {
-        id: uniqueId,
-        timestamp: Date.now(),
-        title,
-        body,
-        author,
-        category,
-        votedScore: 1
-      }
+      id: uniqueId,
+      timestamp: Date.now(),
+      title,
+      body,
+      author,
+      category,
+      voteScore: 1
     }
   }
 
@@ -189,11 +181,9 @@ const editPost: EditPostFunc =
   ({id, title, body}) => {
     return {
       type: EDIT_POST,
-      postInfo: {
-        id,
-        title,
-        body
-      }
+      id,
+      title,
+      body
     }
   }
 
@@ -202,9 +192,7 @@ const deletePost: DeletePostFunc =
   ({ id }) => {
     return {
       type: DELETE_POST,
-      postInfo: {
-        id
-      }
+      id
     }
   }
 
