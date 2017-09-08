@@ -120,6 +120,7 @@ type AddComment = {
 
 type EditComment = {
   type: typeof EDIT_COMMENT,
+  id: string,
   timestamp: number,
   body: string
 }
