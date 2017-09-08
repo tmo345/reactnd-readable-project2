@@ -249,7 +249,7 @@ const deleteComment: DeletCommentFunc =
   }
 
 
-type ReducerFunc = (state: Map<string,*>, action: Action) => Map<string,*>
+type ReducerFunc = (state: StateMap, action: Action) => StateMap;
 const reducer: ReducerFunc = (state = initialState, action) => {
     switch(action.type) {
       case ADD_POST:
