@@ -114,7 +114,8 @@ type AddComment = {
   timestamp: number,
   body: string,
   author: string,
-  parentId: string
+  parentId: string,
+  voteScore: number
 }
 
 type EditComment = {
@@ -212,16 +213,17 @@ const deletePost: DeletePostFunc =
     }
   }
 
-type AddCommentFunc = ({ id: string, timestamp: number, author: string, body: string, parentId: string}) => AddComment
+type AddCommentFunc = ({ id: string, timestamp: number, author: string, body: string, voteScore: number, parentId: string}) => AddComment
 const addComment: AddCommentFunc =
-  ({ id, timestamp, body, author, parentId }) => {
+  ({ id, timestamp, body, author, parentId, voteScore }) => {
     return {
       type: ADD_COMMENT,
       id,
       timestamp,
       body,
       author,
-      parentId
+      parentId,
+      voteScore
     }
   }
 
