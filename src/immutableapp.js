@@ -37,41 +37,41 @@ const initalStateJS: State = {
 const initialState: Map<string,*> = fromJS(initalStateJS);
 
 
-export const UP_VOTE_POST = 'UP_VOTE_POST';
-export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
+const UP_VOTE_POST = 'UP_VOTE_POST';
+const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
 
-export const ADD_POST = 'ADD_POST';
-export const EDIT_POST = 'EDIT_POST';
-export const DELETE_POST = 'DELETE_POST';
+const ADD_POST = 'ADD_POST';
+const EDIT_POST = 'EDIT_POST';
+const DELETE_POST = 'DELETE_POST';
 
-export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
-export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
+const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
+const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
 
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const EDIT_COMMENT = 'EDIT_COMMENT';
-export const DELETE_COMMENT = 'DELETE_COMMENT';
+const ADD_COMMENT = 'ADD_COMMENT';
+const EDIT_COMMENT = 'EDIT_COMMENT';
+const DELETE_COMMENT = 'DELETE_COMMENT';
 
-export type UpVotePost = {|
+type UpVotePost = {|
   type: typeof UP_VOTE_POST,
   id: string
 |};
 
-export type DownVotePost = {|
+type DownVotePost = {|
   type: typeof DOWN_VOTE_POST,
   id: string
 |};
 
-export type UpVoteComment = {|
+type UpVoteComment = {|
   type: typeof UP_VOTE_COMMENT,
   id: string
 |};
 
-export type DownVoteComment = {|
+type DownVoteComment = {|
   type: typeof DOWN_VOTE_COMMENT,
   id: string
 |};
 
-export type AddPost = {|
+type AddPost = {|
   type: typeof ADD_POST,
   postInfo: {
     id: string,
@@ -84,7 +84,7 @@ export type AddPost = {|
   }
 |}
 
-export type EditPost = {|
+type EditPost = {|
   type: typeof EDIT_POST,
   postInfo: {
     id: string,
@@ -93,14 +93,14 @@ export type EditPost = {|
   }
 |}
 
-export type DeletePost = {|
+type DeletePost = {|
   type: typeof DELETE_POST,
   postInfo: {
     id: string
   }
 |}
 
-export type AddComment = {
+type AddComment = {
   type: typeof ADD_COMMENT,
   id: string,
   timestamp: number,
@@ -109,13 +109,13 @@ export type AddComment = {
   parentId: string
 }
 
-export type EditComment = {
+type EditComment = {
   type: typeof EDIT_COMMENT,
   timestamp: number,
   body: string
 }
 
-export type DeleteComment = {
+type DeleteComment = {
   type: typeof DELETE_COMMENT,
   id: string
 }
@@ -284,4 +284,7 @@ const reducer: ReducerFunc = (state = initialState, action) => {
     }
   }
 
+export {
+  addPost,
+  reducer
 }
