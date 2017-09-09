@@ -6,7 +6,6 @@ import { ADD_POST, EDIT_POST, DELETE_POST } from '../actions/constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from '../actions/constants';
 
-// import type { StateJS, StateMap } from './types';
 import type { Action } from '../actions/types';
 import type { Post, Comment, Category } from './types';
 
