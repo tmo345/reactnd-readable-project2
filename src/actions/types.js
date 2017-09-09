@@ -1,6 +1,7 @@
 // @flow
 'use strict';
 import {
+  SET_CATEGORIES,
   UP_VOTE_POST,
   DOWN_VOTE_POST,
   UP_VOTE_COMMENT,
@@ -12,6 +13,11 @@ import {
   EDIT_COMMENT,
   DELETE_COMMENT
 } from './constants'
+
+export type SetCategories = {
+  type: typeof SET_CATEGORIES,
+  categories: Array<{name: string, path: string}>
+}
 
 export type UpVotePost = {|
   type: typeof UP_VOTE_POST,
@@ -79,6 +85,7 @@ export type DeleteComment = {
 }
 
 export type Action =
+  | SetCategories
   | AddPost
   | EditPost
   | DeletePost

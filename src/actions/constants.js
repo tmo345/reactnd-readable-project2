@@ -1,5 +1,7 @@
 // @flow
 
+export const SET_CATEGORIES = 'SET_CATEGORIES';
+
 export const UP_VOTE_POST = 'UP_VOTE_POST';
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
 

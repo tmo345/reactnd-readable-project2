@@ -1,6 +1,7 @@
 // @flow
 
 import { fromJS, Map } from 'immutable';
+import { SET_CATEGORIES } from '../actions/constants';
 import { ADD_POST, EDIT_POST, DELETE_POST } from '../actions/constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from '../actions/constants';
@@ -20,6 +21,7 @@ types being in the file.
  */
 
 export type StateJS = {|
+  categories: Array<?Category>,
   posts: {
     [id: string]: Post
   },
@@ -28,9 +30,11 @@ export type StateJS = {|
   }
 |}
 
-export type StateMap = Map<string,(string|number|Post|Comment)>
+export type StateMap = Map<string,(string|number|Post|Comment|Array<Category>)>
+
 // Initial application store state
 const initalStateJS: StateJS = {
+  categories: [],
   posts: {
     // TODO: Remove dummy data
     'id1': {
@@ -52,6 +56,10 @@ const initialStateMap: StateMap = fromJS(initalStateJS);
 // Root reducer
 export const reducer = (state: StateMap = initialStateMap, action: Action): StateMap => {
     switch(action.type) {
+      case SET_CATEGORIES:
+        return state
+          .set('categories', action.categories);
+
       case ADD_POST:
         { // block scope const declarations
           const { id, timestamp, title, body, author, category, voteScore } = action;

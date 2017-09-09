@@ -1,8 +1,11 @@
 // @flow
 
+import { SET_CATEGORIES } from './constants';
 import { ADD_POST, EDIT_POST, DELETE_POST } from './constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from './constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from './constants';
+
+import type { SetCategories } from './types';
 import type { AddComment, EditComment, DeleteComment } from './types';
 import type { AddPost, EditPost, DeletePost } from './types';
 import type { UpVotePost, DownVotePost, UpVoteComment, DownVoteComment } from './types';
@@ -26,8 +29,14 @@ export type EditPostData = {|
   body: string
 |};
 
+export type SetCategoriesData = Array<{name: string, path: string}>
 
 // Action Creators
+export const setCategories =
+  (categories: SetCategoriesData): SetCategories => ({
+    type: SET_CATEGORIES,
+    categories
+  })
 
 export const upVotePost =
   (id: string): UpVotePost => ({
