@@ -3,7 +3,7 @@
 [include]
 
 [libs]
-'./flow-typed/appLibDefs.js'
+
 [lints]
 
 [options]
