@@ -3,19 +3,28 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { addPost } from './actions';
+import { addPost, setCategories } from './actions';
 import { connect } from 'react-redux';
 import type { ReduxStore } from './index.js';
-import type { AddPost, Action } from './actions/types';
+import type { AddPost, SetCategories, Action } from './actions/types';
 import type { AddPostData } from './actions';
 import type { Dispatch } from 'redux';
+import { getCategories } from './utils/api'
 
 type Props = {
   store: ReduxStore,
-  onDivClick: (data: {title: string, body: string, author: string, category: string}) => AddPost
+  onDivClick: (data: {title: string, body: string, author: string, category: string}) => AddPost,
+  dispatchCategories: (categories: string[]) => SetCategories
 }
 
 class App extends Component<Props> {
+  componentDidMount() {
+    getCategories()
+      .then((categories) => {
+        this.props.dispatchCategories(categories);
+      });
+  }
+
   render() {
     return (
       <div className="App"
@@ -38,7 +47,10 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   onDivClick(data: AddPostData) {
-    dispatch(addPost(data))  }
+    dispatch(addPost(data))  },
+  dispatchCategories(categories) {
+    dispatch(setCategories(categories))
+  }
 })
 
 
