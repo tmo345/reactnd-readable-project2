@@ -6,7 +6,7 @@ if (! token) {
   token = localStorage.token;
 }
 
-const header = {
+const headers = {
   'Accept': 'application/json',
   'Authorization': token
 };
