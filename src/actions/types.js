@@ -1,5 +1,4 @@
 // @flow
-'use strict';
 import {
   SET_CATEGORIES,
   UP_VOTE_POST,
