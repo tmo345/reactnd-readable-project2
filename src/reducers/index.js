@@ -7,36 +7,17 @@ import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from
 
 // import type { StateJS, StateMap } from './types';
 import type { Action } from '../actions/types';
+import type { Post, Comment, Category } from './types';
 
 // TODO:
-/*  Figure out why flow wizardry is making me keep the following types (Post,
-Comment, StateJS, StateMap) in this file. If I move them to another file and
+/*  Figure out why flow wizardry is making me keep the following types
+(StateJS, StateMap) in this file. If I move them to another file and
 import the types, flow starts complaining about the immutablejs Map methods.
-The methods execute without any errors despite the flow errors. If I leave 
+The methods execute without any errors despite the flow errors. If I leave
 them  here, flow is happy. My hunch is that this has to do with the return
 type of "any" from the fromJS function and flow is making inferences from the
 types being in the file.
  */
-
-
-export type Post = {
-  id: string,
-  timestamp: number,
-  title: string,
-  body: string,
-  author: string,
-  category: string,
-  voteScore: number
-}
-
-export type Comment = {
-  id: string,
-  parentId: string,
-  timestamp: string,
-  body: string,
-  author: string,
-  voteScore: number
-}
 
 export type StateJS = {|
   posts: {
