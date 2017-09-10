@@ -2,6 +2,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
+import type { EditPostData } from '../actions';
+import type { Post as PostType } from '../reducers/types';
+import type { EditPostDispatch } from '../containers/Listings';
+
+type Props = {
+  post: PostType,
+  editPost: EditPostDispatch
+};
 
 const PostListItem = styled.li`
 
@@ -23,14 +31,12 @@ const CreatedAt = styled.p`
 
 `
 
-export const Post = (props) => {
+export const Post = (props: Props) => {
   const id = props.post.get('id');
-  const data = {title: 'new title', body: 'new body', id: id};
-  const post = props.post
+  const post = props.post;
   return (
     <PostListItem
-      key={props.post.get('id')}
-      onClick={() => props.editPost(data)}
+      onClick={() => props.editPost({ id: id, title: 'new title', body: 'new body'})}
     >
       <Title>{post.get('title')}</Title>
       <Author>{post.get('author')}</Author>
