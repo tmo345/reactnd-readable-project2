@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import type { AddPostData, EditPostData } from '../actions';
 import { Post } from './Post';
 import { AddPostButton } from './AddPostButton'
 import type { Map } from 'immutable';
@@ -20,14 +19,14 @@ type Props = {
 }
 
 export const PostList = (props: Props) => {
-  const { posts, addPost, editPost, deletePost } = props;
+  const { posts, addPost, editPost } = props;
   return (
     <div>
       <PostListElement>
         {posts.valueSeq().map((post) => {
           return (
             <Post
-              
+              key={post.get('id')}
               post={post}
               editPost={editPost}
             />

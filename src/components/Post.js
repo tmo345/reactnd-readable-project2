@@ -2,7 +2,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
-import type { EditPostData } from '../actions';
 import type { Post as PostType } from '../reducers/types';
 import type { EditPostDispatch } from '../containers/Listings';
 

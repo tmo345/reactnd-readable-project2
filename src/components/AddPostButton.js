@@ -1,7 +1,5 @@
 // @flow
 import React from 'react';
-import type { AddPost } from '../actions/types';
-import type { AddPostData } from '../actions';
 import type { AddPostDispatch } from '../containers/Listings';
 
 type Props = {
