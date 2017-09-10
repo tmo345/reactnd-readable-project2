@@ -5,6 +5,7 @@ import { Post } from './Post';
 import { AddPostButton } from './AddPostButton'
 import type { Map } from 'immutable';
 import styled from 'styled-components';
+import type { AddPostDispatch, EditPostDispatch, DeletePostDispatch } from '../containers/Listings'
 
 const PostListElement = styled.ul`
   list-style-type: none;
@@ -13,9 +14,9 @@ const PostListElement = styled.ul`
 
 type Props = {
   posts: Map<string, *>,
-  addPost: (data: AddPostData) => void,
-  editPost: (data: EditPostData) => void,
-  deletePost: (id: string) => void
+  addPost: AddPostDispatch,
+  editPost: EditPostDispatch,
+  deletePost: DeletePostDispatch
 }
 
 export const PostList = (props: Props) => {
@@ -26,6 +27,7 @@ export const PostList = (props: Props) => {
         {posts.valueSeq().map((post) => {
           return (
             <Post
+              
               post={post}
               editPost={editPost}
             />
