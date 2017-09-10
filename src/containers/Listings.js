@@ -13,11 +13,19 @@ const mapStateToProps = (state: StateMap)  => {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
+export type AddPostDispatch = (postData: AddPostData) => Action;
+export type EditPostDispatch = (postData: EditPostData) => Action;
+export type DeletePostDispatch = (id: string) => Action;
+
+const mapDispatchToProps = (dispatch: Dispatch<Action>): {
+  addPost: AddPostDispatch,
+  editPost: EditPostDispatch,
+  deletePost: DeletePostDispatch
+} => {
   return {
-    addPost: (postData: AddPostData) => dispatch(addPost(postData)),
-    editPost: (postData: EditPostData) => dispatch(editPost(postData)),
-    deletePost: (id: string) => dispatch(deletePost(id))
+    addPost: (postData) => dispatch(addPost(postData)),
+    editPost: (postData) => dispatch(editPost(postData)),
+    deletePost: (id) => dispatch(deletePost(id))
   };
 }
 
