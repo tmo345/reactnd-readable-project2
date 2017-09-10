@@ -5,6 +5,7 @@ import { SET_CATEGORIES } from '../actions/constants';
 import { ADD_POST, EDIT_POST, DELETE_POST } from '../actions/constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from '../actions/constants';
+import moment from 'moment';
 
 import type { Action } from '../actions/types';
 import type { Post, Comment, Category } from './types';
@@ -38,7 +39,7 @@ const initalStateJS: StateJS = {
     // TODO: Remove dummy data
     'id1': {
       id: 'id1',
-      timestamp: Date.now(),
+      timestamp: moment(),
       title: 'First post',
       body: 'First post content',
       author: 'Author of first post',

@@ -4,6 +4,7 @@ import { SET_CATEGORIES } from './constants';
 import { ADD_POST, EDIT_POST, DELETE_POST } from './constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from './constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from './constants';
+import moment from 'moment';
 
 import type { SetCategories } from './types';
 import type { AddComment, EditComment, DeleteComment } from './types';
@@ -68,7 +69,7 @@ export const addPost =
     return {
       type: ADD_POST,
       id: uniqueId,
-      timestamp: Date.now(),
+      timestamp: moment(),
       title,
       body,
       author,
