@@ -11,7 +11,7 @@ import {
   ADD_COMMENT,
   EDIT_COMMENT,
   DELETE_COMMENT
-} from './constants'
+} from './constants';
 
 export type SetCategories = {
   type: typeof SET_CATEGORIES,
