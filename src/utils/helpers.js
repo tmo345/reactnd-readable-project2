@@ -2,5 +2,5 @@
 
 import moment from 'moment';
 
-export const formatTime = (momentDate) =>
-  momentDate.format('MMMM D, YYYY hh:mm A')
+export const formatTime = (timestamp: string): string =>
+  moment(timestamp).format('MMMM D, YYYY hh:mm A')

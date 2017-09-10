@@ -69,7 +69,7 @@ export const addPost =
     return {
       type: ADD_POST,
       id: uniqueId,
-      timestamp: moment(),
+      timestamp: Date.now(),
       title,
       body,
       author,
