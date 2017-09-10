@@ -63,7 +63,7 @@ export const reducer = (state: StateMap = initialStateMap, action: Action): Stat
         { // block scope const declarations
           const { id, timestamp, title, body, author, category, voteScore } = action;
           return state
-            .mergeDeepIn(['posts'], Map({
+            .mergeDeepIn(['posts'], fromJS({
               [id]: { id, timestamp, title, body, author, category, voteScore }
             }));
         }
