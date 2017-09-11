@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
 import { Post } from './Post';
-import { AddPostButton } from './AddPostButton'
-import type { Map } from 'immutable';
 import styled from 'styled-components';
-import type { AddPostDispatch, EditPostDispatch, DeletePostDispatch } from '../containers/Listings'
+import { Link } from 'react-router-dom';
+import type { Map } from 'immutable';
 
 const PostListElement = styled.ul`
   list-style-type: none;
@@ -13,27 +12,24 @@ const PostListElement = styled.ul`
 
 type Props = {
   posts: Map<string, *>,
-  addPost: AddPostDispatch,
-  editPost: EditPostDispatch,
-  deletePost: DeletePostDispatch
 }
 
 export const PostList = (props: Props) => {
-  const { posts, addPost, editPost } = props;
+  const { posts } = props;
   return (
     <div>
       <PostListElement>
         {posts.valueSeq().map((post) => {
           return (
-            <Post
-              key={post.get('id')}
-              post={post}
-              editPost={editPost}
-            />
+            <li key={post.get('id')}>
+              <Link to={`post/${post.get('id')}`}>
+                {post.get('title')}
+              </Link>
+            </li>
+
           );
         })}
       </PostListElement>
-      <AddPostButton addPost={addPost} />
     </div>
   )
 
