@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { AddPostDispatch } from '../containers/Listings';
+import type { AddPostDispatch } from '../containers/AddPostDisplay';
 
 type Props = {
   addPost: AddPostDispatch
