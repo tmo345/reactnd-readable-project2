@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
@@ -11,6 +10,7 @@ import { Provider } from 'react-redux'
 import type { Store, Dispatch } from 'redux';
 import type { Action } from './actions/types';
 import type { StateMap } from './reducers'
+import { BrowserRouter } from 'react-router-dom';
 
 export type ReduxStore = Store<StateMap, Action, Dispatch<Action>>
 
@@ -22,7 +22,9 @@ const store: ReduxStore =
 
 ReactDOM.render(
   <Provider  store={store}>
-    <App store={store}/>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'));
 registerServiceWorker();
