@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
 import type { Post as PostType } from '../reducers/types';
-import type { EditPostDispatch } from '../containers/Listings';
+import type { EditPostDispatch } from '../containers/PostDisplay';
 
 type Props = {
   post: PostType,

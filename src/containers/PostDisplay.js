@@ -1,0 +1,29 @@
+// @flow
+import React from 'react';
+import { connect } from 'react-redux';
+import type { StateMap } from '../reducers';
+import { Post } from '../components/Post';
+import type { Action } from '../actions/types';
+import { editPost, deletePost } from '../actions';
+import type { EditPostData } from '../actions';
+
+const mapStateToProps = (state: StateMap, ownProps) => {
+  return {
+    post: state.getIn(['posts', ownProps.match.params.id])
+  }
+}
+
+export type EditPostDispatch = (postData: EditPostData) => Action;
+export type DeletePostDispatch = (id: string) => Action;
+
+const mapDispatchToProps = (dispatch: Dispatch<Action>): {
+  editPost: EditPostDispatch,
+  deletePost: DeletePostDispatch
+} => {
+  return {
+    editPost: (postData) => dispatch(editPost(postData)),
+    deletePost: (id) => dispatch(deletePost(id))
+  };
+}
+
+export const PostDisplay = connect(mapStateToProps)(Post)
