@@ -11,6 +11,7 @@ import type { Store, Dispatch } from 'redux';
 import type { Action } from './actions/types';
 import type { StateMap } from './reducers'
 import { BrowserRouter } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export type ReduxStore = Store<StateMap, Action, Dispatch<Action>>
 
