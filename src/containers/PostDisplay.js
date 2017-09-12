@@ -1,5 +1,4 @@
 // @flow
-import React from 'react';
 import { connect } from 'react-redux';
 import type { StateMap } from '../reducers';
 import { Post } from '../components/Post';

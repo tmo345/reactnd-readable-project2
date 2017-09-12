@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Post } from './Post';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import type { Map } from 'immutable';
