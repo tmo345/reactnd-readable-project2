@@ -26,4 +26,4 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): {
   };
 }
 
-export const PostDisplay = connect(mapStateToProps)(Post)
+export const PostDisplay = connect(mapStateToProps, mapDispatchToProps)(Post)
