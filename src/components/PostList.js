@@ -22,9 +22,14 @@ export const PostList = (props: Props) => {
         {posts.valueSeq().map((post) => {
           return (
             <li key={post.get('id')}>
+              <div>
               <Link to={`post/${post.get('id')}`}>
                 {post.get('title')}
               </Link>
+              <div>
+                Votes: {post.get('voteScore')}
+              </div>
+              </div>
             </li>
 
           );
