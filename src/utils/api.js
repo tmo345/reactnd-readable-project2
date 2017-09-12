@@ -1,4 +1,5 @@
 // @flow
+import { Category } from '../reducers/types';
 
 const api = "http://localhost:5001";
 
@@ -9,7 +10,11 @@ const headers = {
   'Authorization': token
 };
 
-export const getCategories: fetch = () =>
+export const getCategories: fetch = (): Promise<Array<Category>> =>
   fetch(`${api}/categories`, { headers })
-    .then(res => res.json())
-    .then(data => data.categories)
+    .then((res) => res.json())
+    .then((data: {
+      categories: Array<Category>
+    }) => {
+      return data.categories;
+    })
