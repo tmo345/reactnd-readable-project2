@@ -8,7 +8,10 @@ import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from
 import moment from 'moment';
 import type { StateJS, StateMap } from 'store-types';
 import type { Action } from 'action-types';
+import { combineReducers } from 'redux';
 
+const initialPosts = {
+  byId: {
     'id1': {
       id: 'id1',
       timestamp: moment(),
@@ -19,83 +22,131 @@ import type { Action } from 'action-types';
       voteScore: 1
     }
   },
-  comments: {}
-};
+  allIds: ['id1']
+}
 
-// Convert the initialStateJS object to Immutable.Map
-const initialStateMap: StateMap = fromJS(initalStateJS);
+const initialCategoryUI = {
+  dropdownOpen: false,
+  active: 'udacity'
+}
 
-// Root reducer
-export const reducer = (state: StateMap = initialStateMap, action: Action): StateMap => {
-    switch(action.type) {
-      case SET_CATEGORIES:
-        return state
-          .set('categories', action.categories);
+export const categories = (state = [{name: 'All', path: '/' }], action) => {
+  switch(action.type) {
+    case SET_CATEGORIES:
+      return [...state, ...action.categories]
+    default:
+      return state
+  }
+}
 
-      case ADD_POST:
-        { // block scope const declarations
-          const { id, timestamp, title, body, author, category, voteScore } = action;
-          return state
-            .mergeDeepIn(['posts'], fromJS({
-              [id]: { id, timestamp, title, body, author, category, voteScore }
-            }));
+export const categoryUI = (state = initialCategoryUI, action) => {
+  switch(action.type) {
+    case TOGGLE_CATEGORY_SELECT:
+      return {
+        ...state,
+        dropdownOpen: !state.dropdownOpen
+      }
+    case SET_ACTIVE_CATEGORY:
+      return {
+        ...state,
+        active: action.active
+      }
+    default:
+      return state
+  }
+}
+
+export const posts = (state = initialPosts, action) => {
+  switch(action.type) {
+    case ADD_POST:
+      { // block scope const declarations
+        const { id, timestamp, title, body, author, category, voteScore } = action;
+        return {
+          byId: {
+            ...state.byId,
+            [id]: { id, timestamp, title, body, author, category, voteScore }
+          },
+          allIds: [...state.allIds, id]
         }
+      }
 
-      case EDIT_POST:
-        return state
-          .setIn(['posts', action.id, 'title'], action.title)
-          .setIn(['posts', action.id, 'body'], action.body);
+    case EDIT_POST:
+      return {
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            title: action.title,
+            body: action.body
+          }
+        },
+        allIds: [...state.allIds]
+      }
 
-      case DELETE_POST:
-        return state
-          .deleteIn(['posts', action.id])
+    case DELETE_POST:
+      const remainingIds = state.allIds.filter((remainingId) => remainingId !== action.id);
+      const remainingPosts = remainingIds.reduce((byId, currentId) => {
+        byId[currentId] = state.byId[currentId];
+        return byId;
+      }, {});
+
+      return {
+        byId: remainingPosts,
+        allIds: remainingIds
+      }
+
+    case UP_VOTE_POST:
+      return {
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            voteScore: state.byId[action.id]['voteScore'] + 1
+          }
+        },
+        allIds: [...state.allIds]
+      }
 
       case UP_VOTE_POST:
-        return state
-          .updateIn(
-            ['posts', action.id, 'voteScore'],
-            (score: number) => score + 1
-          );
-
-      case DOWN_VOTE_POST:
-        return state.updateIn(
-          ['posts', action.id, 'voteScore'],
-          (score: number ) => score - 1
-        );
-
-      case ADD_COMMENT:
-        { // Block scope const declarations
-          const { id, timestamp, body, author, voteScore, parentId } = action;
-          return state.mergeDeepIn(['comments'], Map({
-            [id]: { parentId, id, timestamp, body, author, voteScore }
-          }));
+        return {
+          byId: {
+            ...state.byId,
+            [action.id]: {
+              ...state.byId[action.id],
+              voteScore: state.byId[action.id]['voteScore'] + 1
+            }
+          },
+          allIds: [...state.allIds]
         }
 
-      case EDIT_COMMENT:
-        return state
-          .setIn(['comments', action.id, 'body'], action.body)
-          .setIn(['comments', action.id, 'timestamp'], action.timestamp)
+      case DOWN_VOTE_POST:
+        return {
+          byId: {
+            ...state.byId,
+            [action.id]: {
+              ...state.byId[action.id],
+              voteScore: state.byId[action.id]['voteScore'] - 1
+            }
+          },
+          allIds: [...state.allIds]
+        }
 
-      case DELETE_COMMENT:
-        return state
-          .deleteIn(['comments', action.id]);
-
-      case UP_VOTE_COMMENT:
-        return state
-          .updateIn(
-            ['comments', action.id, 'voteScore'],
-            (score: number) => score + 1
-          );
-
-      case DOWN_VOTE_COMMENT:
-        return state
-          .updateIn(
-            ['comments', action.id, 'voteScore'],
-            (score: number) => score - 1
-          );
-
-
-      default:
-        return state;
-    }
+    default:
+      return state
   }
+}
+
+// TODO: Implement cases for comments reducer
+const comments = (state = {}, action) => {
+  switch(action.type) {
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({
+  posts,
+  categories,
+  categoryUI,
+  comments
+})
