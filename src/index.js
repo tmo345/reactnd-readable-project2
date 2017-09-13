@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 import type { Store, Dispatch } from 'redux';
 import type { Action } from 'action-types';
 import { BrowserRouter } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'semantic-ui-css/semantic.min.css';
 import type { StateMap } from 'store-types'
 
 const store =
