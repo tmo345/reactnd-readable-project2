@@ -1,6 +1,8 @@
 // @flow
 
 export const SET_CATEGORIES = 'SET_CATEGORIES';
+export const TOGGLE_CATEGORY_SELECT = 'TOGGLE_CATEGORY_SELECT';
+export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 
 export const UP_VOTE_POST = 'UP_VOTE_POST';
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';

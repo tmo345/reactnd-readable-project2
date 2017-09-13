@@ -1,6 +1,6 @@
 // @flow
 
-import { SET_CATEGORIES } from './constants';
+import { SET_CATEGORIES, TOGGLE_CATEGORY_SELECT, SET_ACTIVE_CATEGORY } from './constants';
 import { ADD_POST, EDIT_POST, DELETE_POST } from './constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from './constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from './constants';
@@ -22,6 +22,15 @@ export const setCategories =
   (categories: SetCategoriesData): SetCategories => ({
     type: SET_CATEGORIES,
     categories
+  })
+
+export const toggleCategorySelect =
+  (): ToggleCategorySelect => ({ type: TOGGLE_CATEGORY_SELECT})
+
+export const setActiveCategory =
+  (options): SetActiveCategory => ({
+    type: SET_ACTIVE_CATEGORY,
+    active: options.value
   })
 
 export const upVotePost =

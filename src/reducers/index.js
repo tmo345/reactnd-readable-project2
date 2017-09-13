@@ -1,7 +1,7 @@
 // @flow
 
 import { fromJS, Map } from 'immutable';
-import { SET_CATEGORIES } from '../actions/constants';
+import { SET_CATEGORIES, TOGGLE_CATEGORY_SELECT, SET_ACTIVE_CATEGORY } from '../actions/constants';
 import { ADD_POST, EDIT_POST, DELETE_POST } from '../actions/constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from '../actions/constants';

@@ -2,7 +2,7 @@
 import  React, { Component } from 'react';
 import { getCategories } from '../utils/api.js'
 import { connect } from 'react-redux';
-import { setCategories } from '../actions';
+import { setCategories, toggleCategorySelect, setActiveCategory } from '../actions';
 import NavBar from '../components/NavBar';
 import { fromJS } from 'immutable'
 import type { Category } from 'store-types';
