@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import type { StateMap } from '../reducers';
 import { PostList } from '../components/PostList.js';
+import type { StateMap } from 'store-types'
 
 const mapStateToProps = (state: StateMap)  => {
   return {

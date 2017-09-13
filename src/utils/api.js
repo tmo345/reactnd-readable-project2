@@ -1,5 +1,5 @@
 // @flow
-import { Category } from '../reducers/types';
+import type { Category } from 'store-types';
 
 const api = "http://localhost:5001";
 

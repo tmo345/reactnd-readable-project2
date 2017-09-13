@@ -5,31 +5,17 @@ import { ADD_POST, EDIT_POST, DELETE_POST } from './constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from './constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from './constants';
 
-import type { SetCategories } from './types';
-import type { AddComment, EditComment, DeleteComment } from './types';
-import type { AddPost, EditPost, DeletePost } from './types';
-import type { UpVotePost, DownVotePost, UpVoteComment, DownVoteComment } from './types';
+import type { SetCategories, ToggleCategorySelect, SetActiveCategory } from 'action-types';
+import type { AddComment, EditComment, DeleteComment } from 'action-types';
+import type { AddPost, EditPost, DeletePost } from 'action-types';
+import type { UpVotePost, DownVotePost, UpVoteComment, DownVoteComment } from 'action-types';
+import type { AddPostData, EditPostData, SetCategoriesData } from 'action-types';
 
 // For creating unique ids for posts and comments
 const uuidv4 = require('uuid/v4');
 
 
 // Types for object arguments to some action creators
-
-export type AddPostData = {|
-  title: string,
-  body: string,
-  author: string,
-  category: string
-|};
-
-export type EditPostData = {|
-  id: string,
-  title: string,
-  body: string
-|};
-
-export type SetCategoriesData = Array<{name: string, path: string}>
 
 // Action Creators
 export const setCategories =

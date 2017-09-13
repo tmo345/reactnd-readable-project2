@@ -8,10 +8,10 @@ import { createStore } from 'redux';
 import { reducer } from './reducers';
 import { Provider } from 'react-redux'
 import type { Store, Dispatch } from 'redux';
-import type { Action } from './actions/types';
-import type { StateMap } from './reducers'
+import type { Action } from 'action-types';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import type { StateMap } from 'store-types'
 
 export type ReduxStore = Store<StateMap, Action, Dispatch<Action>>
 

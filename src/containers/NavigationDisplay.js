@@ -1,13 +1,12 @@
 // @flow
 import  React, { Component } from 'react';
-import type { StateMap } from '../reducers';
 import { getCategories } from '../utils/api.js'
 import { connect } from 'react-redux';
 import { setCategories } from '../actions';
 import NavBar from '../components/NavBar';
-import type { Category } from '../reducers/types';
-import type { Action } from '../actions/types';
 import { fromJS } from 'immutable'
+import type { Category } from 'store-types';
+import type { Action } from 'action-types';
 
 type Props = {
   categories: Array<Category>,

@@ -1,10 +1,10 @@
 // @flow
 import { connect } from 'react-redux';
-import type { StateMap } from '../reducers';
 import { Post } from '../components/Post';
-import type { Action } from '../actions/types';
+import type { Action } from 'action-types';
 import { editPost, deletePost } from '../actions';
-import type { EditPostData } from '../actions';
+import type { EditPostData } from 'action-types';
+import type { StateMap } from 'store-types';
 
 const mapStateToProps = (state: StateMap, ownProps) => {
   return {

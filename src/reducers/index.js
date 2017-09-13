@@ -6,37 +6,9 @@ import { ADD_POST, EDIT_POST, DELETE_POST } from '../actions/constants';
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/constants';
 import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from '../actions/constants';
 import moment from 'moment';
+import type { StateJS, StateMap } from 'store-types';
+import type { Action } from 'action-types';
 
-import type { Action } from '../actions/types';
-import type { Post, Comment, Category } from './types';
-
-// TODO:
-/*  Figure out why flow wizardry is making me keep the following types
-(StateJS, StateMap) in this file. If I move them to another file and
-import the types, flow starts complaining about the immutablejs Map methods.
-The methods execute without any errors despite the flow errors. If I leave
-them  here, flow is happy. My hunch is that this has to do with the return
-type of "any" from the fromJS function and flow is making inferences from the
-types being in the file.
- */
-
-export type StateJS = {|
-  categories: Array<?Category>,
-  posts: {
-    [id: string]: Post
-  },
-  comments: {
-    [id: string]: Comment
-  }
-|}
-
-export type StateMap = Map<string,(string|number|Post|Comment|Array<Category>)>
-
-// Initial application store state
-const initalStateJS: StateJS = {
-  categories: [],
-  posts: {
-    // TODO: Remove dummy data
     'id1': {
       id: 'id1',
       timestamp: moment(),
