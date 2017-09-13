@@ -8,7 +8,7 @@ import type { StateMap } from 'store-types';
 
 const mapStateToProps = (state: StateMap, ownProps) => {
   return {
-    post: state.getIn(['posts', ownProps.match.params.id])
+    post: state.posts.byId[ownProps.match.params.id]
   }
 }
 

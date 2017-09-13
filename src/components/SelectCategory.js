@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 type Props = {
-  categories: List
+  categories: Array<string>,
+
 }
 
 const CategoryList = styled.ul`

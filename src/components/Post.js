@@ -30,19 +30,19 @@ const CreatedAt = styled.p`
 
 `
 
-export const Post = (props: Props) => {
-  const id = props.post.get('id');
+export const Post = (props) => {
+  const id = props.post.id;
   const post = props.post;
   return (
     <PostListItem
       onClick={() => props.editPost({ id: id, title: 'new title', body: 'new body'})}
     >
-      <Title>{post.get('title')}</Title>
-      <Author>{post.get('author')}</Author>
+      <Title>{post.title}</Title>
+      <Author>{post.author}</Author>
       <CreatedAt>
-        {formatTime(post.get('timestamp'))}
+        {formatTime(post.timestamp)}
       </CreatedAt>
-      <Body>{post.get('body')}</Body>
+      <Body>{post.body}</Body>
     </PostListItem>
   )
 }

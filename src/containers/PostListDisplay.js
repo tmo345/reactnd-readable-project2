@@ -5,7 +5,7 @@ import type { StateMap } from 'store-types'
 
 const mapStateToProps = (state: StateMap)  => {
   return {
-    posts: state.get('posts'),
+    posts: state.posts,
   }
 }
 

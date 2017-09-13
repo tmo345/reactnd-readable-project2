@@ -9,24 +9,21 @@ const PostListElement = styled.ul`
   text-align: left;
 `
 
-type Props = {
-  posts: Map<string, *>,
-}
 
-export const PostList = (props: Props) => {
+export const PostList = (props) => {
   const { posts } = props;
   return (
     <div>
       <PostListElement>
-        {posts.valueSeq().map((post) => {
+        {posts.allIds.map((postId) => {
           return (
-            <li key={post.get('id')}>
+            <li key={posts.byId[postId]['id']}>
               <div>
-              <Link to={`post/${post.get('id')}`}>
-                {post.get('title')}
+              <Link to={`post/${posts.byId[postId]['id']}`}>
+                {posts.byId[postId]['title']}
               </Link>
               <div>
-                Votes: {post.get('voteScore')}
+                Votes: {posts.byId[postId]['voteScore']}
               </div>
               </div>
             </li>

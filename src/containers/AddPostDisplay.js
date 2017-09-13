@@ -7,7 +7,7 @@ import type { Action } from 'action-types';
 import type { StateMap } from 'store-types';
 
 const mapStateToProps = (state: StateMap) => ({
-  posts: state.get('posts')
+  posts: state.posts
 });
 
 export type AddPostDispatch = (postData: AddPostData) => Action;
