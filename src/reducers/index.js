@@ -1,9 +1,11 @@
 // @flow
 
 import moment from 'moment';
+import type { PostState, CategoryName, CategoryState } from 'store-types';
+import type { PostAction, SetActiveCategory } from 'action-types';
 import { combineReducers } from 'redux';
 
-const initialPosts = {
+const initialPosts: PostState = {
   byId: {
     'id1': {
       id: 'id1',
@@ -18,13 +20,31 @@ const initialPosts = {
   allIds: ['id1']
 }
 
-const initialCategoryUI = {
-  dropdownOpen: false,
-  active: 'udacity'
-}
+const initialCategories = [
+  {
+    name: 'all',
+    path: '/',
+    active: true
+  },
+  {
+    name: 'udacity',
+    path: 'udacity',
+    active: false
+  },
+  {
+    name: 'react',
+    path: 'react',
+    active: false
+  },
+  {
+    name: 'redux',
+    path: 'redux',
+    active: false
+  },
+]
 
 
-export const categoryUI = (state = initialCategoryUI, action) => {
+export const categories = (state: CategoryState = initialCategories, action: SetActiveCategory) => {
   switch(action.type) {
     case TOGGLE_CATEGORY_SELECT:
       return {
@@ -110,7 +130,7 @@ export const posts: Reducer<PostState, PostAction> = (state: PostState = initial
 }
 
 // TODO: Implement cases for comments reducer
-const comments = (state = {}, action) => {
+const comments = (state = { byId: {}, allIds: [] }, action) => {
   switch(action.type) {
     default:
       return state;
