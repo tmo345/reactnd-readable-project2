@@ -46,15 +46,6 @@ const initialCategories = [
 
 export const categories = (state: CategoryState = initialCategories, action: SetActiveCategory) => {
   switch(action.type) {
-    case TOGGLE_CATEGORY_SELECT:
-      return {
-        ...state,
-        dropdownOpen: !state.dropdownOpen
-      }
-    case SET_ACTIVE_CATEGORY:
-      return {
-        ...state,
-        active: action.active
       }
     default:
       return state
