@@ -61,5 +61,11 @@ declare module 'store-types' {
     allIds: (?string)[]
   }
 
-  declare type StateMap = Map<string,(string|number|Post|Comment|Array<Category>|boolean|Moment)>
+  declare type StoreState = {
+    categories: CategoryState,
+    posts: PostState,
+    comments: CommentState
+  }
+
+
 }

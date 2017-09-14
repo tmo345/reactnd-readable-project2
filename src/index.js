@@ -13,7 +13,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import type { StoreState } from 'store-types'
 
-const store =
+const store: Store<StoreState, Action> =
   createStore(
     rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
