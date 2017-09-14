@@ -7,7 +7,7 @@ import type { Category } from 'store-types';
 import type { Action } from 'action-types';
 
 type Props = {
-  categories: Array<string>,
+  categories: Array<Category>,
   categoryUI: {
     dropdownOpen: boolean,
     active: string
@@ -39,7 +39,7 @@ const mapStateToProps = ({ categories, categoryUI }) => ({
 const mapDispatchToProps = (dispatch: Dispatch<Action>): Dispatch<Action> =>  {
 
   return {
-  setActiveCategory: (category: string) => dispatch(setActiveCategory(category))
+  setActiveCategory: (category: CategoryName) => dispatch(setActiveCategory(category))
 };
 }
 

@@ -7,7 +7,7 @@ import type { Action } from 'action-types';
 
 type Props = {
   categories: Array<string>,
-  setActiveCategory: (category: string) => Dispatch<Action>
+  setActiveCategory: (category: string) => void
 }
 
 class NavigationDisplay extends Component<Props> {
@@ -28,7 +28,7 @@ const mapStateToProps = ({ categories, categoryUI }) => ({
 const mapDispatchToProps = (dispatch: Dispatch<Action>): Dispatch<Action> =>  {
 
   return {
-  setActiveCategory: (category: string) => dispatch(setActiveCategory(category))
+  setActiveCategory: (category: CategoryName) => dispatch(setActiveCategory(category))
 };
 }
 
