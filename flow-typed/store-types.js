@@ -3,6 +3,20 @@ import type Moment from 'moment'
 
 declare module 'store-types' {
 
+  declare type CategoryName =
+    | 'all'
+    | 'react'
+    | 'redux'
+    | 'udacity'
+
+  declare type Category = {
+    name: CategoryName,
+    path: string,
+    active: boolean
+  }
+
+  declare type CategoryState = Array<Category>
+
   declare type Post = {
     id: string,
     timestamp: Moment,
