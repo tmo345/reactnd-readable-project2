@@ -54,13 +54,12 @@ declare module 'store-types' {
       [id: string]: Post
     },
     comments: {
+  declare type CommentState = {
+    byId: {
       [id: string]: Comment
     },
-    categorySelect: {
-      dropdownOpen: boolean,
-      active: string
-    }
-  |}
+    allIds: (?string)[]
+  }
 
   declare type StateMap = Map<string,(string|number|Post|Comment|Array<Category>|boolean|Moment)>
 }
