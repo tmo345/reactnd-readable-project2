@@ -43,17 +43,7 @@ declare module 'store-types' {
     voteScore: number
   }
 
-  declare type Category = {
-    name: string,
-    path: string
-  }
 
-  declare type StateJS = {|
-    categories: Array<?Category>,
-    posts: {
-      [id: string]: Post
-    },
-    comments: {
   declare type CommentState = {
     byId: {
       [id: string]: Comment
