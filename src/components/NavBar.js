@@ -11,18 +11,15 @@ const SiteBranding = styled(Menu.Menu)`
 
 const NavBar = (props) => {
   return (
-        <Menu inverted={true} attached="top">
-        <Container>
-            <SiteBranding>
-              <Menu.Item as={Link} to='/'>
-                <h1>Readable</h1>
-              </Menu.Item>
-            </SiteBranding>
+    <Menu inverted={true} attached="top">
+      <Container>
+        <SiteBranding>
+          <Menu.Item as={Link} to='/'>
+            <h1>Readable</h1>
+          </Menu.Item>
+        </SiteBranding>
       </Container>
-        </Menu>
-
-
-
+    </Menu>
   )
 }
 
