@@ -13,6 +13,13 @@ declare module 'store-types' {
     voteScore: number
   }
 
+  declare type PostState = {
+    byId: {
+      [id: string]: Post
+    },
+    allIds: (?string)[]
+  }
+
   declare type Comment = {
     id: string,
     parentId: string,

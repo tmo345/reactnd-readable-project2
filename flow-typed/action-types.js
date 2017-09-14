@@ -90,6 +90,14 @@ declare module 'action-types' {
     id: string
   }
 
+  declare type PostAction =
+    | AddPost
+    | EditPost
+    | DeletePost
+    | UpVotePost
+    | DownVotePost
+
+
   declare type Action =
     | SetActiveCategory
     | AddPost

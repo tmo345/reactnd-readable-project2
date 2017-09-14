@@ -41,7 +41,7 @@ export const categoryUI = (state = initialCategoryUI, action) => {
   }
 }
 
-export const posts = (state = initialPosts, action) => {
+export const posts: Reducer<PostState, PostAction> = (state: PostState = initialPosts, action: PostAction) => {
   switch(action.type) {
     case 'ADD_POST':
       { // block scope const declarations
