@@ -1,10 +1,4 @@
 // @flow
-
-import { SET_CATEGORIES, TOGGLE_CATEGORY_SELECT, SET_ACTIVE_CATEGORY } from './constants';
-import { ADD_POST, EDIT_POST, DELETE_POST } from './constants';
-import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from './constants';
-import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from './constants';
-
 import type { SetActiveCategory } from 'action-types';
 import type { AddComment, EditComment, DeleteComment } from 'action-types';
 import type { AddPost, EditPost, DeletePost } from 'action-types';
@@ -20,32 +14,32 @@ const uuidv4 = require('uuid/v4');
 // Action Creators
 
 export const setActiveCategory =
-  (options): SetActiveCategory => ({
-    type: SET_ACTIVE_CATEGORY,
-    active: options.value
+  (name: CategoryName): SetActiveCategory => ({
+    type: 'SET_ACTIVE_CATEGORY',
+    name: name
   })
 
 export const upVotePost =
   (id: string): UpVotePost => ({
-    type: UP_VOTE_POST,
+    type: 'UP_VOTE_POST',
     id
   });
 
 export const downVotePost =
   (id: string): DownVotePost => ({
-    type: DOWN_VOTE_POST,
+    type: 'DOWN_VOTE_POST',
     id
   });
 
 export const upVoteComment =
   (id: string): UpVoteComment => ({
-    type: UP_VOTE_COMMENT,
+    type: 'UP_VOTE_COMMENT',
     id
   });
 
 export const downVoteComment =
   (id: string): DownVoteComment => ({
-    type: DOWN_VOTE_COMMENT,
+    type: 'DOWN_VOTE_COMMENT',
     id
   })
 
@@ -53,7 +47,7 @@ export const addPost =
   ({ title, body, author, category } : AddPostData): AddPost => {
     const uniqueId = `post-${uuidv4()}`;
     return {
-      type: ADD_POST,
+      type: 'ADD_POST',
       id: uniqueId,
       timestamp: Date.now(),
       title,
@@ -67,7 +61,7 @@ export const addPost =
 
 export const editPost =
   ({id, title, body}: EditPostData): EditPost => ({
-    type: EDIT_POST,
+    type: 'EDIT_POST',
     id,
     title,
     body
@@ -75,7 +69,7 @@ export const editPost =
 
 export const deletePost =
   (id: string): DeletePost => ({
-    type: DELETE_POST,
+    type: 'DELETE_POST',
     id
   });
 
@@ -83,7 +77,7 @@ type AddCommentFunc = ({ id: string, timestamp: number, author: string, body: st
 export const addComment: AddCommentFunc =
   ({ id, timestamp, body, author, parentId, voteScore }) => {
     return {
-      type: ADD_COMMENT,
+      type: 'ADD_COMMENT',
       id,
       timestamp,
       body,
@@ -97,7 +91,7 @@ type EditCommentFunc = ({id: string, body: string}) => EditComment
 export const editComment: EditCommentFunc =
   ({id, body}) => {
     return {
-      type: EDIT_COMMENT,
+      type: 'EDIT_COMMENT',
       id,
       timestamp: Date.now(),
       body
@@ -108,7 +102,7 @@ type DeletCommentFunc = ({id: string}) => DeleteComment;
 export const deleteComment: DeletCommentFunc =
   ({id}) => {
     return {
-      type: DELETE_COMMENT,
+      type: 'DELETE_COMMENT',
       id
     }
   }

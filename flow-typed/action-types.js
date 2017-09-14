@@ -1,71 +1,52 @@
 // @flow
-import {
-  SET_CATEGORIES,
-  TOGGLE_CATEGORY_SELECT,
-  SET_ACTIVE_CATEGORY,
-  UP_VOTE_POST,
-  DOWN_VOTE_POST,
-  UP_VOTE_COMMENT,
-  DOWN_VOTE_COMMENT,
-  ADD_POST,
-  EDIT_POST,
-  DELETE_POST,
-  ADD_COMMENT,
-  EDIT_COMMENT,
-  DELETE_COMMENT
-} from '../src/actions/constants';
-import { List, Map } from 'immutable';
+/**
+ * Note: Using string literals for action types instead of constants
+ * because flow can enforce the type as the exact string literal.
+ */
+import type { CategoryName } from 'store-types';
 
 declare module 'action-types' {
 
-  declare type AddPostData = {|
+  declare type AddPostData = {
     title: string,
     body: string,
     author: string,
     category: string
-  |};
+  };
 
-  declare type EditPostData = {|
+  declare type EditPostData = {
     id: string,
     title: string,
     body: string
-  |};
+  };
 
-  declare type SetCategoriesData = List<Map<string, *>>
-
-  declare type SetCategories = {
-    type: typeof SET_CATEGORIES,
-    categories: List<Map<string,*>>
+  declare type SetActiveCategory = {
+    type: 'SET_ACTIVE_CATEGORY',
+    name: CategoryName
   }
 
-
-  declare type SetActiveCategory = {|
-    type: typeof SET_ACTIVE_CATEGORY,
-    active: string
-  |}
-
-  declare type UpVotePost = {|
-    type: typeof UP_VOTE_POST,
+  declare type UpVotePost = {
+    type: 'UP_VOTE_POST',
     id: string
-  |};
+  };
 
-  declare type DownVotePost = {|
-    type: typeof DOWN_VOTE_POST,
+  declare type DownVotePost = {
+    type: 'DOWN_VOTE_POST',
     id: string
-  |};
+  };
 
-  declare type UpVoteComment = {|
-    type: typeof UP_VOTE_COMMENT,
+  declare type UpVoteComment = {
+    type: 'UP_VOTE_COMMENT',
     id: string
-  |};
+  };
 
   declare type DownVoteComment = {|
-    type: typeof DOWN_VOTE_COMMENT,
+    type: 'DOWN_VOTE_COMMENT',
     id: string
   |};
 
-  declare type AddPost = {|
-    type: typeof ADD_POST,
+  declare type AddPost = {
+    type: 'ADD_POST',
     id: string,
     timestamp: number,
     title: string,
@@ -73,22 +54,22 @@ declare module 'action-types' {
     author: string,
     category: string,
     voteScore: number
-  |}
+  }
 
-  declare type EditPost = {|
-    type: typeof EDIT_POST,
+  declare type EditPost = {
+    type: 'EDIT_POST',
     id: string,
     title: string,
     body: string
-  |}
+  }
 
-  declare type DeletePost = {|
-    type: typeof DELETE_POST,
+  declare type DeletePost = {
+    type: 'DELETE_POST',
     id: string
-  |}
+  }
 
   declare type AddComment = {
-    type: typeof ADD_COMMENT,
+    type: 'ADD_COMMENT',
     id: string,
     timestamp: number,
     body: string,
@@ -98,14 +79,14 @@ declare module 'action-types' {
   }
 
   declare type EditComment = {
-    type: typeof EDIT_COMMENT,
+    type: 'EDIT_COMMENT',
     id: string,
     timestamp: number,
     body: string
   }
 
   declare type DeleteComment = {
-    type: typeof DELETE_COMMENT,
+    type: 'DELETE_COMMENT',
     id: string
   }
 

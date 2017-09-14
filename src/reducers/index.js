@@ -1,10 +1,5 @@
 // @flow
 
-import { fromJS, Map } from 'immutable';
-import { SET_CATEGORIES, TOGGLE_CATEGORY_SELECT, SET_ACTIVE_CATEGORY } from '../actions/constants';
-import { ADD_POST, EDIT_POST, DELETE_POST } from '../actions/constants';
-import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/constants';
-import { UP_VOTE_POST, DOWN_VOTE_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from '../actions/constants';
 import moment from 'moment';
 import type { StateJS, StateMap } from 'store-types';
 import type { Action } from 'action-types';
@@ -50,7 +45,7 @@ export const categoryUI = (state = initialCategoryUI, action) => {
 
 export const posts = (state = initialPosts, action) => {
   switch(action.type) {
-    case ADD_POST:
+    case 'ADD_POST':
       { // block scope const declarations
         const { id, timestamp, title, body, author, category, voteScore } = action;
         return {
@@ -62,7 +57,7 @@ export const posts = (state = initialPosts, action) => {
         }
       }
 
-    case EDIT_POST:
+    case 'EDIT_POST':
       return {
         byId: {
           ...state.byId,
@@ -75,7 +70,7 @@ export const posts = (state = initialPosts, action) => {
         allIds: [...state.allIds]
       }
 
-    case DELETE_POST:
+    case 'DELETE_POST':
       const remainingIds = state.allIds.filter((remainingId) => remainingId !== action.id);
       const remainingPosts = remainingIds.reduce((byId, currentId) => {
         byId[currentId] = state.byId[currentId];
@@ -87,7 +82,7 @@ export const posts = (state = initialPosts, action) => {
         allIds: remainingIds
       }
 
-    case UP_VOTE_POST:
+    case 'UP_VOTE_POST':
       return {
         byId: {
           ...state.byId,
@@ -99,29 +94,17 @@ export const posts = (state = initialPosts, action) => {
         allIds: [...state.allIds]
       }
 
-      case UP_VOTE_POST:
-        return {
-          byId: {
-            ...state.byId,
-            [action.id]: {
-              ...state.byId[action.id],
-              voteScore: state.byId[action.id]['voteScore'] + 1
-            }
-          },
-          allIds: [...state.allIds]
-        }
-
-      case DOWN_VOTE_POST:
-        return {
-          byId: {
-            ...state.byId,
-            [action.id]: {
-              ...state.byId[action.id],
-              voteScore: state.byId[action.id]['voteScore'] - 1
-            }
-          },
-          allIds: [...state.allIds]
-        }
+    case 'DOWN_VOTE_POST':
+      return {
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            voteScore: state.byId[action.id]['voteScore'] - 1
+          }
+        },
+        allIds: [...state.allIds]
+      }
 
     default:
       return state
