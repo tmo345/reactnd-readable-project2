@@ -19,14 +19,6 @@ const NavBar = (props) => {
                 <h1>Readable</h1>
               </Menu.Item>
             </SiteBranding>
-            <Menu.Menu position='right'>
-              <SelectCategory
-                categories={props.categories}
-                categoryUI={props.categoryUI}
-                toggleCategorySelect={props.toggleCategorySelect}
-                setActiveCategory={props.setActiveCategory}
-              />
-            </Menu.Menu>
       </Container>
         </Menu>
 

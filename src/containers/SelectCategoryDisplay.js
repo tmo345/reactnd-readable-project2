@@ -3,7 +3,7 @@ import  React, { Component } from 'react';
 import { getCategories } from '../utils/api.js'
 import { connect } from 'react-redux';
 import { setCategories, toggleCategorySelect, setActiveCategory } from '../actions';
-import NavBar from '../components/NavBar';
+import SelectCategory from '../components/SelectCategory';
 import type { Category } from 'store-types';
 import type { Action } from 'action-types';
 
@@ -18,17 +18,17 @@ type Props = {
   setActiveCategory: (category: string) => Dispatch<Action>
 }
 
-class NavigationDisplay extends Component<Props> {
-  //componentDidMount(): void {
-    //getCategories()
-      //.then((categories: Array<Category>): void => {
-      //this.props.setCategories(categories);
-    //});
-  //}
+class SelectCategoryDisplay extends Component<Props> {
+  componentDidMount(): void {
+    getCategories()
+      .then((categories: Array<Category>): void => {
+      this.props.setCategories(categories);
+    });
+  }
 
   render() {
     return (
-      <NavBar
+      <SelectCategory
         categories={this.props.categories}
         categoryUI={this.props.categoryUI}
         toggleCategorySelect={this.props.toggleCategorySelect}
@@ -52,4 +52,4 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): Dispatch<Action> =>  {
 };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectCategoryDisplay);
