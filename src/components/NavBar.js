@@ -1,6 +1,4 @@
 import React from 'react';
-import Logo from './Logo';
-import SelectCategory from './SelectCategory';
 import { Container, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';

@@ -4,7 +4,6 @@ import { Post } from '../components/Post';
 import type { Action } from 'action-types';
 import { editPost, deletePost } from '../actions';
 import type { EditPostData } from 'action-types';
-import type { StateMap } from 'store-types';
 
 const mapStateToProps = (state: StateMap, ownProps) => {
   return {

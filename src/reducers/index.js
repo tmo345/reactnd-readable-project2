@@ -1,8 +1,6 @@
 // @flow
 
 import moment from 'moment';
-import type { StateJS, StateMap } from 'store-types';
-import type { Action } from 'action-types';
 import { combineReducers } from 'redux';
 
 const initialPosts = {

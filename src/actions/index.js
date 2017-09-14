@@ -9,8 +9,6 @@ import type { AddPostData, EditPostData } from 'action-types';
 const uuidv4 = require('uuid/v4');
 
 
-// Types for object arguments to some action creators
-
 // Action Creators
 
 export const setActiveCategory =

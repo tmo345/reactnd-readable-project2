@@ -7,11 +7,11 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 import rootReducer from './reducers';
 import { Provider } from 'react-redux'
-import type { Store, Dispatch } from 'redux';
+import type { Store } from 'redux';
 import type { Action } from 'action-types';
 import { BrowserRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
-import type { StateMap } from 'store-types'
+import type { StoreState } from 'store-types'
 
 const store =
   createStore(
