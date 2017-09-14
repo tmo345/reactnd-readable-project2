@@ -11,14 +11,23 @@ const initialPosts: PostState = {
     'id1': {
       id: 'id1',
       timestamp: moment(),
-      title: 'First post',
+      title: 'Udacity  post',
       body: 'First post content',
       author: 'Author of first post',
-      category: 'Category of first post',
+      category: 'udacity',
+      voteScore: 1
+    },
+    'id2': {
+      id: 'id2',
+      timestamp: moment(),
+      title: 'React post',
+      body: 'First post content',
+      author: 'Author of first post',
+      category: 'react',
       voteScore: 1
     }
   },
-  allIds: ['id1']
+  allIds: ['id1', 'id2']
 }
 
 const initialCategories = [
