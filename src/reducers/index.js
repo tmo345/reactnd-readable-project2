@@ -97,7 +97,12 @@ export const posts: Reducer<PostState, PostAction> = (state: PostState = initial
     case 'DELETE_POST':
       const remainingIds = state.allIds.filter((remainingId) => remainingId !== action.id);
       const remainingPosts = remainingIds.reduce((byId, currentId) => {
-        byId[currentId] = state.byId[currentId];
+        // In case remainingIds is empty to avoid assigning undefined as property of byId.
+        // An example would be where there is one post and you delete it, resulting in
+        // remainingIds = [].
+        if (currentId) {
+          byId[currentId] = state.byId[currentId];
+        }
         return byId;
       }, {});
 
