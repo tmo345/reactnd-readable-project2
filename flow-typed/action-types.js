@@ -97,18 +97,15 @@ declare module 'action-types' {
     | UpVotePost
     | DownVotePost
 
-
-  declare type Action =
-    | SetActiveCategory
-    | AddPost
-    | EditPost
-    | DeletePost
-    | UpVotePost
-    | DownVotePost
-    | UpVoteComment
-    | DownVoteComment
+  declare type CommentAction =
     | AddComment
     | EditComment
     | DeleteComment
+    | UpVoteComment
+    | DownVoteComment
 
+  declare type Action =
+    | SetActiveCategory
+    | PostAction
+    | CommentAction
 }

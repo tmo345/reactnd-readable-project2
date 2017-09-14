@@ -1,9 +1,10 @@
 // @flow
 
 import moment from 'moment';
-import type { PostState, CategoryName, CategoryState } from 'store-types';
-import type { PostAction, SetActiveCategory } from 'action-types';
+import type { PostState, CategoryName, CategoryState, CommentState } from 'store-types';
+import type { PostAction, SetActiveCategory, CommentAction } from 'action-types';
 import { combineReducers } from 'redux';
+import type { Reducer } from 'redux';
 
 const initialPosts: PostState = {
   byId: {
@@ -44,7 +45,7 @@ const initialCategories = [
 ]
 
 
-export const categories = (state: CategoryState = initialCategories, action: SetActiveCategory) => {
+export const categories: Reducer<CategoryState, SetActiveCategory> = (state: CategoryState = initialCategories, action: SetActiveCategory) => {
   switch(action.type) {
     case 'SET_ACTIVE_CATEGORY':
       const currentActive = (state.filter((category) => category.active))[0]
@@ -140,12 +141,12 @@ export const posts: Reducer<PostState, PostAction> = (state: PostState = initial
   }
 }
 
-// TODO: Implement cases for comments reducer
-const comments = (state = { byId: {}, allIds: [] }, action) => {
-  switch(action.type) {
-    default:
-      return state;
-  }
+const comments: Reducer<CommentState, CommentAction> =
+  (state: CommentState = { byId: {}, allIds: [] }, action: CommentAction) => {
+    switch(action.type) {
+      default:
+        return state;
+    }
 }
 
 export default combineReducers({
