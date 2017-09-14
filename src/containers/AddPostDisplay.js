@@ -5,7 +5,7 @@ import { addPost } from '../actions';
 import type { AddPostData } from 'action-types';
 import type { Action } from 'action-types';
 
-const mapStateToProps = (state: StateMap) => ({
+const mapStateToProps = (state) => ({
   posts: state.posts
 });
 
