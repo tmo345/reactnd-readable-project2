@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { CategoryName, Category } from 'store-types'
+import CategoryFilterLink from '../containers/FilterCategoryLink.js';
 
 type Props = {
   categories: Array<Category>,
@@ -37,7 +38,9 @@ const SelectCategory = (props: Props) => {
           <CategoryOption
             key={category.name}
             onClick={() => setActiveCategory(category.name)}>
+              <CategoryFilterLink categoryFilter={category.name}>
               {category.name}
+              </CategoryFilterLink>
           </CategoryOption>
           ))}
         </CategoryOptions>

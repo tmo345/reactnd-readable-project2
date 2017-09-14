@@ -10,7 +10,8 @@ type Props = {
         [id: string]: Post
       },
     allIds: Array<string>
-  }
+  },
+  filterCategory: string
 }
 
 
@@ -22,10 +23,16 @@ const PostListElement = styled.ul`
 
 export const PostList = (props: Props) => {
   const { posts } = props;
+  let filteredPosts;
+  if (props.filterCategory === 'all') {
+    filteredPosts = posts.allIds;
+  } else {
+    filteredPosts = posts.allIds.filter((postId) => posts.byId[postId]['category'] === props.filterCategory)
+  }
   return (
     <div>
       <PostListElement>
-        {posts.allIds.map((postId) => {
+        {filteredPosts.map((postId) => {
           return (
             <li key={posts.byId[postId]['id']}>
               <div>
