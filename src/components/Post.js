@@ -30,7 +30,7 @@ const CreatedAt = styled.p`
 
 `
 
-export const Post = (props) => {
+export const Post = (props: Props) => {
   const id = props.post.id;
   const post = props.post;
   return (

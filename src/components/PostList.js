@@ -2,6 +2,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import type { Post } from 'store-types';
+
+type Props = {
+  posts: {
+      byId: {
+        [id: string]: Post
+      },
+    allIds: Array<string>
+  }
+}
+
 
 const PostListElement = styled.ul`
   list-style-type: none;
@@ -9,7 +20,7 @@ const PostListElement = styled.ul`
 `
 
 
-export const PostList = (props) => {
+export const PostList = (props: Props) => {
   const { posts } = props;
   return (
     <div>
