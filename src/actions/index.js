@@ -4,6 +4,7 @@ import type { AddComment, EditComment, DeleteComment } from 'action-types';
 import type { AddPost, EditPost, DeletePost } from 'action-types';
 import type { UpVotePost, DownVotePost, UpVoteComment, DownVoteComment } from 'action-types';
 import type { AddPostData, EditPostData } from 'action-types';
+import type { CategoryName } from 'store-types';
 
 // For creating unique ids for posts and comments
 const uuidv4 = require('uuid/v4');
