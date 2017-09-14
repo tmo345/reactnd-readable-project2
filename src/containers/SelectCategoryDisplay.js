@@ -1,8 +1,7 @@
 // @flow
 import  React, { Component } from 'react';
-import { getCategories } from '../utils/api.js'
 import { connect } from 'react-redux';
-import { setCategories, toggleCategorySelect, setActiveCategory } from '../actions';
+import { setActiveCategory } from '../actions';
 import SelectCategory from '../components/SelectCategory';
 import type { Category } from 'store-types';
 import type { Action } from 'action-types';
@@ -19,12 +18,6 @@ type Props = {
 }
 
 class SelectCategoryDisplay extends Component<Props> {
-  componentDidMount(): void {
-    getCategories()
-      .then((categories: Array<Category>): void => {
-      this.props.setCategories(categories);
-    });
-  }
 
   render() {
     return (
@@ -46,8 +39,6 @@ const mapStateToProps = ({ categories, categoryUI }) => ({
 const mapDispatchToProps = (dispatch: Dispatch<Action>): Dispatch<Action> =>  {
 
   return {
-  setCategories: (categories: Array<Category>): Dispatch<Action> => dispatch(setCategories(categories)),
-  toggleCategorySelect: () => dispatch(toggleCategorySelect()),
   setActiveCategory: (category: string) => dispatch(setActiveCategory(category))
 };
 }

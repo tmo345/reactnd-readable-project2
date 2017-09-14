@@ -30,14 +30,6 @@ const initialCategoryUI = {
   active: 'udacity'
 }
 
-export const categories = (state = [{name: 'All', path: '/' }], action) => {
-  switch(action.type) {
-    case SET_CATEGORIES:
-      return [...state, ...action.categories]
-    default:
-      return state
-  }
-}
 
 export const categoryUI = (state = initialCategoryUI, action) => {
   switch(action.type) {
@@ -147,6 +139,5 @@ const comments = (state = {}, action) => {
 export default combineReducers({
   posts,
   categories,
-  categoryUI,
   comments
 })

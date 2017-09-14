@@ -38,9 +38,6 @@ declare module 'action-types' {
     categories: List<Map<string,*>>
   }
 
-  declare type ToggleCategorySelect = {|
-    type: typeof TOGGLE_CATEGORY_SELECT
-  |};
 
   declare type SetActiveCategory = {|
     type: typeof SET_ACTIVE_CATEGORY,
@@ -113,8 +110,6 @@ declare module 'action-types' {
   }
 
   declare type Action =
-    | SetCategories
-    | ToggleCategorySelect
     | SetActiveCategory
     | AddPost
     | EditPost
