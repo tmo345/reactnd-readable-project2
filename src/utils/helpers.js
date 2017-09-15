@@ -1,5 +1,3 @@
-// @flow
-
 import moment from 'moment';
 
 export const formatTime = (timestamp: string): string =>

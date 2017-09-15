@@ -1,4 +1,3 @@
-// @flow
 import type { SetActiveCategory } from 'action-types';
 import type { AddComment, EditComment, DeleteComment } from 'action-types';
 import type { AddPost, EditPost, DeletePost } from 'action-types';

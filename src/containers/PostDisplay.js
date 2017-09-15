@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import { Post } from '../components/Post';
 import type { Action } from 'action-types';
