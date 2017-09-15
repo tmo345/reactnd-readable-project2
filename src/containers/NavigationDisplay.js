@@ -20,9 +20,8 @@ class NavigationDisplay extends Component<Props> {
   }
 }
 
-const mapStateToProps = ({ categories, categoryUI }) => ({
+const mapStateToProps = ({ categories }) => ({
   categories,
-  categoryUI
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): Dispatch<Action> =>  {
