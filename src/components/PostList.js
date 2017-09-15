@@ -5,13 +5,7 @@ import { Link } from 'react-router-dom';
 import type { Post } from 'store-types';
 
 type Props = {
-  posts: {
-      byId: {
-        [id: string]: Post
-      },
-    allIds: Array<string>
-  },
-  filterCategory: string
+  posts: (Post)[]
 }
 
 
@@ -22,31 +16,30 @@ const PostListElement = styled.ul`
 
 
 export const PostList = (props: Props) => {
-  const { posts } = props;
-  let filteredPosts;
-  if (props.filterCategory === 'all') {
-    filteredPosts = posts.allIds;
-  } else {
-    filteredPosts = posts.allIds.filter((postId) => posts.byId[postId]['category'] === props.filterCategory)
+  const posts = props.posts;
+  console.log(posts)
+  if (posts.length === 0) {
+    return <p>Sorry there are no posts in this category.</p>
   }
   return (
     <div>
       <PostListElement>
-        {filteredPosts.map((postId) => {
+        { posts.map((post) => {
+        console.log(post)
           return (
-            <li key={posts.byId[postId]['id']}>
+            <li key={post.id}>
               <div>
-              <Link to={`post/${posts.byId[postId]['id']}`}>
-                {posts.byId[postId]['title']}
+              <Link to={`post/${post.id}`}>
+                {post.title}
               </Link>
               <div>
-                Votes: {posts.byId[postId]['voteScore']}
+                Votes: {post.voteScore}
               </div>
               </div>
             </li>
-
           );
-        })}
+        }
+        )}
       </PostListElement>
     </div>
   )
