@@ -11,12 +11,11 @@ type Props = {
 }
 
 const Categories = styled.div`
-  display: flex;
+  //display: flex;
   text-align: left;
 `
 
 const Heading = styled.h3`
-  padding-top: 20px;
   padding-left: 16px;
 `
 
@@ -26,11 +25,21 @@ const FilterList = styled.ul`
 `
 const FilterItem = styled.li`
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 7.5px;
+  margin-bottom: 7.5px;
 `
 
+const ActiveButton = styled(Button)`
+  background-color: #101D28;
+`
+
+const ButtonText = styled.span`
+  font-size: 1rem;
+  text-transform: capitalize;
+`
 
 const SelectCategory = (props: Props) => {
+  console.log(props)
   const setActiveCategory = props.setActiveCategory;
 
   return (
@@ -38,7 +47,6 @@ const SelectCategory = (props: Props) => {
       <Heading>Choose Category:</Heading>
       <FilterList>
 
-        <Button.Group color="blue">
           {props.categories.map((category) => (
 
           <FilterItem
@@ -46,12 +54,13 @@ const SelectCategory = (props: Props) => {
             onClick={() => setActiveCategory(category.name)}
           >
             <FilterLink categoryFilter={category.path}>
-              <Button compact>{category.name}</Button>
+              <Button color={category.active ? 'blue' : 'grey'} size='medium'>
+                <ButtonText>{category.name}</ButtonText>
+              </Button>
             </FilterLink>
           </FilterItem>
 
           ))}
-        </Button.Group>
       </FilterList>
     </Categories>
     )
