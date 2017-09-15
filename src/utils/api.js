@@ -1,5 +1,4 @@
-// @flow
-import type { Category } from 'store-types';
+import type { Category, Post } from 'store-types';
 
 const api = "http://localhost:5001";
 
@@ -9,6 +8,10 @@ const headers = {
   'Accept': 'application/json',
   'Authorization': token
 };
+
+export const fetchFromApi = () => {
+  return fetch(`${api}/categories`, { headers });
+}
 
 export const getCategories: fetch = (): Promise<Array<Category>> =>
   fetch(`${api}/categories`, { headers })

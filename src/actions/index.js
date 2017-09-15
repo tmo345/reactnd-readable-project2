@@ -5,6 +5,8 @@ import type { AddPost, EditPost, DeletePost } from 'action-types';
 import type { UpVotePost, DownVotePost, UpVoteComment, DownVoteComment } from 'action-types';
 import type { AddPostData, EditPostData } from 'action-types';
 import type { CategoryName } from 'store-types';
+import { getPosts } from '../utils/api';
+import { fetchFromApi } from '../utils/api';
 
 // For creating unique ids for posts and comments
 const uuidv4 = require('uuid/v4');
@@ -17,6 +19,18 @@ export const hydratePosts =
     return {
       type: 'HYDRATE_POSTS',
       posts: posts
+    }
+  }
+
+export const getAllPosts =
+  () => {
+    return function( dispatch ) {
+      return fetchFromApi().
+        then(
+          response => response.json(),
+          error => console.log('An error occured.', error)
+        )
+        .then(posts => dispatch(hydratePosts(posts)))
     }
   }
 
