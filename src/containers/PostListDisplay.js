@@ -1,49 +1,58 @@
-// @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PostList } from '../components/PostList.js';
+import { PostList } from '../components/PostList';
 import type { Post, CategoryName } from 'store-types';
+import { setActiveCategory } from '../actions';
+import SelectCategory from '../components/SelectCategory';
+import { Grid } from 'semantic-ui-react';
+import { curry, compose } from 'ramda';
+import { convertToList } from '../utils/helpers';
 
-
-type ByIdObject = {
-  [id: string]: Post
-}
-
-type PostsArray = (Post)[]
-
-class PostListDisplay extends Component<*> {
-  toPostArray = (object: ByIdObject): PostsArray => {
-    const keys = Object.keys(object)
-    return keys.map((key) => object[key])
-  }
-
-  filterByCategory = (filterCategory: CategoryName, postsArray: PostsArray ): PostsArray => {
-    if (filterCategory === 'all') {
-      return postsArray;
+const filterBy = curry(
+  (category, objectArray) => {
+    if (category === 'all') {
+      return objectArray;
     } else {
-      return postsArray.filter((post) => post.category === filterCategory)
+      return objectArray.filter((object) => object.category === category);
     }
   }
+)
 
-  render() {
-    const postsArray = this.toPostArray(this.props.posts);
-    const filteredPosts = this.filterByCategory(this.props.filterCategory, postsArray);
-    return (
-      <PostList posts={filteredPosts} />
-      )
-}
+export const makeFilterBy = (filter) => {
+  return compose(filterBy(filter), convertToList);
 }
 
-
-
-const mapStateToProps = (state, ownProps)  => {
-  return {
-    posts: state.posts.byId,
-    filterCategory: ownProps.match.params.category || 'all'
-  }
+const PostListDisplay = (props) => {
+  const filterPosts = makeFilterBy(props.filterCategory)
+  return (
+    <Grid columns={2}>
+      <Grid.Row>
+        <Grid.Column largeScreen={10}>
+          <PostList filteredPosts={filterPosts(props.postsById)} />
+        </Grid.Column>
+        <Grid.Column largeScreen={6}>
+          <SelectCategory
+            setActiveCategory={props.setActiveCategory}
+            categories={props.categories}
+          />
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
+    )
 }
+
+const mapStateToProps = (state, ownProps)  => ({
+  postsById: state.posts.byId,
+  filterCategory: ownProps.match.params.category || 'all',
+  categories: state.categories
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setActiveCategory: (newActiveCategory) => dispatch(setActiveCategory(newActiveCategory))
+});
 
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(PostListDisplay);
