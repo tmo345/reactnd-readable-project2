@@ -16,8 +16,7 @@ const PostListElement = styled.ul`
 
 
 export const PostList = (props: Props) => {
-  const posts = props.posts;
-  console.log(posts)
+  const posts = props.filteredPosts;
   if (posts.length === 0) {
     return <p>Sorry there are no posts in this category.</p>
   }
@@ -25,11 +24,10 @@ export const PostList = (props: Props) => {
     <div>
       <PostListElement>
         { posts.map((post) => {
-        console.log(post)
           return (
             <li key={post.id}>
               <div>
-              <Link to={`post/${post.id}`}>
+              <Link to={`${post.category}/${post.id}`}>
                 {post.title}
               </Link>
               <div>
