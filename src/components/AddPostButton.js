@@ -22,16 +22,11 @@ const StyledButton = styled(Button)`
 export const AddPostButton = (props: Props) => {
   return (
     <ButtonContainer>
-    <StyledButton
+    <Button
+      icon='write'
       color='green'
-      size='medium'
-      onClick={() => props.addPost({title: 'things', author: 'yo', body: 'post', category: 'ayep'})}
-    >
-      <Icon
-        name='write'
-      />
-      <ButtonText>New Post!</ButtonText>
-    </StyledButton>
+      onClick={() => props.addPost({title: 'things', author: 'yo', body: 'post', category: 'redux'})}
+    />
 </ButtonContainer>
 )
 }
