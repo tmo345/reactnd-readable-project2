@@ -20,7 +20,9 @@ const NavBar = (props) => {
           </Menu.Item>
         </SiteBranding>
 
-    <AddPostDisplay />
+        <Menu.Menu position='right'>
+          <AddPostDisplay />
+        </Menu.Menu>
       </Container>
     </Menu>
   )

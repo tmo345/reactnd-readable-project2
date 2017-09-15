@@ -1,13 +1,37 @@
 // @flow
 import React from 'react';
 import type { AddPostDispatch } from '../containers/AddPostDisplay';
+import { Button, Icon } from 'semantic-ui-react';
+import styled from 'styled-components'
 
 type Props = {
   addPost: AddPostDispatch
 }
 
+const ButtonContainer = styled.div`
+  padding-top: 10px;
+`
+
+const ButtonText = styled.span`
+  font-size: 18px;
+`
+
+const StyledButton = styled(Button)`
+`
+
 export const AddPostButton = (props: Props) => {
-  return (<button
-            onClick={() => props.addPost({title: 'things', author: 'yo', body: 'post', category: 'ayep'})}
-          >New Post!</button>)
+  return (
+    <ButtonContainer>
+    <StyledButton
+      color='green'
+      size='medium'
+      onClick={() => props.addPost({title: 'things', author: 'yo', body: 'post', category: 'ayep'})}
+    >
+      <Icon
+        name='write'
+      />
+      <ButtonText>New Post!</ButtonText>
+    </StyledButton>
+</ButtonContainer>
+)
 }

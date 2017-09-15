@@ -6,18 +6,30 @@ import { Route } from 'react-router-dom';
 import { MainView } from './components/MainView';
 import { PostDisplay } from './containers/PostDisplay';
 import NavigationDisplay from './containers/NavigationDisplay';
-import { Container } from 'semantic-ui-react';
+import { Container, Grid,  } from 'semantic-ui-react';
 import SelectCategoryDisplay from './containers/SelectCategoryDisplay';
 
 
 export default class App extends Component<*> {
   render() {
     return (
-      <div className="App">
-        <NavigationDisplay />
-        <SelectCategoryDisplay />
-        <MainView />
-      </div>
-    );
+      <Grid columns={1}>
+        <Grid.Row>
+          <NavigationDisplay />
+        </Grid.Row>
+        <Container>
+          <Grid columns={2}>
+            <Grid.Row>
+              <Grid.Column largeScreen={10}>
+              <MainView />
+            </Grid.Column>
+            <Grid.Column largeScreen={6}>
+              <SelectCategoryDisplay />
+            </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
+      </Grid>
+      );
   }
 }
