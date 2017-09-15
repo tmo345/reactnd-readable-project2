@@ -18,3 +18,10 @@ export const getCategories: fetch = (): Promise<Array<Category>> =>
     }) => {
       return data.categories;
     })
+
+export const getPosts = () =>
+  fetch(`${api}/posts`, { headers })
+  .then(res => res.json(), error => console.log('An error occurs', error))
+  .then((data) => {
+    return data;
+  })

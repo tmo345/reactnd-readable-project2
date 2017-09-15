@@ -12,6 +12,14 @@ const uuidv4 = require('uuid/v4');
 
 // Action Creators
 
+export const hydratePosts =
+  (posts) => {
+    return {
+      type: 'HYDRATE_POSTS',
+      posts: posts
+    }
+  }
+
 export const setActiveCategory =
   (name: CategoryName): SetActiveCategory => ({
     type: 'SET_ACTIVE_CATEGORY',

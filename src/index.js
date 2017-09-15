@@ -12,12 +12,17 @@ import type { Action } from 'action-types';
 import { BrowserRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import type { StoreState } from 'store-types'
+import { hydratePosts } from './actions';
 
 const store: Store<StoreState, Action> =
   createStore(
     rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
+getPosts()
+  .then((posts) => store.dispatch(hydratePosts(posts)))
+
+
 
 ReactDOM.render(
   <Provider  store={store}>

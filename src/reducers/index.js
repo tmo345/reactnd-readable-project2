@@ -7,27 +7,8 @@ import { combineReducers } from 'redux';
 import type { Reducer } from 'redux';
 
 const initialPosts: PostState = {
-  byId: {
-    'id1': {
-      id: 'id1',
-      timestamp: moment(),
-      title: 'Udacity  post',
-      body: 'First post content',
-      author: 'Author of first post',
-      category: 'udacity',
-      voteScore: 1
-    },
-    'id2': {
-      id: 'id2',
-      timestamp: moment(),
-      title: 'React post',
-      body: 'First post content',
-      author: 'Author of first post',
-      category: 'react',
-      voteScore: 1
-    }
-  },
-  allIds: ['id1', 'id2']
+  byId: {},
+  allIds: []
 }
 
 const initialCategories = [
@@ -79,6 +60,20 @@ export const categories: Reducer<CategoryState, SetActiveCategory> = (state: Cat
 
 export const posts: Reducer<PostState, PostAction> = (state: PostState = initialPosts, action: PostAction) => {
   switch(action.type) {
+
+    case 'HYDRATE_POSTS':
+      {
+        const postIds = action.posts.map((post) => post.id)
+        const byIdObject = action.posts.reduce((acc, currentPost) => {
+          acc[currentPost.id] = currentPost
+          console.log(acc)
+          return acc;
+        }, {})
+        return {
+          byId: byIdObject,
+          allIds: postIds
+        }
+      }
     case 'ADD_POST':
       { // block scope const declarations
         const { id, timestamp, title, body, author, category, voteScore } = action;
@@ -156,7 +151,7 @@ const comments: Reducer<CommentState, CommentAction> =
       default:
         return state;
     }
-}
+  }
 
 export default combineReducers({
   posts,
