@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PostList } from '../components/PostList';
 import type { Post, CategoryName } from 'store-types';
-import { setActiveCategory } from '../actions';
+import { setActiveCategory, getPostsByCategory } from '../actions';
 import SelectCategory from '../components/SelectCategory';
 import { Grid } from 'semantic-ui-react';
 import { curry, compose } from 'ramda';
@@ -32,8 +32,9 @@ const PostListDisplay = (props) => {
         </Grid.Column>
         <Grid.Column largeScreen={6}>
           <SelectCategory
-            setActiveCategory={props.setActiveCategory}
             categories={props.categories}
+            setActiveCategory={props.setActiveCategory}
+            getPostsByCategory={props.getPostsByCategory}
           />
         </Grid.Column>
       </Grid.Row>
@@ -48,7 +49,8 @@ const mapStateToProps = (state, ownProps)  => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setActiveCategory: (newActiveCategory) => dispatch(setActiveCategory(newActiveCategory))
+  setActiveCategory: (newActiveCategory) => dispatch(setActiveCategory(newActiveCategory)),
+  getPostsByCategory: (category) => dispatch(getPostsByCategory(category))
 });
 
 

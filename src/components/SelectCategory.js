@@ -51,7 +51,7 @@ const SelectCategory = (props: Props) => {
 
           <FilterItem
             key={category.name}
-            onClick={() => setActiveCategory(category.name)}
+            onClick={() => props.getPostsByCategory(category.name)}
           >
             <FilterLink categoryFilter={category.path}>
               <Button color={category.active ? 'blue' : 'grey'} size='medium'>
@@ -59,7 +59,6 @@ const SelectCategory = (props: Props) => {
               </Button>
             </FilterLink>
           </FilterItem>
-
           ))}
       </FilterList>
     </Categories>

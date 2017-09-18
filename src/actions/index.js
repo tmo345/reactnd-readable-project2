@@ -4,7 +4,7 @@ import type { AddPost, EditPost, DeletePost } from 'action-types';
 import type { UpVotePost, DownVotePost, UpVoteComment, DownVoteComment } from 'action-types';
 import type { AddPostData, EditPostData } from 'action-types';
 import type { CategoryName } from 'store-types';
-import { getPosts } from '../utils/api';
+import { getPosts, getPostsOfCategory } from '../utils/api';
 import { fetchFromApi } from '../utils/api';
 
 // For creating unique ids for posts and comments
@@ -33,12 +33,30 @@ export const getAllPosts =
     }
   }
 
+
 export const setActiveCategory =
   (name: CategoryName): SetActiveCategory => ({
     type: 'SET_ACTIVE_CATEGORY',
     name: name
   })
 
+export const getPostsByCategory =
+  (category) => {
+    return function ( dispatch ) {
+      dispatch(setActiveCategory(category))
+      if (category === 'all') {
+        return getPosts()
+          .then(posts => dispatch(hydratePosts(posts)))
+      } else {
+
+      return getPostsOfCategory(category)
+        .then(posts => dispatch({
+          type: 'GET_POSTS_BY_CATEGORY',
+          posts
+        }))
+      }
+    }
+  }
 export const upVotePost =
   (id: string): UpVotePost => ({
     type: 'UP_VOTE_POST',

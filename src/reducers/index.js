@@ -74,6 +74,13 @@ export const posts: Reducer<PostState, PostAction> = (state: PostState = initial
           allIds: postIds
         }
       }
+
+    case 'GET_POSTS_BY_CATEGORY':
+      return {
+        byId: action.posts,
+        allIds: Object.keys(action.posts)
+      }
+
     case 'ADD_POST':
       { // block scope const declarations
         const { id, timestamp, title, body, author, category, voteScore } = action;
