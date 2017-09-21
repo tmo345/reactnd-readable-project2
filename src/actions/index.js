@@ -1,11 +1,16 @@
-import type { SetActiveCategory } from 'action-types';
+// @flow
+import type { SetActiveCategory, HydratePosts, SetSortPostByFlag, SetPostsByCategory } from 'action-types';
+import type { GetPostsByCategory, FetchPostsById } from 'action-types';
+import type { SortFlag, SortDirection, Action, ThunkAction } from 'action-types';
 import type { AddComment, EditComment, DeleteComment } from 'action-types';
 import type { AddPost, EditPost, DeletePost } from 'action-types';
 import type { UpVotePost, DownVotePost, UpVoteComment, DownVoteComment } from 'action-types';
 import type { AddPostData, EditPostData } from 'action-types';
-import type { CategoryName } from 'store-types';
-import { getPosts, getPostsOfCategory } from '../utils/api';
+import type { CategoryName, Post } from 'store-types';
+import { getPost, getPosts, fetchPostsByCategory } from '../utils/api';
 import { fetchFromApi } from '../utils/api';
+import type { Dispatch } from 'redux';
+import type { DispatchWithThunk } from 'action-types';
 
 // For creating unique ids for posts and comments
 const uuidv4 = require('uuid/v4');
@@ -13,8 +18,9 @@ const uuidv4 = require('uuid/v4');
 
 // Action Creators
 
+
 export const hydratePosts =
-  (posts) => {
+  (posts: Array<Post>): HydratePosts => {
     return {
       type: 'HYDRATE_POSTS',
       posts: posts
@@ -23,7 +29,7 @@ export const hydratePosts =
 
 export const getAllPosts =
   () => {
-    return function( dispatch ) {
+    return function( dispatch: Dispatch<Action> ) {
       return fetchFromApi().
         then(
           response => response.json(),
@@ -40,23 +46,41 @@ export const setActiveCategory =
     name: name
   })
 
+
+export const setPostsByCategory =
+  (posts: Array<Post>): SetPostsByCategory => ({
+    type: 'SET_POSTS_BY_CATEGORY',
+    posts
+  })
+
 export const getPostsByCategory =
-  (category) => {
-    return function ( dispatch ) {
-      dispatch(setActiveCategory(category))
-      if (category === 'all') {
+  (categoryName: CategoryName): GetPostsByCategory => {
+    return function ( dispatch: DispatchWithThunk ) {
+      dispatch(setActiveCategory(categoryName))
+      if (categoryName === 'all') {
         return getPosts()
           .then(posts => dispatch(hydratePosts(posts)))
       } else {
 
-      return getPostsOfCategory(category)
-        .then(posts => dispatch({
-          type: 'GET_POSTS_BY_CATEGORY',
-          posts
-        }))
+        return fetchPostsByCategory(categoryName)
+          .then(posts => dispatch(setPostsByCategory(posts)))
       }
     }
   }
+
+const getPostById = (post: Post) => ({
+  type: 'GET_POST_BY_ID',
+  post
+})
+
+export const fetchPostById =
+  (id: string) => {
+    return function ( dispatch: DispatchWithThunk ) {
+      getPost(id)
+        .then(post => dispatch(getPostById(post)))
+    }
+  }
+
 export const upVotePost =
   (id: string): UpVotePost => ({
     type: 'UP_VOTE_POST',
@@ -68,6 +92,13 @@ export const downVotePost =
     type: 'DOWN_VOTE_POST',
     id
   });
+
+export const setSortPostByFlag =
+  (flag: SortFlag , direction: SortDirection): SetSortPostByFlag => ({
+    type: 'SET_SORT_POST_FLAG',
+    flag,
+    direction,
+  })
 
 export const upVoteComment =
   (id: string): UpVoteComment => ({

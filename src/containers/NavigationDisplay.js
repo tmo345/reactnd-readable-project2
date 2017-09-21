@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { setActiveCategory } from '../actions';
 import NavBar from '../components/NavBar';
 import type { Action } from 'action-types';
+import type { CategoryState } from 'store-types';
 
 type Props = {
-  categories: Array<string>,
+  categories: CategoryState,
   setActiveCategory: (category: string) => void
 }
 

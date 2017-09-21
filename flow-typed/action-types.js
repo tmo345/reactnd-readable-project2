@@ -3,9 +3,14 @@
  * Note: Using string literals for action types instead of constants
  * because flow can enforce the type as the exact string literal.
  */
-import type { CategoryName } from 'store-types';
+import type { CategoryName, Post, StoreState } from 'store-types';
 
 declare module 'action-types' {
+
+  declare type HydratePosts = {
+    type: 'HYDRATE_POSTS',
+    posts: Array<Post>
+  }
 
   declare type AddPostData = {
     title: string,
@@ -23,6 +28,15 @@ declare module 'action-types' {
   declare type SetActiveCategory = {
     type: 'SET_ACTIVE_CATEGORY',
     name: CategoryName
+  }
+
+  declare type SortFlag = 'voteScore' | 'timestamp';
+  declare type SortDirection = 'ascending' | 'descending';
+
+  declare type SetSortPostByFlag = {
+    type: 'SET_SORT_POST_FLAG',
+    flag: SortFlag,
+    direction: SortDirection
   }
 
   declare type UpVotePost = {
@@ -90,7 +104,24 @@ declare module 'action-types' {
     id: string
   }
 
+  declare type SetPostsByCategory = {
+    type: 'SET_POSTS_BY_CATEGORY',
+    posts: Array<Post>
+  }
+
+  declare type GetPostsByCategory =
+    (category: CategoryName) => DispatchWithThunk
+
+  declare type GetPostById = {
+    type: 'GET_POST_BY_ID',
+    post: Post
+  }
+
+  declare type FetchPostsById =
+    (id: string) => DispatchWithThunk
+
   declare type PostAction =
+    | HydratePosts
     | AddPost
     | EditPost
     | DeletePost
@@ -104,8 +135,26 @@ declare module 'action-types' {
     | UpVoteComment
     | DownVoteComment
 
+  declare type ThunkAction =
+    | FetchPostsById
+    | GetPostsByCategory
+
   declare type Action =
+    | GetPostById
     | SetActiveCategory
+    | SetPostsByCategory
+    | SetSortPostByFlag
     | PostAction
     | CommentAction
+
+
+    declare type Thunk<A> = ((Dispatch) => (Promise<void> | void)) => A
+
+    declare type DispatchWithThunk =
+      & Dispatch<Action>
+      & Thunk<Action | ThunkAction>
+
 }
+
+
+

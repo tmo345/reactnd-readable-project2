@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import type { Post } from 'store-types';
 
 type Props = {
-  posts: (Post)[]
+  posts: Array<Post>
 }
 
 
@@ -16,7 +16,7 @@ const PostListElement = styled.ul`
 
 
 export const PostList = (props: Props) => {
-  const posts = props.filteredPosts;
+  const posts = props.posts;
   if (posts.length === 0) {
     return <p>Sorry there are no posts in this category.</p>
   }
@@ -33,6 +33,7 @@ export const PostList = (props: Props) => {
               <div>
                 Votes: {post.voteScore}
               </div>
+              <div>Date: {post.timestamp}</div>
               </div>
             </li>
           );

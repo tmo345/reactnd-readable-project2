@@ -29,7 +29,18 @@ export const getPosts = () =>
     return data;
   })
 
-export const getPostsOfCategory = (category) =>
+export const getPost = (id) =>
+  fetch(`${api}/posts/${id}`, { headers })
+  .then(res => {
+    console.log('got response from server')
+    return res.json()
+  })
+  .then(data => {
+    console.log('data', data)
+    return data
+  })
+
+export const fetchPostsByCategory = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
   .then((res) => res.json())
   .then((data) => data);

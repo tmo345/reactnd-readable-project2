@@ -3,11 +3,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import { PostDisplay } from './containers/PostDisplay';
+import PostDisplay from './containers/PostDisplay';
 import NavigationDisplay from './containers/NavigationDisplay';
 import { Container, Grid,  } from 'semantic-ui-react';
-import PostListDisplay from './containers/PostListDisplay';
-
+import ListOfPosts from './containers/postList/PostListDisplay';
+import { hydratePosts } from './actions'
+import { getPosts } from './utils/api'
+import { store  } from './index.js'
 
 export default class App extends Component<*> {
   render() {
@@ -17,19 +19,10 @@ export default class App extends Component<*> {
           <NavigationDisplay />
         </Grid.Row>
         <Container>
-          <Route exact path='/:category?' component={PostListDisplay} />
+          <Route exact path='/:category?' component={ListOfPosts} />
 
-          <Route exact path='/:category/:id' render={(props) => (
+          {/*<Route exact path='/:category/:id' component={PostDisplay} />*/}
 
-            <Grid columns={2}>
-              <Grid.Row>
-                <Grid.Column largeScreen={16}>
-                  <PostDisplay {...props} />
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-            )}>
-          </Route>
           </Container>
         </Grid>
         );

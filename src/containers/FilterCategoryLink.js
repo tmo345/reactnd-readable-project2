@@ -4,14 +4,15 @@
 *  filter todos
 *  http://redux.js.org/docs/advanced/UsageWithReactRouter.html
 */
-import React from 'react';
+import * as  React from 'react';
 import { Link  } from 'react-router-dom';
 
-const CategoryFilterLink = ({ categoryFilter, children }) => (
+const FilterCategoryLink = ({ categoryFilter, children }:
+  { categoryFilter: string, children: React.Node }) => (
   <Link
     to={categoryFilter}>
     {children}
   </Link>
 )
 
-export default CategoryFilterLink;
+export default FilterCategoryLink;

@@ -7,7 +7,7 @@ import { Button } from 'semantic-ui-react';
 
 type Props = {
   categories: Array<Category>,
-  setActiveCategory: (category: CategoryName) => void
+  getPostsByCategory: (category: CategoryName) => Dispatch<*>,
 }
 
 const Categories = styled.div`
@@ -39,8 +39,6 @@ const ButtonText = styled.span`
 `
 
 const SelectCategory = (props: Props) => {
-  console.log(props)
-  const setActiveCategory = props.setActiveCategory;
 
   return (
     <Categories>

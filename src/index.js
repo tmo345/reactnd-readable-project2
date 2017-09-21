@@ -19,7 +19,7 @@ import { hydratePosts } from './actions';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 
-const store: Store<StoreState, Action> =
+export const store: Store<StoreState, Action> =
   createStore(
     rootReducer,
     composeEnhancers(
@@ -27,8 +27,8 @@ const store: Store<StoreState, Action> =
 
   ))
 
-getPosts()
-  .then((posts) => store.dispatch(hydratePosts(posts)))
+//getPosts()
+  //.then((posts) => store.dispatch(hydratePosts(posts)))
 
 
 

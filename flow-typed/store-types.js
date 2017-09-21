@@ -17,6 +17,7 @@ declare module 'store-types' {
 
   declare type CategoryState = Array<Category>
 
+
   declare type Post = {
     id: string,
     timestamp: Moment,
@@ -28,10 +29,7 @@ declare module 'store-types' {
   }
 
   declare type PostState = {
-    byId: {
-      [id: string]: Post
-    },
-    allIds: (?string)[]
+    [id: string]: Post
   }
 
   declare type Comment = {
@@ -51,10 +49,16 @@ declare module 'store-types' {
     allIds: (?string)[]
   }
 
+  declare type SortingState = {
+    flag: 'voteScore' | 'date',
+    direction: 'ascending' | 'descending'
+  }
+
   declare type StoreState = {
     categories: CategoryState,
     posts: PostState,
-    comments: CommentState
+    comments: CommentState,
+    sorting: SortingState
   }
 
 
