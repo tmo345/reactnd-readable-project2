@@ -147,6 +147,10 @@ declare module 'action-types' {
     | PostAction
     | CommentAction
 
+    // Thunk and DispatchWithThunk types are based on "Type-check Store" section in blog post by Satyajit Sahoo:
+    // https://blog.callstack.io/type-checking-react-and-redux-thunk-with-flow-part-2-206ce5f6e705
+
+    // The following is my understanding of the type signatures I tweaked from blog post. The Dispatch function type returns an Action as described in https://github.com/flowtype/flow-typed/blob/master/definitions/npm/redux_v3.x.x/flow_v0.33.x-/redux_v3.x.x.js. With redux-thunk, the action creators return a function (will refer to as inner function). In this case, the inner function makes an ajax request and returns a Promise. If the ajax request is successful, the promise is resolved and a synchronous Action is dispatched. This Dispatch returns an Action. Below you see the polymorphic type A, which will be the concrete type Action.
 
     declare type Thunk<A> = ((Dispatch) => (Promise<void> | void)) => A
 
@@ -155,6 +159,3 @@ declare module 'action-types' {
       & Thunk<Action | ThunkAction>
 
 }
-
-
-
