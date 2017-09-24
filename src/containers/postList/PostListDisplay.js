@@ -2,24 +2,25 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { PostList } from './PostList';
-import type { SortFlag, SortDirection, Action, DispatchWithThunk, ThunkAction } from 'action-types';
+import type { SortFlag, SortDirection } from 'action-types';
 import type { SortingState, Category, Post, CategoryName, } from 'store-types';
-import { setActiveCategory, getPostsByCategory, setSortPostByFlag } from '../../actions';
+import { setSortPostByFlag } from '../../actions/sorting-actions';
+import { getPostsByCategory } from '../../actions/post-actions';
 import SelectCategory from '../../components/SelectCategory';
 import { Grid } from 'semantic-ui-react';
-import { curry, compose, sortWith, sort, sortBy, ascend, descend, prop as _prop } from 'ramda';
+import { sort, ascend, descend, prop as _prop } from 'ramda';
 import { convertToList } from '../../utils/helpers';
 import PostSort from '../../components/PostSort';
-import type { Dispatch } from 'redux';
 import type { StoreState } from 'store-types';
+import type { GetPostsByCategory, SetPostsByCategory } from 'action-types';
 
 type Props = {
   categories: Array<Category>,
   filterCategory: CategoryName,
   posts: Array<Post>,
   sorting: SortingState,
-  getPostsByCategory: (filterCategory: CategoryName) => Dispatch<Action>,
-  setSortPostByFlag: (flag: SortFlag, direction: SortDirection) => Dispatch<Action>,
+  getPostsByCategory: typeof getPostsByCategory,
+  setSortPostByFlag: typeof setSortPostByFlag,
   match: *
 }
 
@@ -32,17 +33,16 @@ class ListOfPosts extends React.Component<Props> {
   sortPostsBy = (flag, direction) => {
     const isAscending = direction === 'ascending';
     if (isAscending) {
-      return sortWith([ascend(_prop(flag))])
+      return sort(ascend(_prop(flag)))
     } else {
-      return sortWith([descend(_prop(flag))])
+      return sort(descend(_prop(flag)))
     }
   }
 
   render() {
     const { flag, direction } = this.props.sorting;
     const sortPosts = this.sortPostsBy(flag, direction);
-
-    return (
+     return (
       <Grid columns={2}>
         <Grid.Row>
           <Grid.Column largeScreen={10}>
@@ -76,7 +76,7 @@ const mapStateToProps = (state: StoreState, ownProps: Props)  => ({
 
 const mapDispatchToProps = (dispatch: *) => ({
   getPostsByCategory: (category: CategoryName) => dispatch(getPostsByCategory(category)),
-  setSortPostByFlag: (flag, direction) => dispatch(setSortPostByFlag(flag, direction))
+  setSortPostByFlag: (flag, direction) => dispatch(setSortPostByFlag({ flag, direction }))
 });
 
 

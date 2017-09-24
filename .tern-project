@@ -1,12 +1,9 @@
 {
   "plugins": {
     "es_modules": {},
-    "node": {},
-    "string_completion": {}
+    "node": {}
   },
   "libs": [
-    "ecma5",
-    "ecma6",
     "browser"
   ],
   "loadEagerly": [

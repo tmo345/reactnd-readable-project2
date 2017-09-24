@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import type { Post } from 'store-types';
+// import type { Post } from 'store-types';
 
 type Props = {
   posts: Array<Post>
@@ -17,6 +17,7 @@ const PostListElement = styled.ul`
 
 export const PostList = (props: Props) => {
   const posts = props.posts;
+  console.log('post sort', props.posts)
   if (posts.length === 0) {
     return <p>Sorry there are no posts in this category.</p>
   }

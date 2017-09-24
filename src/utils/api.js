@@ -1,4 +1,4 @@
-import type { Category, Post } from 'store-types';
+import type { Category } from 'store-types';
 
 const api = "http://localhost:5001";
 
@@ -13,7 +13,7 @@ export const fetchFromApi = () => {
   return fetch(`${api}/categories`, { headers });
 }
 
-export const getCategories: fetch = (): Promise<Array<Category>> =>
+export const fetchCategories: fetch = (): Promise<Array<Category>> =>
   fetch(`${api}/categories`, { headers })
     .then((res) => res.json())
     .then((data: {
@@ -22,14 +22,14 @@ export const getCategories: fetch = (): Promise<Array<Category>> =>
       return data.categories;
     })
 
-export const getPosts = () =>
+export const fetchPosts = () =>
   fetch(`${api}/posts`, { headers })
   .then(res => res.json(), error => console.log('An error occurs', error))
   .then((data) => {
     return data;
   })
 
-export const getPost = (id) =>
+export const fetchPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
   .then(res => {
     console.log('got response from server')

@@ -1,18 +1,16 @@
 // @flow
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import PostDisplay from './containers/PostDisplay';
 import NavigationDisplay from './containers/NavigationDisplay';
-import { Container, Grid,  } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import ListOfPosts from './containers/postList/PostListDisplay';
-import { hydratePosts } from './actions'
-import { getPosts } from './utils/api'
-import { store  } from './index.js'
 
-export default class App extends Component<*> {
-  render() {
+type Props = {}
+
+export default class App extends React.Component<Props> {
+  render(): React.Node {
     return (
       <Grid columns={1}>
         <Grid.Row>

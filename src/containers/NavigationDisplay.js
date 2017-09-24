@@ -1,14 +1,14 @@
 // @flow
 import  React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setActiveCategory } from '../actions';
+import { setActiveCategory } from '../actions/category-actions';
 import NavBar from '../components/NavBar';
-import type { Action } from 'action-types';
+import type { Action, SetActiveCategory } from 'action-types';
 import type { CategoryState } from 'store-types';
 
 type Props = {
   categories: CategoryState,
-  setActiveCategory: (category: string) => void
+  setActiveCategory: (category: string) => SetActiveCategory
 }
 
 class NavigationDisplay extends Component<Props> {
@@ -21,14 +21,13 @@ class NavigationDisplay extends Component<Props> {
   }
 }
 
-const mapStateToProps = ({ categories }) => ({
-  categories,
+const mapStateToProps = ({ categories }: StoreState) => ({
+  categories
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): Dispatch<Action> =>  {
-
   return {
-  setActiveCategory: (category: CategoryName) => dispatch(setActiveCategory(category))
+  setActiveCategory: (category: CategoryName): SetActiveCategory => dispatch(setActiveCategory(category))
 };
 }
 

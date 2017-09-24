@@ -29,10 +29,6 @@ const FilterItem = styled.li`
   margin-bottom: 7.5px;
 `
 
-const ActiveButton = styled(Button)`
-  background-color: #101D28;
-`
-
 const ButtonText = styled.span`
   font-size: 1rem;
   text-transform: capitalize;

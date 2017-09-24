@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { Action } from 'action-types';
-import { fetchPostById, editPost, deletePost } from '../actions';
+import { getPostById, editPost, deletePost } from '../actions/post-actions';
 import Post from '../components/Post';
 import type { EditPostData } from 'action-types';
 import { Grid } from 'semantic-ui-react';
@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
     editPost: (postData) => dispatch(editPost(postData)),
     deletePost: (id) => dispatch(deletePost(id)),
-    fetchPostById: (id) => dispatch(fetchPostById(id))
+    getPostsById: (id) => dispatch(getPostById(id))
   };
 }
 

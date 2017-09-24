@@ -2,14 +2,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
-import type { Post as PostType } from 'store-types';
+// import type { Post as PostType } from 'store-types';
 import type { EditPostDispatch } from '../containers/PostDisplay';
 import { Item, Grid, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import { getPostById } from '../utils/api';
 import CommentList from './CommentList';
 
 type Props = {
-  post: PostType,
+  post: Post,
   id: string
 };
 

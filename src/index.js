@@ -12,9 +12,7 @@ import type { Store } from 'redux';
 import type { Action } from 'action-types';
 import { BrowserRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
-import type { StoreState } from 'store-types'
-import { getPosts } from './utils/api';
-import { hydratePosts } from './actions';
+// import type { StoreState } from 'store-types'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -24,12 +22,7 @@ export const store: Store<StoreState, Action> =
     rootReducer,
     composeEnhancers(
       applyMiddleware(thunk)
-
   ))
-
-//getPosts()
-  //.then((posts) => store.dispatch(hydratePosts(posts)))
-
 
 
 ReactDOM.render(

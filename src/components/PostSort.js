@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Icon } from 'semantic-ui-react';
-import CategoryFilterLink from '../containers/FilterCategoryLink';
 
 const PostSort = (props) => (
   <List horizontal>
