@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import type { Action } from 'action-types';
 import { getPostById, editPost, deletePost } from '../actions/post-actions';
@@ -15,16 +15,16 @@ type Props = {
   deletePost: id => Dispatch<typeof deletePost>
 };
 
-class PostDisplay extends Component<Props> {
-  render() {
+class PostDisplay extends React.Component<Props> {
+  render(): React.Node {
     return (
       <Grid columns={2}>
         <Grid.Row>
           <Grid.Column largeScreen={16}>
             <SinglePost
-              getPostById={this.props.getPostById}
               id={this.props.id}
               post={this.props.post}
+              getPostById={this.props.getPostById}
             />
           </Grid.Column>
         </Grid.Row>
@@ -40,8 +40,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export type EditPostDispatch = (postData: EditPostData) => Action;
-export type DeletePostDispatch = (id: string) => Action;
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
