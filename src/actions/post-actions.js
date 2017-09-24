@@ -65,21 +65,22 @@ export const downVotePost =
 
 // Asynchronous actions
 
-export const getPostsByCategory =
-  (categoryName: categoryName): DispatchPostAction => {
-    return function( dispatch: DispatchPostAction) {
-      let fetchPromise;
-      if (categoryName === 'all') {
-        fetchPromise = fetchPosts();
-      } else {
-        fetchPromise = fetchPostsByCategory(categoryName);
-      }
-      fetchPromise
-        .then(dispatch(setActiveCategory(categoryName)))
-        .then((posts: Array<Post>) => dispatch(setPostsFromServer(posts)))
-
+export const getPostsByCategory = (
+  categoryName: categoryName
+): DispatchPostAction => {
+  return function(dispatch: DispatchPostAction) {
+    let fetchPromise;
+    if (categoryName === 'all') {
+      fetchPosts().then((posts: Array<Post>) =>
+        dispatch(setPostsFromServer(posts))
+      );
+    } else {
+      fetchPostsByCategory(categoryName).then((posts: Array<Post>) =>
+        dispatch(setPostsFromServer(posts))
+      );
     }
-  }
+  };
+};
 
 export const getPostById =
   (id: id): DispatchPostAction => {
