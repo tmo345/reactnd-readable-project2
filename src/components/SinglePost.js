@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
-// import type { Post as PostType } from 'store-types';
-import type { EditPostDispatch } from '../containers/PostDisplay';
 import { Item, Grid, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import { getPostById } from '../utils/api';
 import CommentList from './CommentList';
@@ -13,31 +11,19 @@ type Props = {
   id: string
 };
 
-const PostListItem = styled.li`
+const PostListItem = styled.li``;
 
-`
+const Title = styled.h3``;
 
-const Title = styled.h3`
+const Body = styled.p``;
 
-`
+const Author = styled.p``;
 
-const Body = styled.p`
+const CreatedAt = styled.p``;
 
-`
-
-const Author = styled.p`
-
-`
-
-const CreatedAt = styled.p`
-`
-
-const ClearFloat = styled.p`
-  clear: both;
-`
+const ClearFloat = styled.p`clear: both;`;
 
 class SinglePost extends Component<Props> {
-
   render() {
     const id = this.props.id;
 
@@ -76,7 +62,7 @@ class SinglePost extends Component<Props> {
         <CommentList />
         */}
       </div>
-      )
+    );
   }
 }
 
