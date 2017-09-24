@@ -36,7 +36,7 @@ const ClearFloat = styled.p`
   clear: both;
 `
 
-class Post extends Component<Props> {
+class SinglePost extends Component<Props> {
 
   render() {
     const id = this.props.id;
@@ -80,4 +80,4 @@ class Post extends Component<Props> {
   }
 }
 
-export default Post;
+export default SinglePost;
