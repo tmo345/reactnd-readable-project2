@@ -2,7 +2,8 @@
 
 import type {
   CategoryState,
-  CategoryAction
+  CategoryAction,
+  categoryName
 } from '../types/category-types';
 
 const initialCategoryState: CategoryState = [
@@ -25,30 +26,36 @@ const initialCategoryState: CategoryState = [
     name: 'redux',
     path: 'redux',
     active: false
-  },
+  }
 ];
 
-const categories = (state: CategoryState = initialCategoryState, action: CategoryAction): CategoryState => {
-  switch(action.type) {
+const categories = (
+  state: CategoryState = initialCategoryState,
+  action: CategoryAction
+): CategoryState => {
+  switch (action.type) {
     case 'SET_ACTIVE_CATEGORY':
-      const currentActive = (state.filter((category) => category.active))[0]
-        const targetCategory: CategoryName = action.name;
-        if (currentActive.name === targetCategory) {
-          return state;
-        }
-        return (state.map((category) => {
-          if (category.name === action.name || category.active) {
-            return { ...category,
-              active: !category.active
-            }
-          } else {
-            return category
-          }
-        }))
-
-      default:
+      const currentActive = state.filter(
+        category => category.active === true
+      )[0];
+      const targetCategory: categoryName = action.name;
+      if (currentActive.name === targetCategory) {
         return state;
+      }
+      return state.map(category => {
+        if (category.name === action.name || category.active) {
+          return {
+            ...category,
+            active: !category.active
+          };
+        } else {
+          return category;
+        }
+      });
+
+    default:
+      return state;
   }
-}
+};
 
 export default categories;

@@ -1,19 +1,21 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import type { Action } from 'action-types';
 import { getPostById, editPost, deletePost } from '../actions/post-actions';
 import { Grid } from 'semantic-ui-react';
 import SinglePost from '../components/SinglePost';
 import type { id, Post, EditPostData } from '../types/post-types';
+import type { Action } from '../types/action-type';
 import type { StoreState } from '../types/store-type';
+import type { Match } from 'react-router-dom';
 
 type Props = {
   id: id,
   post: Post,
   getPostById: id => Dispatch<typeof getPostById>,
   editPost: EditPostData => Dispatch<typeof editPost>,
-  deletePost: id => Dispatch<typeof deletePost>
+  deletePost: id => Dispatch<typeof deletePost>,
+  match: Match
 };
 
 class PostDisplay extends React.Component<Props> {
@@ -34,13 +36,18 @@ class PostDisplay extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: StoreState, ownProps: Props) => {
+  let urlId;
+  try {
+    urlId = ownProps.match.params.id;
+  } catch (e) {
+    urlId = '';
+    console.log(e.message);
+  }
   return {
-    post: state.posts[ownProps.match.params.id],
-    id: ownProps.match.params.id
+    post: urlId ? state.posts[urlId] : {}
   };
 };
-
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
