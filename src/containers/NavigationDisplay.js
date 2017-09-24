@@ -5,6 +5,7 @@ import { setActiveCategory } from '../actions/category-actions';
 import NavBar from '../components/NavBar';
 import type { Action, SetActiveCategory } from 'action-types';
 import type { CategoryState } from 'store-types';
+import type { StoreState } from '../types/store-type';
 
 type Props = {
   categories: CategoryState,

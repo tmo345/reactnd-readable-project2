@@ -6,6 +6,7 @@ import { getPostById, editPost, deletePost } from '../actions/post-actions';
 import { Grid } from 'semantic-ui-react';
 import SinglePost from '../components/SinglePost';
 import type { id, Post, EditPostData } from '../types/post-types';
+import type { StoreState } from '../types/store-type';
 
 type Props = {
   id: id,

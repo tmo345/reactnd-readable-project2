@@ -12,7 +12,7 @@ import type { Store } from 'redux';
 import type { Action } from 'action-types';
 import { BrowserRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
-// import type { StoreState } from 'store-types'
+import type { StoreState } from './types/store-type';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
