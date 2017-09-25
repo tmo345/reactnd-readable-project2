@@ -27,7 +27,7 @@ export const PostList = (props: Props) => {
           return (
             <li key={post.id}>
               <div>
-                <Link to={`${post.categoryName}/${post.id}`}>{post.title}</Link>
+                <Link to={`${post.category}/${post.id}`}>{post.title}</Link>
                 <div>Votes: {post.voteScore}</div>
                 <div>Date: {post.timestamp}</div>
               </div>

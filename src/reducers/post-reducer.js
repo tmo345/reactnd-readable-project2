@@ -21,12 +21,12 @@ const posts = (
         title,
         body,
         author,
-        categoryName,
+        category,
         voteScore
       } = action;
       return {
         ...state,
-        [id]: { id, timestamp, title, body, author, categoryName, voteScore }
+        [id]: { id, timestamp, title, body, author, category, voteScore }
       };
     }
 

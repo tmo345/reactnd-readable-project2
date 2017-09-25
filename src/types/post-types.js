@@ -13,7 +13,7 @@ export type voteScore = number;
 // Build the types used for posts as intersection types of all the parts defined above
 export type Post = { id: id } & { title: title } & { body: body } & {
     author: author
-  } & { categoryName: categoryName } & { voteScore: voteScore } & {
+  } & { category: categoryName } & { voteScore: voteScore } & {
     timestamp: number
   };
 
@@ -24,7 +24,7 @@ export type PostState = {
 
 export type AddPostData = { title: title } & { body: body } & {
     author: author
-  } & { categoryName: categoryName };
+  } & { category: categoryName };
 
 export type EditPostData = { id: id } & { title: title } & { body: body };
 

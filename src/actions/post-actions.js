@@ -31,7 +31,7 @@ export const addPost = ({
   title,
   body,
   author,
-  categoryName
+  category
 }: AddPostData): AddPost => {
   const uniqueId = `post-${uuidv4()}`;
   return {
@@ -42,7 +42,7 @@ export const addPost = ({
     title,
     body,
     author,
-    categoryName
+    category
   };
 };
 

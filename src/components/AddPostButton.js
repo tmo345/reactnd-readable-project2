@@ -21,7 +21,7 @@ export const AddPostButton = (props: Props) => {
             title: 'things',
             author: 'yo',
             body: 'post',
-            categoryName: 'redux'
+            category: 'redux'
           })}
       />
     </ButtonContainer>
