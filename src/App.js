@@ -1,33 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { addPost } from './actions';
-import { connect } from 'react-redux';
+// @flow
 
-class App extends Component {
-  render() {
+import * as React from 'react';
+import './App.css';
+import { Route } from 'react-router-dom';
+import NavigationDisplay from './containers/NavigationDisplay';
+import { Container, Grid } from 'semantic-ui-react';
+import ListOfPosts from './containers/postList/PostListDisplay';
+import PostDisplay from './containers/PostDisplay';
+
+type Props = {};
+
+export default class App extends React.Component<Props> {
+  render(): React.Node {
     return (
-      <div className="App"
-        onClick={() => this.props.onDivClick({title: 'title', body: 'body', author: 'author', category: 'category'})}>
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Grid columns={1}>
+        <Grid.Row>
+          <NavigationDisplay />
+        </Grid.Row>
+        <Container>
+          <Route exact path="/:category?" component={ListOfPosts} />
+          <Route exact path="/:category/:id" component={PostDisplay} />
+        </Container>
+      </Grid>
     );
   }
 }
-const mapStateToProps = () => {
-  return {}
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onDivClick: (data) => dispatch(addPost(data))  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);

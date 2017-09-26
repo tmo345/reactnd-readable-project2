@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "es_modules": {},
+    "node": {}
+  },
+  "libs": [
+    "browser"
+  ],
+  "loadEagerly": [
+    "src/**/*.js"
+
+  ],
+  "dontLoad": [
+    "node_modules/**"
+  ],
+  "ecmaVersion": 6
+}
