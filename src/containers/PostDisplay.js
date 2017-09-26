@@ -1,25 +1,11 @@
-
-import * as React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPostById, editPost, deletePost } from '../actions/post-actions';
 import { Grid } from 'semantic-ui-react';
 import SinglePost from '../components/SinglePost';
-import type { id, Post, EditPostData } from '../types/post-types';
-import type { Action } from '../types/action-type';
-import type { StoreState } from '../types/store-type';
-import type { Match } from 'react-router-dom';
 
-type Props = {
-  id: id,
-  post: Post,
-  getPostById: id => Dispatch<typeof getPostById>,
-  editPost: EditPostData => Dispatch<typeof editPost>,
-  deletePost: id => Dispatch<typeof deletePost>,
-  match: Match
-};
-
-class PostDisplay extends React.Component<Props> {
-  render(): React.Node {
+class PostDisplay extends Component {
+  render() {
     return (
       <Grid columns={2}>
         <Grid.Row>
@@ -36,24 +22,23 @@ class PostDisplay extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: StoreState, ownProps: Props) => {
+const mapStateToProps = (state, ownProps) => {
   let urlId;
   try {
     urlId = ownProps.match.params.id;
   } catch (e) {
     urlId = '';
-    console.log(e.message);
   }
   return {
     post: urlId ? state.posts[urlId] : {}
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
+const mapDispatchToProps = dispatch => {
   return {
-    editPost: (postData: EditPostData) => dispatch(editPost(postData)),
-    deletePost: (id: id) => dispatch(deletePost(id)),
-    getPostById: (id: id) => dispatch(getPostById(id))
+    editPost: postData => dispatch(editPost(postData)),
+    deletePost: id => dispatch(deletePost(id)),
+    getPostById: id => dispatch(getPostById(id))
   };
 };
 

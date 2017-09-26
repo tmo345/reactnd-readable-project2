@@ -1,18 +1,11 @@
-
-
-import type { SortingAction, SortingState } from "../types/sorting-types";
-
-const initialSorting: SortingState = {
-  flag: "timestamp",
-  direction: "descending"
+const initialSorting = {
+  flag: 'timestamp',
+  direction: 'descending'
 };
 
-const sorting = (
-  state: SortingState = initialSorting,
-  action: SortingAction
-) => {
+const sorting = (state = initialSorting, action) => {
   switch (action.type) {
-    case "SET_SORT_POST_FLAG":
+    case 'SET_SORT_POST_FLAG':
       return {
         flag: action.flag,
         direction: action.direction

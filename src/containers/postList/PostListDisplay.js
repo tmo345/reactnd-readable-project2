@@ -1,13 +1,6 @@
-
-import * as React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PostList } from './PostList';
-import type {
-  sortFlag,
-  sortDirection,
-  SortingState
-} from '../../types/sorting-types';
-import type { categoryName, Category } from '../../types/category-types';
 import { setSortPostByFlag } from '../../actions/sorting-actions';
 import { getPostsByCategory } from '../../actions/post-actions';
 import { setActiveCategory } from '../../actions/category-actions';
@@ -16,24 +9,9 @@ import { Grid } from 'semantic-ui-react';
 import { sort, ascend, descend, prop as _prop } from 'ramda';
 import { convertToList } from '../../utils/helpers';
 import PostSort from '../../components/PostSort';
-import type { StoreState } from '../../types/store-type';
 import { withRouter } from 'react-router-dom';
-import type { Match, Location } from 'react-router-dom';
-import type { Post } from '../../types/post-types';
 
-type Props = {
-  categories: Array<Category>,
-  filterCategory: categoryName,
-  posts: Array<Post>,
-  sorting: SortingState,
-  getPostsByCategory: typeof getPostsByCategory,
-  setSortPostByFlag: typeof setSortPostByFlag,
-  setActiveCategory: typeof setActiveCategory,
-  match: Match,
-  location: Location
-};
-
-class ListOfPosts extends React.Component<Props> {
+class ListOfPosts extends Component {
   componentDidMount() {
     this.props.setActiveCategory(this.props.filterCategory);
     this.props.getPostsByCategory(this.props.filterCategory);
@@ -60,7 +38,7 @@ class ListOfPosts extends React.Component<Props> {
     }
   };
 
-  render(): React.Node {
+  render() {
     const { flag, direction } = this.props.sorting;
     const sortPosts = this.sortPostsBy(flag, direction);
     return (
@@ -80,7 +58,7 @@ class ListOfPosts extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: StoreState, ownProps: Props) => ({
+const mapStateToProps = (state, ownProps) => ({
   posts: state.posts,
   filterCategory: ownProps.match.params.category || 'all',
   categories: state.categories,
@@ -88,8 +66,7 @@ const mapStateToProps = (state: StoreState, ownProps: Props) => ({
 });
 
 const mapDispatchToProps = (dispatch: *) => ({
-  getPostsByCategory: (category: categoryName) =>
-    dispatch(getPostsByCategory(category)),
+  getPostsByCategory: category => dispatch(getPostsByCategory(category)),
   setSortPostByFlag: (flag, direction) =>
     dispatch(setSortPostByFlag({ flag, direction })),
   setActiveCategory: category => dispatch(setActiveCategory(category))

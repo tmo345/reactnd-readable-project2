@@ -1,38 +1,15 @@
-
-
 import moment from 'moment';
 import { fetchPost, fetchPosts, fetchPostsByCategory } from '../utils/api';
 import uuidv4 from 'uuid/v4';
 import { setActiveCategory } from './category-actions';
 
-import type {
-  AddPostData,
-  EditPostData,
-  Post,
-  id,
-  PostAction,
-  DispatchPostAction,
-  SetPostsFromServer,
-  AddPost,
-  EditPost,
-  DeletePost,
-  UpVotePost,
-  DownVotePost
-} from '../types/post-types';
-import type { categoryName } from '../types/category-types';
-
 // Synchronous actions
-export const setPostsFromServer = (posts: Array<Post>): SetPostsFromServer => ({
+export const setPostsFromServer = posts => ({
   type: 'SET_POSTS_FROM_SERVER',
   posts
 });
 
-export const addPost = ({
-  title,
-  body,
-  author,
-  category
-}: AddPostData): AddPost => {
+export const addPost = ({ title, body, author, category }) => {
   const uniqueId = `post-${uuidv4()}`;
   return {
     type: 'ADD_POST',
@@ -46,52 +23,48 @@ export const addPost = ({
   };
 };
 
-export const editPost = ({ id, title, body }: EditPostData): EditPost => ({
+export const editPost = ({ id, title, body }) => ({
   type: 'EDIT_POST',
   id,
   title,
   body
 });
 
-export const deletePost = (id: id): DeletePost => ({
+export const deletePost = id => ({
   type: 'DELETE_POST',
   id
 });
 
-export const upVotePost = (id: id): UpVotePost => ({
+export const upVotePost = id => ({
   type: 'UP_VOTE_POST',
   id
 });
 
-export const downVotePost = (id: id): DownVotePost => ({
+export const downVotePost = id => ({
   type: 'DOWN_VOTE_POST',
   id
 });
 
 // Asynchronous actions
 
-export const getPostsByCategory = (
-  categoryName: categoryName
-): DispatchPostAction => {
-  return function(dispatch: DispatchPostAction) {
+export const getPostsByCategory = categoryName => {
+  return function(dispatch) {
     let fetchPromise;
     if (categoryName === 'all') {
-      fetchPosts().then((posts: Array<Post>) =>
-        dispatch(setPostsFromServer(posts))
-      );
+      fetchPosts().then(posts => dispatch(setPostsFromServer(posts)));
     } else {
-      fetchPostsByCategory(categoryName).then((posts: Array<Post>) =>
+      fetchPostsByCategory(categoryName).then(posts =>
         dispatch(setPostsFromServer(posts))
       );
     }
   };
 };
 
-export const getPostById = (id: id): DispatchPostAction => {
-  return function(dispatch: DispatchPostAction) {
-    return fetchPost(id).then((post: Post) => {
+export const getPostById = id => {
+  return function(dispatch) {
+    return fetchPost(id).then(post => {
       // setPostsFromServer expects Array<Post>
-      const postInArray: Array<Post> = [post];
+      const postInArray = [post];
       return dispatch(setPostsFromServer(postInArray));
     });
   };

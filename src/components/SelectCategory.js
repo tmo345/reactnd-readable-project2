@@ -1,14 +1,7 @@
-
 import React from 'react';
 import styled from 'styled-components';
-import type { Category } from '../types/category-types';
 import FilterLink from '../containers/FilterCategoryLink.js';
 import { Button } from 'semantic-ui-react';
-import type { categoryName } from '../types/category-types';
-
-type Props = {
-  categories: Array<Category>
-};
 
 const Categories = styled.div`
   //display: flex;
@@ -32,7 +25,7 @@ const ButtonText = styled.span`
   text-transform: capitalize;
 `;
 
-const SelectCategory = (props: Props) => {
+const SelectCategory = props => {
   return (
     <Categories>
       <Heading>Choose Category:</Heading>

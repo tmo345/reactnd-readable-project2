@@ -1,16 +1,9 @@
-
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
 import { Item, Grid, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import { getPostById } from '../utils/api';
 import CommentList from './CommentList';
-import type { Post } from '../types/post-types';
-
-type Props = {
-  post: Post,
-  id: string
-};
 
 const PostListItem = styled.li``;
 
@@ -24,7 +17,7 @@ const CreatedAt = styled.p``;
 
 const ClearFloat = styled.p`clear: both;`;
 
-const SinglePost = (props: Props) => {
+const SinglePost = props => {
   const { id, post } = props;
 
   return (

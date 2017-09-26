@@ -1,24 +1,6 @@
-
-
-import type {
-  AddComment,
-  EditComment,
-  DeleteComment,
-  AddCommentData,
-  EditCommentData,
-  UpVoteComment,
-  DownVoteComment
-} from '../types/comment-types';
-import type { id } from '../types/post-types';
-import moment from 'moment';
 import uuidv4 from 'uuid/v4';
 
-export const addComment = ({
-  parentId,
-  title,
-  body,
-  author
-}: AddCommentData): AddComment => {
+export const addComment = ({ parentId, title, body, author }) => {
   const uniqueId = `comment-${uuidv4()}`;
   return {
     type: 'ADD_COMMENT',
@@ -32,24 +14,24 @@ export const addComment = ({
   };
 };
 
-export const editComment = ({ id, body }: EditCommentData): EditComment => ({
+export const editComment = ({ id, body }) => ({
   type: 'EDIT_COMMENT',
   timestamp: Date.now(),
   id,
   body
 });
 
-export const deleteComment = (id: id): DeleteComment => ({
+export const deleteComment = id => ({
   type: 'DELETE_COMMENT',
   id
 });
 
-export const upVoteComment = (id: id): UpVoteComment => ({
+export const upVoteComment = id => ({
   type: 'UP_VOTE_COMMENT',
   id
 });
 
-export const downVoteComment = (id: id): DownVoteComment => ({
+export const downVoteComment = id => ({
   type: 'DOWN_VOTE_COMMENT',
   id
 });

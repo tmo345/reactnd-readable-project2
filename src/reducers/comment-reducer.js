@@ -1,20 +1,11 @@
+import { stateObjectToArray, stateArraytoObject } from './helpers';
 
+const initialComments = {};
 
-import type {
-  Comment,
-  CommentAction,
-  CommentState
-} from "../types/comment-types";
-import { stateObjectToArray, stateArraytoObject } from "./helpers";
-
-const initialComments: CommentState = {};
-
-const comments = (
-  state: CommentState = initialComments,
-  action: CommentAction
-): CommentState => {
+const comments = (state = initialComments, action) => {
   switch (action.type) {
-    case "ADD_COMMENT": { // block scope destructured action properties
+    case 'ADD_COMMENT': {
+      // block scope destructured action properties
       const { id, parentId, timestamp, body, author, voteScore } = action;
       return {
         ...state,
@@ -38,11 +29,12 @@ const comments = (
         }
       };
 
-    case 'DELETE_COMMENT': { // block scope destructured action properties
+    case 'DELETE_COMMENT': {
+      // block scope destructured action properties
       const { id } = action;
       const commentArray = stateObjectToArray(state);
       const remainingComments = commentArray.filter(
-        (comment: Comment) => comment.id !== id
+        comment => comment.id !== id
       );
       return stateArraytoObject(remainingComments);
     }
@@ -54,7 +46,7 @@ const comments = (
           ...state[action.id],
           voteScore: state[action.id]['voteScore'] + 1
         }
-      }
+      };
 
     case 'DOWN_VOTE_COMMENT':
       return {
@@ -63,7 +55,7 @@ const comments = (
           ...state[action.id],
           voteScore: state[action.id]['voteScore'] - 1
         }
-      }
+      };
 
     default:
       return state;

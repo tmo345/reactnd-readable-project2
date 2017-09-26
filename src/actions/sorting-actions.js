@@ -1,13 +1,4 @@
-
-
-import type {
-  sortFlag,
-  sortDirection,
-  SetSortPostByFlag,
-  SetSortingData
-} from '../types/sorting-types';
-
-export const setSortPostByFlag = ({ flag, direction}: SetSortingData): SetSortPostByFlag => ({
+export const setSortPostByFlag = ({ flag, direction }) => ({
   type: 'SET_SORT_POST_FLAG',
   flag,
   direction

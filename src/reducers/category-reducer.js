@@ -1,12 +1,4 @@
-
-
-import type {
-  CategoryState,
-  CategoryAction,
-  categoryName
-} from '../types/category-types';
-
-const initialCategoryState: CategoryState = [
+const initialCategoryState = [
   {
     name: 'all',
     path: '/',
@@ -29,10 +21,7 @@ const initialCategoryState: CategoryState = [
   }
 ];
 
-const categories = (
-  state: CategoryState = initialCategoryState,
-  action: CategoryAction
-): CategoryState => {
+const categories = (state = initialCategoryState, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_CATEGORY':
       const currentActive = state.filter(

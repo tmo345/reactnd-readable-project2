@@ -1,16 +1,10 @@
-
 import React from 'react';
-import type { AddPostDispatch } from '../containers/AddPostDisplay';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-type Props = {
-  addPost: AddPostDispatch
-};
-
 const ButtonContainer = styled.div`padding-top: 10px;`;
 
-export const AddPostButton = (props: Props) => {
+export const AddPostButton = props => {
   return (
     <ButtonContainer>
       <Button

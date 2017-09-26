@@ -1,11 +1,4 @@
-
-
-import type {
-  SetActiveCategory,
-  categoryName
- } from '../types/category-types';
-
-export const setActiveCategory = (name: categoryName) => ({
+export const setActiveCategory = name => ({
   type: 'SET_ACTIVE_CATEGORY',
   name
-})
+});

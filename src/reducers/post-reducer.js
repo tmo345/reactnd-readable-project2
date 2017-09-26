@@ -1,14 +1,8 @@
-
-
-import type { PostAction, PostState, Post } from '../types/post-types';
 import { stateObjectToArray, stateArraytoObject } from './helpers';
 
-const initialPosts: PostState = {};
+const initialPosts = {};
 
-const posts = (
-  state: PostState = initialPosts,
-  action: PostAction
-): PostState => {
+const posts = (state = initialPosts, action) => {
   switch (action.type) {
     case 'SET_POSTS_FROM_SERVER':
       return stateArraytoObject(action.posts);
