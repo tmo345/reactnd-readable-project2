@@ -1,4 +1,4 @@
-// @flow
+
 
 import type { SortingAction, SortingState } from "../types/sorting-types";
 

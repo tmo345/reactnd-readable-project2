@@ -1,4 +1,4 @@
-// @flow
+
 import React from 'react';
 import type { AddPostDispatch } from '../containers/AddPostDisplay';
 import { Button } from 'semantic-ui-react';

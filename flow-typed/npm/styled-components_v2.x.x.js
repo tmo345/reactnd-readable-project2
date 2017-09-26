@@ -1,7 +1,7 @@
 // flow-typed signature: 2d5d2167b399d10e16ddc719ea6fc62e
 // flow-typed version: 1be5dad600/styled-components_v2.x.x/flow_>=v0.53.x
 
-// @flow
+
 
 type $npm$styledComponents$Interpolation = (<C: {}>(executionContext: C) => string) | string | number;
 type $npm$styledComponents$NameGenerator = (hash: number) => string;

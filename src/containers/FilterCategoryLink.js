@@ -1,4 +1,4 @@
-// @flow
+
 /**
 *  Based on example in redux docs example using Links to
 *  filter todos

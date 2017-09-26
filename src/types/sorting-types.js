@@ -1,4 +1,4 @@
-// @flow
+
 
 export type sortFlag =
   | 'voteScore'

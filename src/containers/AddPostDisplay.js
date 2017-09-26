@@ -1,4 +1,4 @@
-// @flow
+
 import { connect } from 'react-redux';
 import { AddPostButton } from '../components/AddPostButton';
 import { addPost } from '../actions/post-actions';

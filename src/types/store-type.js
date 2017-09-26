@@ -1,4 +1,4 @@
-// @flow
+
 
 import type { PostState } from '../types/post-types';
 import type { CategoryState } from '../types/category-types';

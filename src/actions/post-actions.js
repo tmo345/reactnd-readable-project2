@@ -1,4 +1,4 @@
-// @flow
+
 
 import moment from 'moment';
 import { fetchPost, fetchPosts, fetchPostsByCategory } from '../utils/api';

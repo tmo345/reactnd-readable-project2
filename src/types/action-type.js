@@ -1,4 +1,4 @@
-// @flow
+
 
 import type { PostAction } from './post-types';
 import type { CategoryAction } from './category-types';

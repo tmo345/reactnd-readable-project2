@@ -1,4 +1,4 @@
-// @flow
+
 import type Moment from 'moment';
 import type { categoryName } from './category-types';
 

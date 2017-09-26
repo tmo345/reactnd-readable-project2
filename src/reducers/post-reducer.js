@@ -1,4 +1,4 @@
-// @flow
+
 
 import type { PostAction, PostState, Post } from '../types/post-types';
 import { stateObjectToArray, stateArraytoObject } from './helpers';

@@ -1,4 +1,4 @@
-// @flow
+
 import React from 'react';
 import styled from 'styled-components';
 import type { Category } from '../types/category-types';

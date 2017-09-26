@@ -1,4 +1,4 @@
-// @flow
+
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getPostById, editPost, deletePost } from '../actions/post-actions';
