@@ -1,4 +1,7 @@
-export const setActiveCategory = name => ({
-  type: 'SET_ACTIVE_CATEGORY',
-  name
-});
+export const setActiveCategory = name => {
+  const categoryName = name || 'all';
+  return {
+    type: 'SET_ACTIVE_CATEGORY',
+    categoryName
+  };
+};

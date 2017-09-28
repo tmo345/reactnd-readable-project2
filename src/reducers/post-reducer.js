@@ -4,7 +4,7 @@ const initialPosts = {};
 
 const posts = (state = initialPosts, action) => {
   switch (action.type) {
-    case 'SET_POSTS_FROM_SERVER':
+    case 'GET_ALL_POSTS_SUCCEEDED':
       return stateArraytoObject(action.posts);
 
     case 'ADD_POST': {

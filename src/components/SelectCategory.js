@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import FilterLink from '../containers/FilterCategoryLink.js';
 import { Button } from 'semantic-ui-react';
@@ -25,23 +25,32 @@ const ButtonText = styled.span`
   text-transform: capitalize;
 `;
 
-const SelectCategory = props => {
-  return (
-    <Categories>
-      <Heading>Choose Category:</Heading>
-      <FilterList>
-        {props.categories.map(category => (
-          <FilterItem key={category.name}>
-            <FilterLink categoryFilter={category.path}>
-              <Button color={category.active ? 'blue' : 'grey'} size="medium">
-                <ButtonText>{category.name}</ButtonText>
-              </Button>
-            </FilterLink>
-          </FilterItem>
-        ))}
-      </FilterList>
-    </Categories>
-  );
-};
+class SelectCategory extends Component {
+  render() {
+    return (
+      <Categories>
+        <Heading>Choose Category:</Heading>
+        <FilterList>
+          {this.props.categories.map(category => (
+            <FilterItem key={category.name}>
+              <FilterLink categoryFilter={category.path}>
+                <Button
+                  color={
+                    this.props.activeCategory === category.name
+                      ? 'blue'
+                      : 'grey'
+                  }
+                  size="medium"
+                >
+                  <ButtonText>{category.name}</ButtonText>
+                </Button>
+              </FilterLink>
+            </FilterItem>
+          ))}
+        </FilterList>
+      </Categories>
+    );
+  }
+}
 
 export default SelectCategory;

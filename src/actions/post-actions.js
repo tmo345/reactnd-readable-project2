@@ -1,13 +1,9 @@
 import moment from 'moment';
 import { fetchPost, fetchPosts, fetchPostsByCategory } from '../utils/api';
 import uuidv4 from 'uuid/v4';
-import { setActiveCategory } from './category-actions';
+import { getAllPostsStarted } from './ui-actions.js';
 
 // Synchronous actions
-export const setPostsFromServer = posts => ({
-  type: 'SET_POSTS_FROM_SERVER',
-  posts
-});
 
 export const addPost = ({ title, body, author, category }) => {
   const uniqueId = `post-${uuidv4()}`;
@@ -45,27 +41,15 @@ export const downVotePost = id => ({
   id
 });
 
+export const getAllPostsSucceeded = posts => ({
+  type: 'GET_ALL_POSTS_SUCCEEDED',
+  posts
+});
+
 // Asynchronous actions
-
-export const getPostsByCategory = categoryName => {
+export const getAllPosts = urlId => {
   return function(dispatch) {
-    let fetchPromise;
-    if (categoryName === 'all') {
-      fetchPosts().then(posts => dispatch(setPostsFromServer(posts)));
-    } else {
-      fetchPostsByCategory(categoryName).then(posts =>
-        dispatch(setPostsFromServer(posts))
-      );
-    }
-  };
-};
-
-export const getPostById = id => {
-  return function(dispatch) {
-    return fetchPost(id).then(post => {
-      // setPostsFromServer expects Array<Post>
-      const postInArray = [post];
-      return dispatch(setPostsFromServer(postInArray));
-    });
+    dispatch(getAllPostsStarted());
+    fetchPosts().then(posts => dispatch(getAllPostsSucceeded(posts)));
   };
 };
