@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 import NavigationDisplay from './containers/NavigationDisplay';
 import { Container, Grid } from 'semantic-ui-react';
 import ListOfPosts from './containers/postList/PostListDisplay';
-import PostDisplay from './containers/PostDisplay';
 import { getAllPosts } from './actions/post-actions';
-import { setActiveCategory } from './actions/category-actions';
-import { setCurrentUrlId } from './actions/route-actions';
+import PostList from './containers/postList/PostList';
 import SinglePost from './components/SinglePost';
+
 class App extends React.Component {
   componentDidMount() {
     this.props.getAllPosts();
