@@ -3,6 +3,7 @@ import { Container, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { AddPostDisplay } from '../containers/AddPostDisplay';
+import AddPostModal from './AddPostModal';
 
 const SiteBranding = styled(Menu.Menu)`
   border-left: 1px solid #333;
@@ -20,7 +21,7 @@ const NavBar = props => {
         </SiteBranding>
 
         <Menu.Menu position="right">
-          <AddPostDisplay />
+          <AddPostModal categories={props.categories} />
         </Menu.Menu>
       </Container>
     </Menu>

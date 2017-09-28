@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { AddPostButton } from '../components/AddPostButton';
+import AddPostModal from '../components/AddPostModal';
 import { addPost } from '../actions/post-actions';
 
 const mapStateToProps = state => ({
@@ -11,5 +11,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export const AddPostDisplay = connect(mapStateToProps, mapDispatchToProps)(
-  AddPostButton
+  AddPostModal
 );
