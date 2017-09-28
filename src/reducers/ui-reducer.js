@@ -1,7 +1,8 @@
 import { getAllPostsStarted } from '../actions/ui-actions';
 
 const initialUiState = {
-  postsLoading: false
+  postsLoading: false,
+  addPostModalOpen: false
 };
 const ui = (state = initialUiState, action) => {
   switch (action.type) {
@@ -12,7 +13,14 @@ const ui = (state = initialUiState, action) => {
 
     case 'GET_ALL_POSTS_SUCCEEDED':
       return {
+        ...state,
         postsLoading: false
+      };
+
+    case 'TOGGLE_ADD_POST_MODAL':
+      return {
+        ...state,
+        addPostModalOpen: !state.addPostModalOpen
       };
 
     default:

@@ -13,6 +13,10 @@ const AddPostModal = props => (
         <Button icon="write" color="green" content="Add Post" />
       </ButtonContainer>
     }
+    open={props.addPostModalOpen}
+    onOpen={props.toggleAddPostModal}
+    onClose={props.toggleAddPostModal}
+    closeIcon
   >
     <Modal.Header>New Post</Modal.Header>
     <Modal.Content>
