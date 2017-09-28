@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
-import { Item, Grid, Header, Segment, Button, Icon } from 'semantic-ui-react';
+import {
+  Item,
+  Grid,
+  Header,
+  Segment,
+  Button,
+  Icon,
+  Loader
+} from 'semantic-ui-react';
 import { getPostById } from '../utils/api';
 import CommentList from './CommentList';
 
@@ -9,17 +17,18 @@ const PostListItem = styled.li``;
 
 const Title = styled.h3``;
 
-const Body = styled.p``;
+const Body = styled.div``;
 
-const Author = styled.p``;
+const Author = styled.div``;
 
-const CreatedAt = styled.p``;
+const CreatedAt = styled.div``;
 
-const ClearFloat = styled.p`clear: both;`;
+const ClearFloat = styled.div`clear: both;`;
 
 const SinglePost = props => {
-  const { id, post } = props;
+  const post = props.posts[props.urlId];
 
+  const renderLoader = <Loader inline active={props.postsLoading} />;
   return (
     <div>
       <Item>
@@ -28,20 +37,22 @@ const SinglePost = props => {
             <Grid columns={2}>
               <Grid.Column largeScreen={12}>
                 <Header color="black" inverted as="h2">
-                  {post.title}
+                  {post ? post.title : renderLoader}
                 </Header>
               </Grid.Column>
               <Grid.Column largeScreen={4}>
                 <Header color="black" inverted as="h3" floated="right">
-                  Votes: {post.voteScore}
+                  Votes: {post ? post.voteScore : renderLoader}
                 </Header>
               </Grid.Column>
             </Grid>
           </Segment>
           <Segment attached>
-            <Author>Author: {post.author}</Author>
-            <CreatedAt>{formatTime(post.timestamp)}</CreatedAt>
-            <Body>{post.body}</Body>
+            <Author>Author: {post ? post.author : renderLoader}</Author>
+            <CreatedAt>
+              {post ? formatTime(post.timestamp) : renderLoader}
+            </CreatedAt>
+            <Body>{post ? post.body : renderLoader}</Body>
             <Button floated="right" secondary>
               Delete
             </Button>

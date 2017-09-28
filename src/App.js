@@ -9,6 +9,7 @@ import PostDisplay from './containers/PostDisplay';
 import { getAllPosts } from './actions/post-actions';
 import { setActiveCategory } from './actions/category-actions';
 import { setCurrentUrlId } from './actions/route-actions';
+import SinglePost from './components/SinglePost';
 class App extends React.Component {
   componentDidMount() {
     this.props.getAllPosts();
@@ -21,7 +22,6 @@ class App extends React.Component {
           <NavigationDisplay />
         </Grid.Row>
         <Container>
-          <Route exact path="/:category/:id" component={PostDisplay} />
           <Route
             exact
             path="/:category?"
@@ -33,18 +33,35 @@ class App extends React.Component {
               />
             )}
           />
+          <Route
+            exact
+            path="/:category/:id"
+            render={props => {
+              const id = this.props.urlId;
+              const posts = this.props.posts;
+              return (
+                <SinglePost
+                  posts={this.props.posts}
+                  urlId={props.match.params.id}
+                  postsLoading={this.props.postsLoading}
+                  {...props}
+                />
+              );
+            }}
+          />
         </Container>
       </Grid>
     );
   }
 }
+
 const mapStateToProps = state => ({
   posts: state.posts,
   postsLoading: state.ui.postsLoading
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAllPosts: () => dispatch(getAllPosts()),
+  getAllPosts: () => dispatch(getAllPosts())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
