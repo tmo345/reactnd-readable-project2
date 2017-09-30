@@ -2,12 +2,14 @@ import { getAllPostsStarted } from '../actions/ui-actions';
 
 const initialUiState = {
   postsLoading: false,
-  addPostModalOpen: false
+  addPostModalOpen: false,
+  processingNewPost: false
 };
 const ui = (state = initialUiState, action) => {
   switch (action.type) {
     case 'GET_ALL_POSTS_STARTED':
       return {
+        ...state,
         postsLoading: true
       };
 
@@ -17,10 +19,28 @@ const ui = (state = initialUiState, action) => {
         postsLoading: false
       };
 
-    case 'TOGGLE_ADD_POST_MODAL':
+    case 'ADD_POST_SERVER_STARTED':
       return {
         ...state,
-        addPostModalOpen: !state.addPostModalOpen
+        processingNewPost: true
+      };
+
+    case 'ADD_POST_SERVER_SUCCESS':
+      return {
+        ...state,
+        processingNewPost: false
+      };
+
+    case 'OPEN_ADD_POST_MODAL':
+      return {
+        ...state,
+        addPostModalOpen: true
+      };
+
+    case 'CLOSE_ADD_POST_MODAL':
+      return {
+        ...state,
+        addPostModalOpen: false
       };
 
     default:

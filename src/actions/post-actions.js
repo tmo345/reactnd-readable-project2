@@ -1,23 +1,13 @@
 import moment from 'moment';
-import { fetchPost, fetchPosts, fetchPostsByCategory } from '../utils/api';
+import {
+  fetchPost,
+  fetchPosts,
+  fetchPostsByCategory,
+  postPostToServer
+} from '../utils/api';
 import uuidv4 from 'uuid/v4';
-import { getAllPostsStarted } from './ui-actions.js';
 
 // Synchronous actions
-
-export const addPost = ({ title, body, author, category }) => {
-  const uniqueId = `post-${uuidv4()}`;
-  return {
-    type: 'ADD_POST',
-    id: uniqueId,
-    timestamp: Date.now(),
-    voteScore: 1,
-    title,
-    body,
-    author,
-    category
-  };
-};
 
 export const editPost = ({ id, title, body }) => ({
   type: 'EDIT_POST',
@@ -41,9 +31,22 @@ export const downVotePost = id => ({
   id
 });
 
+export const getAllPostsStarted = () => ({
+  type: 'GET_ALL_POSTS_STARTED'
+});
+
 export const getAllPostsSucceeded = posts => ({
   type: 'GET_ALL_POSTS_SUCCEEDED',
   posts
+});
+
+export const addPostServerStarted = () => ({
+  type: 'ADD_POST_SERVER_STARTED'
+});
+
+export const addPostServerSuccess = post => ({
+  type: 'ADD_POST_SERVER_SUCCESS',
+  post: post
 });
 
 // Asynchronous actions
@@ -51,5 +54,21 @@ export const getAllPosts = urlId => {
   return function(dispatch) {
     dispatch(getAllPostsStarted());
     fetchPosts().then(posts => dispatch(getAllPostsSucceeded(posts)));
+  };
+};
+
+export const addPostServer = ({ title, body, category, author }) => {
+  const uniqueId = `post-${uuidv4()}`;
+  const timestamp = Date.now();
+  return function(dispatch) {
+    dispatch(addPostServerStarted());
+    postPostToServer(
+      title,
+      uniqueId,
+      timestamp,
+      body,
+      author,
+      category
+    ).then(response => dispatch(addPostServerSuccess(response.data)));
   };
 };

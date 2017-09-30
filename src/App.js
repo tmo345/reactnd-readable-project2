@@ -3,11 +3,18 @@ import './App.css';
 import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import NavigationDisplay from './containers/NavigationDisplay';
-import { Container, Grid } from 'semantic-ui-react';
+import { Container, Grid, Menu } from 'semantic-ui-react';
 import ListOfPosts from './containers/postList/PostListDisplay';
 import { getAllPosts } from './actions/post-actions';
 import PostList from './containers/postList/PostList';
 import SinglePost from './components/SinglePost';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const SiteBranding = styled(Menu.Menu)`
+  border-left: 1px solid #333;
+  border-right: 1px solud #333;
+`;
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,7 +25,19 @@ class App extends React.Component {
     return (
       <Grid columns={1}>
         <Grid.Row>
-          <NavigationDisplay />
+          <Menu inverted={true} attached="top">
+            <Container>
+              <SiteBranding>
+                <Menu.Item as={Link} to="/">
+                  <h1>Readable</h1>
+                </Menu.Item>
+              </SiteBranding>
+
+              <Menu.Menu position="right">
+                <NavigationDisplay />
+              </Menu.Menu>
+            </Container>
+          </Menu>
         </Grid.Row>
         <Container>
           <Route
