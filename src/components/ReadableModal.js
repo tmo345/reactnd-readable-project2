@@ -1,8 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-=======
-import createModal from './createModal';
->>>>>>> 4824c51db3f691f74f93e08807ca4dd59bf8e899
 import Modal from 'react-modal';
 
 const ReadableModal = props => (
