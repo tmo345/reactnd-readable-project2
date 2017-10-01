@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostList from './PostList';
 import { setSortPostByFlag } from '../../actions/sorting-actions';
-import { getPostsByCategory } from '../../actions/post-actions';
 import { setActiveCategory } from '../../actions/category-actions';
 import SelectCategory from '../../components/SelectCategory';
 import { Grid, Dimmer, Loader } from 'semantic-ui-react';

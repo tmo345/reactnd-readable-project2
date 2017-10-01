@@ -1,5 +1,3 @@
-import { getAllPostsStarted } from '../actions/ui-actions';
-
 const initialUiState = {
   postsLoading: false,
   addPostModalOpen: false,
@@ -31,12 +29,6 @@ const ui = (state = initialUiState, action) => {
       return {
         ...state,
         processingNewPost: true
-      };
-
-    case 'ADD_POST_SERVER_SUCCESS':
-      return {
-        ...state,
-        processingNewPost: false
       };
 
     case 'OPEN_ADD_POST_MODAL':

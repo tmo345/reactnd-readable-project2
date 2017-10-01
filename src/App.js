@@ -6,7 +6,6 @@ import NavigationDisplay from './containers/NavigationDisplay';
 import { Container, Grid, Menu } from 'semantic-ui-react';
 import ListOfPosts from './containers/postList/PostListDisplay';
 import { getAllPosts } from './actions/post-actions';
-import PostList from './containers/postList/PostList';
 import SinglePost from './components/SinglePost';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -54,18 +53,14 @@ class App extends React.Component {
           <Route
             exact
             path="/:category/:id"
-            render={props => {
-              const id = this.props.urlId;
-              const posts = this.props.posts;
-              return (
-                <SinglePost
-                  posts={this.props.posts}
-                  urlId={props.match.params.id}
-                  postsLoading={this.props.postsLoading}
-                  {...props}
-                />
-              );
-            }}
+            render={props => (
+              <SinglePost
+                posts={this.props.posts}
+                urlId={props.match.params.id}
+                postsLoading={this.props.postsLoading}
+                {...props}
+              />
+            )}
           />
         </Container>
       </Grid>

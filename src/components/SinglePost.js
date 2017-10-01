@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
 import {
@@ -10,12 +10,7 @@ import {
   Icon,
   Loader
 } from 'semantic-ui-react';
-import { getPostById } from '../utils/api';
 import CommentList from './CommentList';
-
-const PostListItem = styled.li``;
-
-const Title = styled.h3``;
 
 const Body = styled.div``;
 

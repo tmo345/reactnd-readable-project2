@@ -1,10 +1,4 @@
-import moment from 'moment';
-import {
-  fetchPost,
-  fetchPosts,
-  fetchPostsByCategory,
-  postPostToServer
-} from '../utils/api';
+import { fetchPosts, postPostToServer } from '../utils/api';
 import uuidv4 from 'uuid/v4';
 
 // Synchronous actions
