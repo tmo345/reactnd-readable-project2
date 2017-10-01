@@ -7,7 +7,7 @@ const posts = (state = initialPosts, action) => {
     case 'GET_ALL_POSTS_SUCCEEDED':
       return stateArraytoObject(action.posts);
 
-    case 'ADD_POST': {
+    case 'ADD_POST_SERVER_SUCCESS': {
       // block scope for declarations of action properties
       const {
         id,
@@ -17,7 +17,7 @@ const posts = (state = initialPosts, action) => {
         author,
         category,
         voteScore
-      } = action;
+      } = action.post;
       return {
         ...state,
         [id]: { id, timestamp, title, body, author, category, voteScore }

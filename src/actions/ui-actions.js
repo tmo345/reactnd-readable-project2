@@ -5,3 +5,7 @@ export const openAddPostModal = () => ({
 export const closeAddPostModal = () => ({
   type: 'CLOSE_ADD_POST_MODAL'
 });
+
+export const resetAddPostFormSubmitted = () => ({
+  type: 'RESET_ADD_POST_FORM_SUBMITTED'
+});
