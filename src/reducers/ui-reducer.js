@@ -3,7 +3,8 @@ import { getAllPostsStarted } from '../actions/ui-actions';
 const initialUiState = {
   postsLoading: false,
   addPostModalOpen: false,
-  processingNewPost: false
+  processingNewPost: false,
+  addPostFormSubmitted: false
 };
 const ui = (state = initialUiState, action) => {
   switch (action.type) {
@@ -17,6 +18,13 @@ const ui = (state = initialUiState, action) => {
       return {
         ...state,
         postsLoading: false
+      };
+
+    case 'ADD_POST_SERVER_SUCCESS':
+      return {
+        ...state,
+        processingNewPost: false,
+        addPostFormSubmitted: true
       };
 
     case 'ADD_POST_SERVER_STARTED':
@@ -41,6 +49,12 @@ const ui = (state = initialUiState, action) => {
       return {
         ...state,
         addPostModalOpen: false
+      };
+
+    case 'RESET_ADD_POST_FORM_SUBMITTED':
+      return {
+        ...state,
+        addPostFormSubmitted: false
       };
 
     default:

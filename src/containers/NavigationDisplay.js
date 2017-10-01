@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openAddPostModal, closeAddPostModal } from '../actions/ui-actions';
+import {
+  openAddPostModal,
+  closeAddPostModal,
+  resetAddPostFormSubmitted
+} from '../actions/ui-actions';
 import { setActiveCategory } from '../actions/category-actions';
-import { Button } from 'semantic-ui-react';
-import styled from 'styled-components';
 import AddPostModal from '../components/AddPostModal';
 import { addPostServer } from '../actions/post-actions';
-import { inputChange } from '../actions/form-actions';
-
-const ButtonContainer = styled.div`padding-top: 10px;`;
+import OpenAddPostModalButton from '../components/OpenAddPostModalButton';
+import AddPostForm from './AddPostForm';
+import PostSubmittedMessage from '../components/PostSubmittedMessage';
 
 class NavigationDisplay extends Component {
   setCategoryOptions = categories => {
@@ -24,47 +26,36 @@ class NavigationDisplay extends Component {
     );
   };
 
-  handleInputChange = fieldName => {
-    return e => {
-      this.props.inputChange(fieldName, e.target.value);
-    };
-  };
-
-  handleSemanticUiChange = fieldName => {
-    return (event, data) => {
-      this.props.inputChange(fieldName, data.value);
-    };
-  };
-
-  handleAddPostSubmit = (title, author, category, body) => {
-    return e => {
-      e.preventDefault();
-      this.props.addPostServer(title, author, category, body);
-    };
+  submit = values => {
+    this.props.addPostServer(values);
   };
 
   render() {
     return (
       <div>
-        <ButtonContainer>
-          <Button
-            onClick={this.props.openAddPostModal}
-            icon="write"
-            color="green"
-            content="Add Post"
-          />
-        </ButtonContainer>
+        <OpenAddPostModalButton
+          openAddPostModal={this.props.openAddPostModal}
+          resetAddPostFormSubmitted={this.props.resetAddPostFormSubmitted}
+        />
         <AddPostModal
           addPostModalOpen={this.props.addPostModalOpen}
           closeAddPostModal={this.props.closeAddPostModal}
-          categories={this.setCategoryOptions(this.props.categories.categories)}
-          onTitleChange={this.handleInputChange('title')}
-          onAuthorChange={this.handleInputChange('author')}
-          onCategoryChange={this.handleSemanticUiChange('category')}
-          onBodyChange={this.handleInputChange('body')}
-          formFields={this.props.formFields}
-          handleAddPostSubmit={this.handleAddPostSubmit}
-        />
+        >
+          {this.props.addPostFormSubmitted ? (
+            <PostSubmittedMessage
+              closeAddPostModal={this.props.closeAddPostModal}
+              resetAddPostFormSubmitted={this.props.resetAddPostFormSubmitted}
+            />
+          ) : (
+            <AddPostForm
+              onSubmit={this.submit}
+              categories={this.setCategoryOptions(
+                this.props.categories.categories
+              )}
+              processingNewPost={this.props.processingNewPost}
+            />
+          )}
+        </AddPostModal>
       </div>
     );
   }
@@ -73,7 +64,8 @@ class NavigationDisplay extends Component {
 const mapStateToProps = state => ({
   categories: state.categories,
   addPostModalOpen: state.ui.addPostModalOpen,
-  formFields: state.forms.addPost
+  processingNewPost: state.ui.processingNewPost,
+  addPostFormSubmitted: state.ui.addPostFormSubmitted
 });
 
 const mapDispatchToProps = dispatch => {
@@ -83,7 +75,7 @@ const mapDispatchToProps = dispatch => {
     closeAddPostModal: () => dispatch(closeAddPostModal()),
     addPostServer: ({ title, body, author, category }) =>
       dispatch(addPostServer({ title, body, author, category })),
-    inputChange: (fieldName, value) => dispatch(inputChange(fieldName, value))
+    resetAddPostFormSubmitted: () => dispatch(resetAddPostFormSubmitted())
   };
 };
 
