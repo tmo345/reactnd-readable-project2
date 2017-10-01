@@ -19,6 +19,16 @@ const ui = (state = initialUiState, action) => {
       };
 
     case 'ADD_POST_SERVER_SUCCESS':
+<<<<<<< HEAD
+=======
+      return {
+        ...state,
+        processingNewPost: false,
+        addPostFormSubmitted: true
+      };
+
+    case 'ADD_POST_SERVER_STARTED':
+>>>>>>> 4824c51db3f691f74f93e08807ca4dd59bf8e899
       return {
         ...state,
         processingNewPost: false,
