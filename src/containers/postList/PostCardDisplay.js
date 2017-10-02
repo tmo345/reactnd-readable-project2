@@ -3,11 +3,25 @@ import { connect } from 'react-redux';
 import { setCommentsForPost } from '../../actions/comment-actions';
 import PostCard from './PostCard';
 import { stateArraytoObject, stateObjectToArray } from '../../reducers/helpers';
+import { voteForPost } from '../../actions/post-actions';
 
 class PostCardDisplay extends Component {
   state = {
     commentNumberLoading: true,
-    commentNumber: 0
+    commentNumber: 0,
+    postVoteProcessing: false
+  };
+
+  postVoteProcessingOn = () => {
+    this.setState({
+      postVoteProcessing: true
+    });
+  };
+
+  postVoteProcessingOff = () => {
+    this.setState({
+      postVoteProcessing: false
+    });
   };
 
   componentDidMount = () => {
@@ -28,23 +42,28 @@ class PostCardDisplay extends Component {
   };
 
   render() {
-    console.log(this.state.commentNumberLoading);
     return (
       <PostCard
         post={this.props.post}
-        commentNumber={this.calculateCommentNumber()}
+        commentNumber={this.state.commentNumber}
         commentNumberLoading={this.state.commentNumberLoading}
+        handlePostVote={this.props.voteForPost}
+        postVoteProcessing={this.state.postVoteProcessing}
+        postVoteProcessingOn={this.postVoteProcessingOn}
+        postVoteProcessingOff={this.postVoteProcessingOff}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  comments: state.comments
+  comments: state.comments,
+  postVoteProcessing: state.ui.postVoteProcessing
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCommentsForPost: postId => dispatch(setCommentsForPost(postId))
+  setCommentsForPost: postId => dispatch(setCommentsForPost(postId)),
+  voteForPost: (id, direction) => dispatch(voteForPost(id, direction))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostCardDisplay);

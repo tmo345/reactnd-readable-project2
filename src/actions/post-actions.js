@@ -1,4 +1,4 @@
-import { fetchPosts, postPostToServer } from '../utils/api';
+import { fetchPosts, postPostToServer, votePostServer } from '../utils/api';
 import uuidv4 from 'uuid/v4';
 
 // Synchronous actions
@@ -40,7 +40,12 @@ export const addPostServerStarted = () => ({
 
 export const addPostServerSuccess = post => ({
   type: 'ADD_POST_SERVER_SUCCESS',
-  post: post
+  post
+});
+
+export const voteForPostSucceeded = post => ({
+  type: 'VOTE_FOR_POST_SUCCEEDED',
+  post
 });
 
 // Asynchronous actions
@@ -64,5 +69,13 @@ export const addPostServer = ({ title, body, category, author }) => {
       author,
       category
     ).then(response => dispatch(addPostServerSuccess(response.data)));
+  };
+};
+
+export const voteForPost = (id, direction) => {
+  return function(dispatch) {
+    return votePostServer(id, direction).then(response => {
+      dispatch(voteForPostSucceeded(response.data));
+    });
   };
 };

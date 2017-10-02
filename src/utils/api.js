@@ -73,3 +73,14 @@ export const postPostToServer = (
     }
   });
 };
+
+export const votePostServer = (id, option) => {
+  return axios({
+    method: 'post',
+    url: `${api}/posts/${id}`,
+    headers,
+    data: {
+      option
+    }
+  });
+};

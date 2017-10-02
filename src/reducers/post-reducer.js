@@ -41,6 +41,16 @@ const posts = (state = initialPosts, action) => {
       return stateArraytoObject(remainingPosts);
     }
 
+    case 'VOTE_FOR_POST_SUCCEEDED':
+      // const changeBy = action.direction === 'upVote' ? 1 : -1;
+      return {
+        ...state,
+        [action.post.id]: {
+          ...state[action.post.id],
+          voteScore: action.post.voteScore
+        }
+      };
+
     case 'UP_VOTE_POST':
       return {
         ...state,
