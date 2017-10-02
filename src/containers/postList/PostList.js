@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Card, Segment } from 'semantic-ui-react';
 import { convertToList } from '../../utils/helpers';
+import PostCardDisplay from './PostCardDisplay';
 
 const PostListElement = styled.ul`
   list-style-type: none;
   text-align: left;
+  padding-left: 0;
 `;
 
 const PostList = props => {
@@ -27,15 +29,7 @@ const PostList = props => {
           <p>Sorry there are no posts in this category.</p>
         ) : (
           postsByCategory.map(post => {
-            return (
-              <li key={post.id}>
-                <div>
-                  <Link to={`${post.category}/${post.id}`}>{post.title}</Link>
-                  <div>Votes: {post.voteScore}</div>
-                  <div>Posted {new Date(post.timestamp).toDateString()}</div>
-                </div>
-              </li>
-            );
+            return <PostCardDisplay key={post.id} post={post} />;
           })
         )}
       </PostListElement>

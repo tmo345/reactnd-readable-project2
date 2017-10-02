@@ -63,7 +63,8 @@ class ListOfPosts extends Component {
 const mapStateToProps = (state, ownProps) => ({
   activeCategory: state.categories.active,
   categories: state.categories.categories,
-  sorting: state.sorting
+  sorting: state.sorting,
+  comments: state.comments
 });
 
 const mapDispatchToProps = (dispatch: *) => ({

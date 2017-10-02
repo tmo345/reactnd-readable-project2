@@ -43,24 +43,13 @@ export const fetchPostsByCategory = category =>
     .then(res => res.json())
     .then(data => data);
 
-// export const postPostToServer = (
-//   title,
-//   id,
-//   timestamp,
-//   body,
-//   author,
-//   category
-// ) => {
-//   fetch(`${api}/posts`, {
-//     method: 'post',
-//     headers,
-//     body: JSON.stringify(title, id, timestamp, body, author, category)
-
-//     // body: `title=${postObject.title}&author=${postObject.author}&category=${postObject.category}&body=${postObject.body}`
-//   });
-//   // .then(res => res.json())
-//   // .then(data => data);
-// };
+export const fetchComments = postId => {
+  return axios({
+    method: 'get',
+    url: `${api}/posts/${postId}/comments`,
+    headers
+  });
+};
 
 export const postPostToServer = (
   title,
