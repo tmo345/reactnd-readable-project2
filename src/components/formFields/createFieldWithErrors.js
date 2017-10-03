@@ -26,24 +26,12 @@ const withReduxFormField = InputComponent => {
   return props => {
     if (props.children) {
       return (
-        <Field
-          component={InputComponent}
-          name={props.name}
-          label={props.label}
-          validate={props.validate}
-        >
+        <Field component={InputComponent} {...props}>
           {props.children}
         </Field>
       );
     } else {
-      return (
-        <Field
-          component={InputComponent}
-          name={props.name}
-          label={props.label}
-          validate={props.validate}
-        />
-      );
+      return <Field component={InputComponent} {...props} />;
     }
   };
 };
