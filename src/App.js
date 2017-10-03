@@ -7,7 +7,6 @@ import { Container, Grid, Menu } from 'semantic-ui-react';
 import ListOfPosts from './containers/postList/PostListDisplay';
 import { getAllPosts } from './actions/post-actions';
 import SinglePostDisplay from './containers/SinglePostDisplay';
-import SinglePost from './components/SinglePost';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Segment } from 'semantic-ui-react';
 import { convertToList } from '../../utils/helpers';
 import PostCardDisplay from './PostCardDisplay';
 

@@ -1,15 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../utils/helpers';
-import {
-  Item,
-  Grid,
-  Header,
-  Segment,
-  Button,
-  Icon,
-  Loader
-} from 'semantic-ui-react';
+import { Item, Grid, Header, Segment, Button, Loader } from 'semantic-ui-react';
 import CommentList from './CommentList';
 import VoteButtons from './VoteButtons';
 

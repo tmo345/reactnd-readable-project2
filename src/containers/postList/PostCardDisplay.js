@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setCommentsForPost } from '../../actions/comment-actions';
 import PostCard from './PostCard';
-import { stateArraytoObject, stateObjectToArray } from '../../reducers/helpers';
+import { stateObjectToArray } from '../../reducers/helpers';
 import { voteForPost } from '../../actions/post-actions';
 
 class PostCardDisplay extends Component {

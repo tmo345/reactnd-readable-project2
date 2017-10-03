@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Loader, Icon, Button } from 'semantic-ui-react';
+import { Card, Loader } from 'semantic-ui-react';
 import VoteButtons from '../../components/VoteButtons';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';

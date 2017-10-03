@@ -2,8 +2,7 @@
 *  Adapted from the redux-forms docs https://redux-form.com/7.0.4/examples/syncvalidation/
 */
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { curry } from 'ramda';
+import { reduxForm } from 'redux-form';
 import { Loader } from 'semantic-ui-react';
 import {
   required,
