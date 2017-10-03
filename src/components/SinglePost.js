@@ -26,6 +26,7 @@ const InlineVoteButtons = styled.div`
   margin-left: 10px;
 `;
 
+// If page is visited directly, post will be undefined until an ajax call hydrates the posts state. Check for presence of post with tertiary expressions and display loader until post is present.
 const SinglePost = props => {
   const post = props.posts[props.urlId];
   const renderLoader = <Loader inline active />;
