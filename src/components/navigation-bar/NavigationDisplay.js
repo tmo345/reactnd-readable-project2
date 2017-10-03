@@ -4,13 +4,13 @@ import {
   openAddPostModal,
   closeAddPostModal,
   resetAddPostFormSubmitted
-} from '../actions/ui-actions';
-import { setActiveCategory } from '../actions/category-actions';
-import AddPostModal from '../components/AddPostModal';
-import { addPostServer } from '../actions/post-actions';
-import OpenAddPostModalButton from '../components/OpenAddPostModalButton';
-import AddPostForm from './AddPostForm';
-import PostSubmittedMessage from '../components/PostSubmittedMessage';
+} from '../../actions/ui-actions';
+import { setActiveCategory } from '../../actions/category-actions';
+import AddPostModal from '../modals/AddPostModal';
+import { addPostServer } from '../../actions/post-actions';
+import OpenAddPostModalButton from '../modals/OpenAddPostModalButton';
+import AddPostForm from '../add-post-form/AddPostForm';
+import PostSubmittedMessage from '../add-post-form/PostSubmittedMessage';
 
 class NavigationDisplay extends Component {
   setCategoryOptions = categories => {

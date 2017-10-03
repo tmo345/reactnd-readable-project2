@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Loader } from 'semantic-ui-react';
-import VoteButtons from '../../components/VoteButtons';
+import VoteButtons from '../voting/VoteButtons';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 

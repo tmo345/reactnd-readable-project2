@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { convertToList } from '../../utils/helpers';
-import PostCardDisplay from './PostCardDisplay';
+import PostCardDisplay from '../post-card/PostCardDisplay';
 
 const PostListElement = styled.ul`
   list-style-type: none;

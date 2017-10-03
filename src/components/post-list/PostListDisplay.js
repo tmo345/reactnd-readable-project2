@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import PostList from './PostList';
 import { setSortPostByFlag } from '../../actions/sorting-actions';
 import { setActiveCategory } from '../../actions/category-actions';
-import SelectCategory from '../../components/SelectCategory';
+import SelectCategory from '../categories/SelectCategory';
 import { Grid, Dimmer, Loader } from 'semantic-ui-react';
 import { sort, ascend, descend, prop as _prop } from 'ramda';
 import { convertToList } from '../../utils/helpers';
-import PostSort from '../../components/PostSort';
+import PostSort from '../sorting/PostSort';
 import { withRouter } from 'react-router-dom';
 
-class ListOfPosts extends Component {
+class PostListDisplay extends Component {
   componentDidMount() {
     this.props.setActiveCategory(this.props.urlCategory);
   }
@@ -74,5 +74,5 @@ const mapDispatchToProps = (dispatch: *) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ListOfPosts)
+  connect(mapStateToProps, mapDispatchToProps)(PostListDisplay)
 );

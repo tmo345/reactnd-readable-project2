@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SinglePost from '../components/SinglePost';
+import SinglePost from './SinglePost';
 import { connect } from 'react-redux';
-import { voteForPost } from '../actions/post-actions';
+import { voteForPost } from '../../actions/post-actions';
 
 class SinglePostDisplay extends Component {
   render() {

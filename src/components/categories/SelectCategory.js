@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import FilterLink from '../containers/FilterCategoryLink.js';
+import FilterLink from './FilterCategoryLink.js';
 import { Button } from 'semantic-ui-react';
 
 const Categories = styled.div`

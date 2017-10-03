@@ -4,15 +4,12 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { Loader } from 'semantic-ui-react';
-import {
-  required,
-  checkCategories
-} from '../components/formFields/validate.js';
+import { required, checkCategories } from '../form-fields/validate';
 import {
   ReadableTextInput,
   ReadableSelect,
   ReadableTextarea
-} from '../components/formFields/reduxFormFields';
+} from '../form-fields/reduxFormFields';
 
 const AddPostForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;

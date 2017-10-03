@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { formatTime } from '../utils/helpers';
+import { formatTime } from '../../utils/helpers';
 import { Item, Grid, Header, Segment, Button, Loader } from 'semantic-ui-react';
-import CommentList from './CommentList';
-import VoteButtons from './VoteButtons';
+import CommentList from '../comment-list/CommentList';
+import VoteButtons from '../voting/VoteButtons';
 
 const Body = styled.div`margin-top: 0.5rem;`;
 const Author = styled.div``;

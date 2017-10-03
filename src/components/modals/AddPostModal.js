@@ -1,6 +1,6 @@
 import React from 'react';
 import ModalHeader from './ModalHeader';
-import ReadableModal from '../components/ReadableModal';
+import ReadableModal from './ReadableModal';
 
 const AddPostModal = props => {
   const label = 'Add New Post';
