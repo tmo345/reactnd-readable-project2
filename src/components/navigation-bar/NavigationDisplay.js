@@ -8,9 +8,9 @@ import {
 import { setActiveCategory } from '../../actions/category-actions';
 import AddPostModal from '../modals/AddPostModal';
 import { addPostServer } from '../../actions/post-actions';
-import OpenAddPostModalButton from '../modals/OpenAddPostModalButton';
+import OpenModalButton from '../modals/OpenModalButton';
 import AddPostForm from '../add-post-form/AddPostForm';
-import PostSubmittedMessage from '../add-post-form/PostSubmittedMessage';
+import FormSubmittedMessage from '../form-fields/FormSubmittedMessage';
 
 class NavigationDisplay extends Component {
   setCategoryOptions = categories => {
@@ -33,18 +33,23 @@ class NavigationDisplay extends Component {
   render() {
     return (
       <div>
-        <OpenAddPostModalButton
-          openAddPostModal={this.props.openAddPostModal}
-          resetAddPostFormSubmitted={this.props.resetAddPostFormSubmitted}
+        <OpenModalButton
+          openModal={this.props.openAddPostModal}
+          resetFormSubmitted={this.props.resetAddPostFormSubmitted}
+          buttonText="Add Post"
+          icon="write"
         />
         <AddPostModal
           addPostModalOpen={this.props.addPostModalOpen}
           closeAddPostModal={this.props.closeAddPostModal}
         >
           {this.props.addPostFormSubmitted ? (
-            <PostSubmittedMessage
-              closeAddPostModal={this.props.closeAddPostModal}
-              resetAddPostFormSubmitted={this.props.resetAddPostFormSubmitted}
+            <FormSubmittedMessage
+              closeModal={this.props.closeAddPostModal}
+              resetFormSubmitted={this.props.resetAddPostFormSubmitted}
+              heading="Post Form Submitted"
+              closeButtonText="Close Modal"
+              secondaryButtonText="Add another new post"
             />
           ) : (
             <AddPostForm

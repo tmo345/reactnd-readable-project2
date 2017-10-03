@@ -4,18 +4,18 @@ import styled from 'styled-components';
 
 const ButtonContainer = styled.div`padding-top: 10px;`;
 
-const OpenAddPostModalButton = props => (
+const OpenModalButton = props => (
   <ButtonContainer>
     <Button
       onClick={() => {
-        props.openAddPostModal();
-        props.resetAddPostFormSubmitted();
+        props.openModal();
+        props.resetFormSubmitted();
       }}
-      icon="write"
+      icon={props.icon}
       color="green"
-      content="Add Post"
+      content={props.buttonText}
     />
   </ButtonContainer>
 );
 
-export default OpenAddPostModalButton;
+export default OpenModalButton;
