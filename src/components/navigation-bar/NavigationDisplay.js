@@ -6,7 +6,7 @@ import {
   resetAddPostFormSubmitted
 } from '../../actions/ui-actions';
 import { setActiveCategory } from '../../actions/category-actions';
-import AddPostModal from '../modals/AddPostModal';
+import ModalWithHeader from '../modals/ModalWithHeader';
 import { addPostServer } from '../../actions/post-actions';
 import OpenModalButton from '../modals/OpenModalButton';
 import AddPostForm from '../add-post-form/AddPostForm';
@@ -39,9 +39,10 @@ class NavigationDisplay extends Component {
           buttonText="Add Post"
           icon="write"
         />
-        <AddPostModal
-          addPostModalOpen={this.props.addPostModalOpen}
-          closeAddPostModal={this.props.closeAddPostModal}
+        <ModalWithHeader
+          label="Add New Post"
+          isOpen={this.props.addPostModalOpen}
+          closeModal={this.props.closeAddPostModal}
         >
           {this.props.addPostFormSubmitted ? (
             <FormSubmittedMessage
@@ -60,7 +61,7 @@ class NavigationDisplay extends Component {
               processingNewPost={this.props.processingNewPost}
             />
           )}
-        </AddPostModal>
+        </ModalWithHeader>
       </div>
     );
   }
