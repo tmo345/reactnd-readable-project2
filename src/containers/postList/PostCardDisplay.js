@@ -8,20 +8,7 @@ import { voteForPost } from '../../actions/post-actions';
 class PostCardDisplay extends Component {
   state = {
     commentNumberLoading: true,
-    commentNumber: 0,
-    postVoteProcessing: false
-  };
-
-  postVoteProcessingOn = () => {
-    this.setState({
-      postVoteProcessing: true
-    });
-  };
-
-  postVoteProcessingOff = () => {
-    this.setState({
-      postVoteProcessing: false
-    });
+    commentNumber: 0
   };
 
   componentDidMount = () => {
@@ -48,9 +35,7 @@ class PostCardDisplay extends Component {
         commentNumber={this.state.commentNumber}
         commentNumberLoading={this.state.commentNumberLoading}
         handlePostVote={this.props.voteForPost}
-        postVoteProcessing={this.state.postVoteProcessing}
-        postVoteProcessingOn={this.postVoteProcessingOn}
-        postVoteProcessingOff={this.postVoteProcessingOff}
+        postVotesNowProcessing={this.props.postVotesNowProcessing}
       />
     );
   }
@@ -58,7 +43,7 @@ class PostCardDisplay extends Component {
 
 const mapStateToProps = state => ({
   comments: state.comments,
-  postVoteProcessing: state.ui.postVoteProcessing
+  postVotesNowProcessing: state.ui.processingVotes.posts
 });
 
 const mapDispatchToProps = dispatch => ({

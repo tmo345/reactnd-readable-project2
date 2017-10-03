@@ -42,7 +42,6 @@ const posts = (state = initialPosts, action) => {
     }
 
     case 'VOTE_FOR_POST_SUCCEEDED':
-      // const changeBy = action.direction === 'upVote' ? 1 : -1;
       return {
         ...state,
         [action.post.id]: {
@@ -51,23 +50,23 @@ const posts = (state = initialPosts, action) => {
         }
       };
 
-    case 'UP_VOTE_POST':
-      return {
-        ...state,
-        [action.id]: {
-          ...state[action.id],
-          voteScore: state[action.id]['voteScore'] + 1
-        }
-      };
-
-    case 'DOWN_VOTE_POST':
-      return {
-        ...state,
-        [action.id]: {
-          ...state[action.id],
-          voteScore: state[action.id]['voteScore'] - 1
-        }
-      };
+    // case 'UP_VOTE_POST':
+    //   return {
+    //     ...state,
+    //     [action.id]: {
+    //       ...state[action.id],
+    //       voteScore: state[action.id]['voteScore'] + 1
+    //     }
+    //   };
+    //
+    // case 'DOWN_VOTE_POST':
+    //   return {
+    //     ...state,
+    //     [action.id]: {
+    //       ...state[action.id],
+    //       voteScore: state[action.id]['voteScore'] - 1
+    //     }
+    //   };
 
     default:
       return state;

@@ -11,19 +11,24 @@ import {
   Loader
 } from 'semantic-ui-react';
 import CommentList from './CommentList';
+import VoteButtons from './VoteButtons';
 
-const Body = styled.div``;
-
+const Body = styled.div`margin-top: 0.5rem;`;
 const Author = styled.div``;
-
 const CreatedAt = styled.div``;
-
 const ClearFloat = styled.div`clear: both;`;
+const InlineVotes = styled.h3`
+  display: inline-block;
+  margin-bottom: 0;
+`;
+const InlineVoteButtons = styled.div`
+  display: inline-block;
+  margin-left: 10px;
+`;
 
 const SinglePost = props => {
   const post = props.posts[props.urlId];
-
-  const renderLoader = <Loader inline active={props.postsLoading} />;
+  const renderLoader = <Loader inline active />;
   return (
     <div>
       <Item>
@@ -36,8 +41,25 @@ const SinglePost = props => {
                 </Header>
               </Grid.Column>
               <Grid.Column largeScreen={4}>
-                <Header color="black" inverted as="h3" floated="right">
-                  Votes: {post ? post.voteScore : renderLoader}
+                <Header color="black" inverted as="span" floated="right">
+                  <Segment compact>
+                    <InlineVotes>
+                      Votes: {post ? post.voteScore : renderLoader}
+                    </InlineVotes>
+                    <InlineVoteButtons>
+                      {post ? (
+                        <VoteButtons
+                          votingOn={post}
+                          handleVote={props.handlePostVote}
+                          votesCurrentlyProcessing={
+                            props.postVotesNowProcessing
+                          }
+                        />
+                      ) : (
+                        renderLoader
+                      )}
+                    </InlineVoteButtons>
+                  </Segment>
                 </Header>
               </Grid.Column>
             </Grid>
@@ -58,10 +80,6 @@ const SinglePost = props => {
           </Segment>
           <Segment attached="bottom">
             <p>Number of comments: 5</p>
-            <p>
-              Vote: <Icon name="plus square outline" />
-              <Icon name="minus square outline" />
-            </p>
           </Segment>
         </div>
       </Item>

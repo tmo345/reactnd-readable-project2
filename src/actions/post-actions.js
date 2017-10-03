@@ -43,9 +43,15 @@ export const addPostServerSuccess = post => ({
   post
 });
 
-export const voteForPostSucceeded = post => ({
+export const voteForPostStarted = id => ({
+  type: 'VOTE_FOR_POST_STARTED',
+  id
+});
+
+export const voteForPostSucceeded = (post, id) => ({
   type: 'VOTE_FOR_POST_SUCCEEDED',
-  post
+  post,
+  id
 });
 
 // Asynchronous actions
@@ -74,8 +80,9 @@ export const addPostServer = ({ title, body, category, author }) => {
 
 export const voteForPost = (id, direction) => {
   return function(dispatch) {
+    dispatch(voteForPostStarted(id));
     return votePostServer(id, direction).then(response => {
-      dispatch(voteForPostSucceeded(response.data));
+      dispatch(voteForPostSucceeded(response.data, id));
     });
   };
 };
