@@ -22,7 +22,7 @@ const VoteButtons = props => {
         size="mini"
         color="black"
         basic
-        disabled={props.votesCurrentlyProcessing.includes(votingOn.id)}
+        disabled={props.votesNowProcessing.includes(votingOn.id)}
       >
         <StyledIcon size="large" name="plus" fitted />
       </Button>{' '}
@@ -36,7 +36,7 @@ const VoteButtons = props => {
         circular
         size="mini"
         color="black"
-        disabled={props.votesCurrentlyProcessing.includes(votingOn.id)}
+        disabled={props.votesNowProcessing.includes(votingOn.id)}
       >
         <StyledIcon size="large" name="minus" fitted />
       </Button>

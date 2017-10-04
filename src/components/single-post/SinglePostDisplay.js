@@ -2,24 +2,36 @@ import React, { Component } from 'react';
 import SinglePost from './SinglePost';
 import { connect } from 'react-redux';
 import { voteForPost } from '../../actions/post-actions';
+import { Loader } from 'semantic-ui-react';
+import SinglePostHeader from './SinglePostHeader';
 
 class SinglePostDisplay extends Component {
   render() {
+    const post = this.props.posts[this.props.match.params.id];
     return (
-      <SinglePost
-        posts={this.props.posts}
-        urlId={this.props.match.params.id}
-        postsLoading={this.props.postsLoading}
-        postVotesNowProcessing={this.props.postVotesNowProcessing}
-        handlePostVote={this.props.voteForPost}
-      />
+      <div>
+        <SinglePostHeader
+          post={post}
+          handleVote={this.props.voteForPost}
+          votesNowProcessing={this.props.postVotesNowProcessing}
+          postsLoading={this.props.postsLoading}
+        />
+        <SinglePost
+          posts={this.props.posts}
+          urlId={this.props.match.params.id}
+          postsLoading={this.props.postsLoading}
+          postVotesNowProcessing={this.props.postVotesNowProcessing}
+          handlePostVote={this.props.voteForPost}
+        />
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
   postVotesNowProcessing: state.ui.processingVotes.posts,
-  posts: state.posts
+  posts: state.posts,
+  postsLoading: state.ui.postsLoading
 });
 
 const mapDispatchToProps = dispatch => ({

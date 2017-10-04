@@ -35,7 +35,7 @@ class PostCardDisplay extends Component {
         commentNumber={this.state.commentNumber}
         commentNumberLoading={this.state.commentNumberLoading}
         handlePostVote={this.props.voteForPost}
-        postVotesNowProcessing={this.props.postVotesNowProcessing}
+        votesNowProcessing={this.props.postVotesNowProcessing}
       />
     );
   }

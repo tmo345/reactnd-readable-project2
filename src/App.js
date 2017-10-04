@@ -46,7 +46,6 @@ class App extends React.Component {
               <ListOfPosts
                 posts={this.props.posts}
                 urlCategory={props.match.params.category}
-                postsLoading={this.props.postsLoading}
               />
             )}
           />
@@ -57,7 +56,6 @@ class App extends React.Component {
               <SinglePostDisplay
                 posts={this.props.posts}
                 urlId={props.match.params.id}
-                postsLoading={this.props.postsLoading}
                 {...props}
               />
             )}

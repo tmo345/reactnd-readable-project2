@@ -22,7 +22,7 @@ const PostCard = props => {
           <Votes>
             <p>
               Votes: {' '}
-              {props.postVotesNowProcessing.includes(post.id) ? (
+              {props.votesNowProcessing.includes(post.id) ? (
                 <Loader size="mini" inline active />
               ) : (
                 post.voteScore
@@ -32,7 +32,7 @@ const PostCard = props => {
             <VoteButtons
               votingOn={props.post}
               handleVote={props.handlePostVote}
-              votesCurrentlyProcessing={props.postVotesNowProcessing}
+              votesNowProcessing={props.votesNowProcessing}
             />
           </Votes>
           <Card.Header>

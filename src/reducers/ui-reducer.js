@@ -1,5 +1,5 @@
 const initialUiState = {
-  postsLoading: false,
+  postsLoading: true,
   addPostModalOpen: false,
   processingNewPost: false,
   addPostFormSubmitted: false,

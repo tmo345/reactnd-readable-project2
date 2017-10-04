@@ -64,7 +64,8 @@ const mapStateToProps = (state, ownProps) => ({
   activeCategory: state.categories.active,
   categories: state.categories.categories,
   sorting: state.sorting,
-  comments: state.comments
+  comments: state.comments,
+  postsLoading: state.ui.postsLoading
 });
 
 const mapDispatchToProps = (dispatch: *) => ({

@@ -1,4 +1,5 @@
 import { fetchPosts, postPostToServer, votePostServer } from '../utils/api';
+import { resetPostsLoading } from './ui-actions';
 import uuidv4 from 'uuid/v4';
 
 // Synchronous actions
@@ -58,7 +59,9 @@ export const voteForPostSucceeded = (post, id) => ({
 export const getAllPosts = urlId => {
   return function(dispatch) {
     dispatch(getAllPostsStarted());
-    fetchPosts().then(posts => dispatch(getAllPostsSucceeded(posts)));
+    fetchPosts()
+      .then(posts => dispatch(getAllPostsSucceeded(posts)))
+      .then(() => dispatch(resetPostsLoading()));
   };
 };
 
