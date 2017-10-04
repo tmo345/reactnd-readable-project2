@@ -12,6 +12,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 const PostListColumn = styled.div`padding-right: 30px !important;`;
+const PostListHeader = styled.h2`margin: 1.2rem 0 1.3rem !important;`;
 
 class PostListDisplay extends Component {
   componentDidMount() {
@@ -40,7 +41,7 @@ class PostListDisplay extends Component {
       <Grid columns={2}>
         <Grid.Row>
           <Grid.Column largeScreen={11} as={PostListColumn}>
-            <h2>Posts</h2>
+            <PostListHeader>Posts</PostListHeader>
             <Dimmer active={this.props.postsLoading} inverted>
               <Loader />
             </Dimmer>
@@ -50,7 +51,7 @@ class PostListDisplay extends Component {
             />
           </Grid.Column>
           <Grid.Column largeScreen={5}>
-            <h2>Filters</h2>
+            <PostListHeader>Filters</PostListHeader>
             <SelectCategory
               setActiveCategory={this.props.setActiveCategory}
               categories={this.props.categories}
