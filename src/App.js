@@ -4,7 +4,7 @@ import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import NavigationDisplay from './components/navigation-bar/NavigationDisplay';
 import { Container, Grid, Menu } from 'semantic-ui-react';
-import ListOfPosts from './components/post-list/PostListDisplay';
+import PostListDisplay from './components/post-list/PostListDisplay';
 import { getAllPosts } from './actions/post-actions';
 import SinglePostDisplay from './components/single-post/SinglePostDisplay';
 import { Link } from 'react-router-dom';
@@ -43,7 +43,7 @@ class App extends React.Component {
             exact
             path="/:category?"
             render={props => (
-              <ListOfPosts
+              <PostListDisplay
                 posts={this.props.posts}
                 urlCategory={props.match.params.category}
               />
