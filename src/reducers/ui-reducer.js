@@ -1,6 +1,7 @@
 const initialUiState = {
   postsLoading: true,
   addPostModalOpen: false,
+  editPostModalOpen: false,
   processingNewPost: false,
   addPostFormSubmitted: false,
   processingVotes: {
@@ -45,6 +46,18 @@ const ui = (state = initialUiState, action) => {
       return {
         ...state,
         addPostModalOpen: false
+      };
+
+    case 'OPEN_EDIT_POST_MODAL':
+      return {
+        ...state,
+        editPostModalOpen: true
+      };
+
+    case 'CLOSE_EDIT_POST_MODAL':
+      return {
+        ...state,
+        editPostModalOpen: false
       };
 
     case 'RESET_ADD_POST_FORM_SUBMITTED':

@@ -14,3 +14,10 @@ export const resetPostsLoading = () => ({
   type: 'RESET_POSTS_LOADING'
 });
 
+export const openEditPostModal = () => ({
+  type: 'OPEN_EDIT_POST_MODAL'
+});
+
+export const closeEditPostModal = () => ({
+  type: 'CLOSE_EDIT_POST_MODAL'
+});
