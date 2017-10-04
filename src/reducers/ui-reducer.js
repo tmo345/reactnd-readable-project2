@@ -16,7 +16,7 @@ const ui = (state = initialUiState, action) => {
         postsLoading: true
       };
 
-    case 'GET_ALL_POSTS_SUCCEEDED':
+    case 'RESET_POSTS_LOADING':
       return {
         ...state,
         postsLoading: false
