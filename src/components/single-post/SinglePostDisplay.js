@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SinglePost from './SinglePost';
+import SinglePostBody from './SinglePostBody';
 import { connect } from 'react-redux';
 import { voteForPost } from '../../actions/post-actions';
 import CommentList from '../comment-list/CommentList';
@@ -16,7 +16,7 @@ class SinglePostDisplay extends Component {
           votesNowProcessing={this.props.postVotesNowProcessing}
           postsLoading={this.props.postsLoading}
         />
-        <SinglePost
+        <SinglePostBody
           posts={this.props.posts}
           urlId={this.props.match.params.id}
           postsLoading={this.props.postsLoading}

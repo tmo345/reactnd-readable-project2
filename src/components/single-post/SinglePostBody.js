@@ -9,7 +9,7 @@ const CreatedAt = styled.div``;
 const CommentNumber = styled.p`float: left;`;
 const ClearFloat = styled.div`clear: both;`;
 
-const SinglePost = props => {
+const SinglePostBody = props => {
   const post = props.posts[props.urlId];
   const renderLoader = <Loader inline active />;
   return (
@@ -39,4 +39,4 @@ const SinglePost = props => {
   );
 };
 
-export default SinglePost;
+export default SinglePostBody;
