@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SinglePost from './SinglePost';
 import { connect } from 'react-redux';
 import { voteForPost } from '../../actions/post-actions';
-import { Loader } from 'semantic-ui-react';
+import CommentList from '../comment-list/CommentList';
 import SinglePostHeader from './SinglePostHeader';
 
 class SinglePostDisplay extends Component {
@@ -23,6 +23,7 @@ class SinglePostDisplay extends Component {
           postVotesNowProcessing={this.props.postVotesNowProcessing}
           handlePostVote={this.props.voteForPost}
         />
+        <CommentList />
       </div>
     );
   }
