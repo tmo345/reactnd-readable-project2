@@ -9,6 +9,9 @@ import { sort, ascend, descend, prop as _prop } from 'ramda';
 import { convertToList } from '../../utils/helpers';
 import PostSort from '../sorting/PostSort';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
+
+const PostListColumn = styled.div`padding-right: 30px !important;`;
 
 class PostListDisplay extends Component {
   componentDidMount() {
@@ -36,23 +39,24 @@ class PostListDisplay extends Component {
     return (
       <Grid columns={2}>
         <Grid.Row>
-          <Grid.Column largeScreen={10}>
+          <Grid.Column largeScreen={11} as={PostListColumn}>
             <h2>Posts</h2>
             <Dimmer active={this.props.postsLoading} inverted>
               <Loader />
             </Dimmer>
-            <PostSort setSortPostByFlag={this.props.setSortPostByFlag} />
             <PostList
               posts={sortPosts(convertToList(this.props.posts))}
               activeCategory={this.props.activeCategory}
             />
           </Grid.Column>
-          <Grid.Column largeScreen={6}>
+          <Grid.Column largeScreen={5}>
+            <h2>Filters</h2>
             <SelectCategory
               setActiveCategory={this.props.setActiveCategory}
               categories={this.props.categories}
               activeCategory={this.props.activeCategory}
             />
+            <PostSort setSortPostByFlag={this.props.setSortPostByFlag} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

@@ -1,18 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import { formatTime } from '../../utils/helpers';
-import { Item, Grid, Header, Segment, Button, Loader } from 'semantic-ui-react';
-import CommentList from '../comment-list/CommentList';
+import { Grid, Header, Segment, Loader } from 'semantic-ui-react';
 import VoteButtons from '../voting/VoteButtons';
 
 const InlineVotes = styled.h3`
   display: inline-block;
   margin-bottom: 0;
+  font-size: 1.3rem;
+  color: #fff;
 `;
 const InlineVoteButtons = styled.div`
   display: inline-block;
   margin-left: 10px;
 `;
+
 const SinglePostHeader = props => {
   return (
     <Segment color="blue" inverted attached="top">
@@ -27,16 +28,15 @@ const SinglePostHeader = props => {
           </Grid.Column>
           <Grid.Column largeScreen={4}>
             <Header color="black" inverted as="span" floated="right">
-              <Segment compact>
-                <InlineVotes>Votes: {props.post.voteScore}</InlineVotes>
-                <InlineVoteButtons>
-                  <VoteButtons
-                    votingOn={props.post}
-                    handleVote={props.handleVote}
-                    votesNowProcessing={props.votesNowProcessing}
-                  />
-                </InlineVoteButtons>
-              </Segment>
+              <InlineVotes>Votes: {props.post.voteScore}</InlineVotes>
+              <InlineVoteButtons>
+                <VoteButtons
+                  votingOn={props.post}
+                  handleVote={props.handleVote}
+                  votesNowProcessing={props.votesNowProcessing}
+                  darkBackground={true}
+                />
+              </InlineVoteButtons>
             </Header>
           </Grid.Column>
         </Grid>

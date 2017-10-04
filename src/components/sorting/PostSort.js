@@ -4,7 +4,7 @@ import { List, Icon } from 'semantic-ui-react';
 const PostSort = props => (
   <List horizontal>
     <List.Item>
-      <List.Header>Sort By:</List.Header>
+      <List.Header as="h3">Sort By:</List.Header>
       <List horizontal>
         <List.Item
           disabled={props.postsLoading}

@@ -8,14 +8,19 @@ const Categories = styled.div`
   text-align: left;
 `;
 
-const Heading = styled.h3`padding-left: 16px;`;
+const Heading = styled.h3`
+  padding-left: 0;
+  margin-top: 0;
+`;
 
 const FilterList = styled.ul`
   list-style-type: none;
-  padding-left: 20px;
+  padding-left: 0;
+  ${'' /* padding-left: 20px; */};
 `;
 const FilterItem = styled.li`
   display: inline-block;
+  width: 45%;
   margin-right: 7.5px;
   margin-bottom: 7.5px;
 `;
@@ -35,6 +40,7 @@ class SelectCategory extends Component {
             <FilterItem key={category.name}>
               <FilterLink categoryFilter={category.path}>
                 <Button
+                  fluid
                   color={
                     this.props.activeCategory === category.name
                       ? 'blue'

@@ -19,12 +19,14 @@ const VoteButtons = props => {
         as={StyledButton}
         compact
         circular
-        size="mini"
+        // size="mini"
         color="black"
-        basic
+        inverted
+        // basic={!props.darkBackground}
         disabled={props.votesNowProcessing.includes(votingOn.id)}
+        icon="plus"
       >
-        <StyledIcon size="large" name="plus" fitted />
+        {/* <StyledIcon size="large" name="plus" /> */}
       </Button>{' '}
       <Button
         onClick={() => {
@@ -32,13 +34,15 @@ const VoteButtons = props => {
         }}
         as={StyledButton}
         compact
-        basic
+        // basic={!props.darkBackground}
         circular
-        size="mini"
+        // size="mini"
+        inverted
         color="black"
         disabled={props.votesNowProcessing.includes(votingOn.id)}
+        icon="minus"
       >
-        <StyledIcon size="large" name="minus" fitted />
+        {/* <StyledIcon size="large" name="minus" /> */}
       </Button>
     </div>
   );
