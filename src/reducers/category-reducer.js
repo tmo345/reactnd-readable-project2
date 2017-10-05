@@ -1,23 +1,23 @@
-const initialCategoryState = {
+export const initialCategoryState = {
   active: 'all',
   categories: [
     {
       name: 'all',
-      path: '/'
+      path: '/',
     },
     {
       name: 'udacity',
-      path: 'udacity'
+      path: 'udacity',
     },
     {
       name: 'react',
-      path: 'react'
+      path: 'react',
     },
     {
       name: 'redux',
-      path: 'redux'
-    }
-  ]
+      path: 'redux',
+    },
+  ],
 };
 
 const categories = (state = initialCategoryState, action) => {
@@ -25,7 +25,7 @@ const categories = (state = initialCategoryState, action) => {
     case 'SET_ACTIVE_CATEGORY':
       return {
         ...state,
-        active: action.categoryName
+        active: action.categoryName,
       };
     // const currentActive = state.filter(
     //   category => category.active === true

@@ -6,7 +6,7 @@ const token = 'authtoken135';
 
 const headers = {
   Accept: 'application/json',
-  Authorization: token
+  Authorization: token,
 };
 
 export const fetchFromApi = () => {
@@ -47,7 +47,7 @@ export const fetchComments = postId => {
   return axios({
     method: 'get',
     url: `${api}/posts/${postId}/comments`,
-    headers
+    headers,
   });
 };
 
@@ -57,7 +57,7 @@ export const postPostToServer = (
   timestamp,
   body,
   author,
-  category
+  category,
 ) => {
   return axios({
     method: 'post',
@@ -69,8 +69,8 @@ export const postPostToServer = (
       timestamp,
       body,
       author,
-      category
-    }
+      category,
+    },
   });
 };
 
@@ -80,8 +80,10 @@ export const votePostServer = (id, option) => {
     url: `${api}/posts/${id}`,
     headers,
     data: {
-      option
-    }
+      option,
+    },
+  });
+};
 
 export const putPostServer = (id, title, body) => {
   return axios({

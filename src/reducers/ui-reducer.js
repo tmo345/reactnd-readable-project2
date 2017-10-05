@@ -15,44 +15,44 @@ const ui = (state = initialUiState, action) => {
     case 'GET_ALL_POSTS_STARTED':
       return {
         ...state,
-        postsLoading: true
+        postsLoading: true,
       };
 
     case 'RESET_POSTS_LOADING':
       return {
         ...state,
-        postsLoading: false
+        postsLoading: false,
       };
 
     case 'ADD_POST_SERVER_SUCCESS':
       return {
         ...state,
         processingNewPost: false,
-        addPostFormSubmitted: true
+        addPostFormSubmitted: true,
       };
 
     case 'ADD_POST_SERVER_STARTED':
       return {
         ...state,
-        processingNewPost: true
+        processingNewPost: true,
       };
 
     case 'OPEN_ADD_POST_MODAL':
       return {
         ...state,
-        addPostModalOpen: true
+        addPostModalOpen: true,
       };
 
     case 'CLOSE_ADD_POST_MODAL':
       return {
         ...state,
-        addPostModalOpen: false
+        addPostModalOpen: false,
       };
 
     case 'OPEN_EDIT_POST_MODAL':
       return {
         ...state,
-        editPostModalOpen: true
+        editPostModalOpen: true,
       };
 
     case 'CLOSE_EDIT_POST_MODAL':
@@ -76,7 +76,7 @@ const ui = (state = initialUiState, action) => {
     case 'RESET_ADD_POST_FORM_SUBMITTED':
       return {
         ...state,
-        addPostFormSubmitted: false
+        addPostFormSubmitted: false,
       };
 
     case 'VOTE_FOR_POST_STARTED':
@@ -84,8 +84,8 @@ const ui = (state = initialUiState, action) => {
         ...state,
         processingVotes: {
           ...state.processingVotes,
-          posts: [...state.processingVotes.posts, action.id]
-        }
+          posts: [...state.processingVotes.posts, action.id],
+        },
       };
 
     case 'VOTE_FOR_POST_SUCCEEDED': {
@@ -96,9 +96,9 @@ const ui = (state = initialUiState, action) => {
           ...state.processingVotes,
           posts: [
             ...state.processingVotes.posts.slice(0, indexToRemove),
-            ...state.processingVotes.posts.slice(indexToRemove + 1)
-          ]
-        }
+            ...state.processingVotes.posts.slice(indexToRemove + 1),
+          ],
+        },
       };
     }
 

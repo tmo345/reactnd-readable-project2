@@ -32,11 +32,11 @@ class SinglePostDisplay extends Component {
 const mapStateToProps = state => ({
   postVotesNowProcessing: state.ui.processingVotes.posts,
   posts: state.posts,
-  postsLoading: state.ui.postsLoading
+  postsLoading: state.ui.postsLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  voteForPost: (id, direction) => dispatch(voteForPost(id, direction))
+  voteForPost: (id, direction) => dispatch(voteForPost(id, direction)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePostDisplay);

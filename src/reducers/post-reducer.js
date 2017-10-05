@@ -16,11 +16,11 @@ const posts = (state = initialPosts, action) => {
         body,
         author,
         category,
-        voteScore
+        voteScore,
       } = action.post;
       return {
         ...state,
-        [id]: { id, timestamp, title, body, author, category, voteScore }
+        [id]: { id, timestamp, title, body, author, category, voteScore },
       };
     }
 
@@ -46,27 +46,9 @@ const posts = (state = initialPosts, action) => {
         ...state,
         [action.post.id]: {
           ...state[action.post.id],
-          voteScore: action.post.voteScore
-        }
+          voteScore: action.post.voteScore,
+        },
       };
-
-    // case 'UP_VOTE_POST':
-    //   return {
-    //     ...state,
-    //     [action.id]: {
-    //       ...state[action.id],
-    //       voteScore: state[action.id]['voteScore'] + 1
-    //     }
-    //   };
-    //
-    // case 'DOWN_VOTE_POST':
-    //   return {
-    //     ...state,
-    //     [action.id]: {
-    //       ...state[action.id],
-    //       voteScore: state[action.id]['voteScore'] - 1
-    //     }
-    //   };
 
     default:
       return state;
