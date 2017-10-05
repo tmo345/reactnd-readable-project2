@@ -1,10 +1,11 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Loader } from 'semantic-ui-react';
 import {
   TitleInputField,
   BodyTextAreaField,
+  IdHiddenInputField,
 } from '../form-fields/readableFormFields';
 import { SubmitButton, ResetButton } from '../form-fields/formButtons';
 
@@ -16,7 +17,7 @@ let EditPostForm = props => {
 
       <TitleInputField />
       <BodyTextAreaField />
-      <Field name="id" component="input" type="hidden" value={props.postId} />
+      <IdHiddenInputField />
 
       <SubmitButton disableConditions={props.processingEditPost} />
       <ResetButton

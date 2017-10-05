@@ -60,3 +60,7 @@ export const BodyTextAreaField = props => (
     validate={required}
   />
 );
+
+export const IdHiddenInputField = props => (
+  <Field component="input" type="hidden" name="id" />
+);
