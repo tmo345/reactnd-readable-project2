@@ -9,7 +9,7 @@ import { setActiveCategory } from '../../actions/category-actions';
 import ModalWithHeader from '../modals/ModalWithHeader';
 import { addPostServer } from '../../actions/post-actions';
 import OpenModalButton from '../modals/OpenModalButton';
-import AddPostForm from '../add-post-form/AddPostForm';
+import AddPostForm from '../forms/AddPostForm';
 import FormSubmittedMessage from '../form-fields/FormSubmittedMessage';
 
 class NavigationDisplay extends Component {

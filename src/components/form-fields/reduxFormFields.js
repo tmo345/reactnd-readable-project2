@@ -1,5 +1,5 @@
 import React from 'react';
-import createFieldWithErrors from './createFieldWithErrors';
+import withErrorDisplay from './withErrorDisplay';
 
 const textInput = ({ input, label }) => (
   <input {...input} placeholder={label} type="text" id={label} />
@@ -15,6 +15,6 @@ const textareaField = ({ input, label }) => (
   <textarea {...input} id={label} placeholder={label} />
 );
 
-export const ReadableTextInput = createFieldWithErrors(textInput);
-export const ReadableSelect = createFieldWithErrors(selectField);
-export const ReadableTextarea = createFieldWithErrors(textareaField);
+export const ReadableTextInput = withErrorDisplay(textInput);
+export const ReadableSelect = withErrorDisplay(selectField);
+export const ReadableTextarea = withErrorDisplay(textareaField);
