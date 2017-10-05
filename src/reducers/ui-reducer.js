@@ -4,10 +4,11 @@ const initialUiState = {
   editPostModalOpen: false,
   processingNewPost: false,
   addPostFormSubmitted: false,
+  processingEditPost: false,
   processingVotes: {
     posts: [],
-    comments: []
-  }
+    comments: [],
+  },
 };
 const ui = (state = initialUiState, action) => {
   switch (action.type) {
@@ -57,7 +58,19 @@ const ui = (state = initialUiState, action) => {
     case 'CLOSE_EDIT_POST_MODAL':
       return {
         ...state,
-        editPostModalOpen: false
+        editPostModalOpen: false,
+      };
+
+    case 'START_EDIT_POST_FORM_SUBMITTED':
+      return {
+        ...state,
+        editPostFormSubmitted: true,
+      };
+
+    case 'RESET_EDIT_POST_FORM_SUBMITTED':
+      return {
+        ...state,
+        editPostFormSubmitted: false,
       };
 
     case 'RESET_ADD_POST_FORM_SUBMITTED':
@@ -88,6 +101,18 @@ const ui = (state = initialUiState, action) => {
         }
       };
     }
+
+    case 'EDIT_POST_SERVER_STARTED':
+      return {
+        ...state,
+        processingEditPost: true,
+      };
+
+    case 'EDIT_POST_SERVER_SUCCESS':
+      return {
+        ...state,
+        processingEditPost: false,
+      };
 
     default:
       return state;

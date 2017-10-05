@@ -17,6 +17,6 @@ export const ResetButton = props => (
     disabled={props.disableConditions}
     onClick={props.resetForm}
   >
-    Clear Form
+    {props.buttonText}
   </button>
 );

@@ -24,14 +24,14 @@ const posts = (state = initialPosts, action) => {
       };
     }
 
-    case 'EDIT_POST':
+    case 'EDIT_POST_SERVER_SUCCESS':
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
-          title: action.title,
-          body: action.body
-        }
+        [action.post.id]: {
+          ...state[action.post.id],
+          title: action.post.title,
+          body: action.post.body,
+        },
       };
 
     case 'DELETE_POST': {

@@ -1,4 +1,9 @@
-import { fetchPosts, postPostToServer, votePostServer } from '../utils/api';
+import {
+  fetchPosts,
+  postPostToServer,
+  votePostServer,
+  putPostServer
+} from '../utils/api';
 import { resetPostsLoading } from './ui-actions';
 import uuidv4 from 'uuid/v4';
 
@@ -44,6 +49,15 @@ export const addPostServerSuccess = post => ({
   post
 });
 
+export const editPostServerStarted = () => ({
+  type: 'EDIT_POST_SERVER_STARTED'
+});
+
+export const editPostServerSuccess = post => ({
+  type: 'EDIT_POST_SERVER_SUCCESS',
+  post
+});
+
 export const voteForPostStarted = id => ({
   type: 'VOTE_FOR_POST_STARTED',
   id
@@ -86,6 +100,17 @@ export const voteForPost = (id, direction) => {
     dispatch(voteForPostStarted(id));
     return votePostServer(id, direction).then(response => {
       dispatch(voteForPostSucceeded(response.data, id));
+    });
+  };
+};
+
+export const editPostServer = ({ id, title, body }) => {
+  console.log(id);
+  return function(dispatch) {
+    dispatch(editPostServerStarted());
+
+    return putPostServer(id, title, body).then(response => {
+      return dispatch(editPostServerSuccess(response.data));
     });
   };
 };

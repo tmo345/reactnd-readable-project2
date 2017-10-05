@@ -82,5 +82,16 @@ export const votePostServer = (id, option) => {
     data: {
       option
     }
+
+export const putPostServer = (id, title, body) => {
+  return axios({
+    method: 'put',
+    url: `${api}/posts/${id}`,
+    headers,
+    data: {
+      id,
+      title,
+      body,
+    },
   });
 };
