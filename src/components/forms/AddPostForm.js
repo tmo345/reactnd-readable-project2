@@ -1,6 +1,6 @@
 /**
  *  Basics of how to make form from the redux-forms docs
- *  https://redux-form.com/7.0.4/examples/syncvalidation/, and then customized
+ *  https://redux-form.com/7.0.4/examples/
 */
 import React from 'react';
 import { reduxForm } from 'redux-form';
