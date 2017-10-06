@@ -14,49 +14,50 @@ export const editPost = ({ id, title, body }) => ({
   type: 'EDIT_POST',
   id,
   title,
-  body
+  body,
 });
 
 export const deletePost = id => ({
   type: 'DELETE_POST',
-  id
+  id,
 });
 
 export const upVotePost = id => ({
   type: 'UP_VOTE_POST',
-  id
+  id,
 });
 
 export const downVotePost = id => ({
   type: 'DOWN_VOTE_POST',
-  id
+  id,
 });
 
 export const getAllPostsStarted = () => ({
-  type: 'GET_ALL_POSTS_STARTED'
+  type: 'GET_ALL_POSTS_STARTED',
 });
 
 export const getAllPostsSucceeded = posts => ({
   type: 'GET_ALL_POSTS_SUCCEEDED',
-  posts
+  posts,
 });
 
 export const addPostServerStarted = () => ({
-  type: 'ADD_POST_SERVER_STARTED'
+  type: 'ADD_POST_SERVER_STARTED',
 });
 
 export const addPostServerSuccess = post => ({
   type: 'ADD_POST_SERVER_SUCCESS',
-  post
+  post,
 });
 
 export const editPostServerStarted = () => ({
-  type: 'EDIT_POST_SERVER_STARTED'
+  type: 'EDIT_POST_SERVER_STARTED',
 });
 
 export const editPostServerSuccess = post => ({
   type: 'EDIT_POST_SERVER_SUCCESS',
-  post
+  post,
+});
 
 export const deletePostServerStarted = () => ({
   type: 'DELETE_POST_SERVER_STARTED',
@@ -69,13 +70,13 @@ export const deletePostServerSuccess = id => ({
 
 export const voteForPostStarted = id => ({
   type: 'VOTE_FOR_POST_STARTED',
-  id
+  id,
 });
 
 export const voteForPostSucceeded = (post, id) => ({
   type: 'VOTE_FOR_POST_SUCCEEDED',
   post,
-  id
+  id,
 });
 
 // Asynchronous actions
@@ -116,12 +117,14 @@ export const voteForPost = (id, direction) => {
 };
 
 export const editPostServer = ({ id, title, body }) => {
-  console.log(id);
   return function(dispatch) {
     dispatch(editPostServerStarted());
 
     return putPostServer(id, title, body).then(response => {
-      return dispatch(editPostServerSuccess(response.data));
+      dispatch(editPostServerSuccess(response.data));
+    });
+  };
+};
 
 export const deletePostServer = ({ id }) => {
   return function(dispatch) {

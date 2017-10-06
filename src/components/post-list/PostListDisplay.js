@@ -70,15 +70,15 @@ const mapStateToProps = (state, ownProps) => ({
   categories: state.categories.categories,
   sorting: state.sorting,
   comments: state.comments,
-  postsLoading: state.ui.postsLoading
+  postsLoading: state.ui.postsLoading,
 });
 
 const mapDispatchToProps = (dispatch: *) => ({
   setSortPostByFlag: (flag, direction) =>
     dispatch(setSortPostByFlag({ flag, direction })),
-  setActiveCategory: category => dispatch(setActiveCategory(category))
+  setActiveCategory: category => dispatch(setActiveCategory(category)),
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(PostListDisplay)
+  connect(mapStateToProps, mapDispatchToProps)(PostListDisplay),
 );

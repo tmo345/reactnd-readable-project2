@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../../utils/helpers';
-import { Item, Segment, Button, Loader } from 'semantic-ui-react';
+import { Item, Segment, Loader } from 'semantic-ui-react';
 import EditPostDisplay from '../forms/EditPostDisplay';
 import DeletePostDisplay from '../forms/DeletePostDisplay';
 
@@ -21,7 +21,6 @@ const EditButtonContainer = styled.div`
 `;
 
 const SinglePostBody = props => {
-  //console.log(props.urlId);
   const post = props.posts[props.urlId];
   const renderLoader = <Loader inline active />;
   return (
