@@ -42,9 +42,6 @@ class PostListDisplay extends Component {
         <Grid.Row>
           <Grid.Column largeScreen={11} as={PostListColumn}>
             <PostListHeader>Posts</PostListHeader>
-            <Dimmer active={this.props.postsLoading} inverted>
-              <Loader />
-            </Dimmer>
             <PostList
               posts={sortPosts(convertToList(this.props.posts))}
               activeCategory={this.props.activeCategory}
