@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import { Route, withRouter } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import NavigationDisplay from './components/navigation-bar/NavigationDisplay';
-import { Container, Grid, Menu } from 'semantic-ui-react';
+import { Container, Grid, Menu, Loader } from 'semantic-ui-react';
 import PostListDisplay from './components/post-list/PostListDisplay';
 import { getAllPosts } from './actions/post-actions';
 import SinglePostDisplay from './components/single-post/SinglePostDisplay';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SiteBranding = styled(Menu.Menu)`
@@ -38,29 +37,53 @@ class App extends React.Component {
             </Container>
           </Menu>
         </Grid.Row>
-        <Container>
-          <Route
-            exact
-            path="/:category?"
-            render={props => (
-              <PostListDisplay
-                posts={this.props.posts}
-                urlCategory={props.match.params.category}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/:category/:id"
-            render={props => (
-              <SinglePostDisplay
-                posts={this.props.posts}
-                urlId={props.match.params.id}
-                {...props}
-              />
-            )}
-          />
-        </Container>
+        {this.props.postsLoading ? (
+          <Loader active />
+        ) : (
+          <Container>
+            <Route
+              exact
+              path="/:category?"
+              render={props => (
+                <PostListDisplay
+                  posts={this.props.posts}
+                  urlCategory={props.match.params.category}
+                  {...props}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/:category/:id"
+              render={props => {
+                if (this.props.deletePostFormSubmitted) {
+                  return (
+                    <div>
+                      <Loader active />
+                      <h2>Post successfully deleted.</h2>
+                      <p>Redirecting you to main page...</p>
+                    </div>
+                  );
+                }
+                return this.props.posts.hasOwnProperty(
+                  props.match.params.id,
+                ) ? (
+                  <SinglePostDisplay
+                    posts={this.props.posts}
+                    urlId={props.match.params.id}
+                    {...props}
+                  />
+                ) : (
+                  <div>
+                    <h2>Post Not Found</h2>
+                    <p>Looks like the post you were looking for isn't here.</p>
+                    <Link to="/">Back to All Posts</Link>
+                  </div>
+                );
+              }}
+            />
+          </Container>
+        )}
       </Grid>
     );
   }
@@ -68,11 +91,12 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   posts: state.posts,
-  postsLoading: state.ui.postsLoading
+  postsLoading: state.ui.postsLoading,
+  deletePostFormSubmitted: state.ui.deletePostFormSubmitted,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAllPosts: () => dispatch(getAllPosts())
+  getAllPosts: () => dispatch(getAllPosts()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

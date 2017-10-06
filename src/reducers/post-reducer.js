@@ -5,7 +5,9 @@ const initialPosts = {};
 const posts = (state = initialPosts, action) => {
   switch (action.type) {
     case 'GET_ALL_POSTS_SUCCEEDED':
-      return stateArraytoObject(action.posts);
+      return stateArraytoObject(
+        action.posts.filter(post => post.deleted === false),
+      );
 
     case 'ADD_POST_SERVER_SUCCESS': {
       // block scope for declarations of action properties
@@ -17,10 +19,20 @@ const posts = (state = initialPosts, action) => {
         author,
         category,
         voteScore,
+        deleted,
       } = action.post;
       return {
         ...state,
-        [id]: { id, timestamp, title, body, author, category, voteScore },
+        [id]: {
+          id,
+          timestamp,
+          title,
+          body,
+          author,
+          category,
+          voteScore,
+          deleted,
+        },
       };
     }
 
@@ -34,7 +46,7 @@ const posts = (state = initialPosts, action) => {
         },
       };
 
-    case 'DELETE_POST': {
+    case 'DELETE_POST_SERVER_SUCCESS': {
       const { id } = action;
       const postArray = stateObjectToArray(state);
       const remainingPosts = postArray.filter((post: Post) => post.id !== id);

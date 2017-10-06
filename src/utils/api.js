@@ -97,3 +97,14 @@ export const putPostServer = (id, title, body) => {
     },
   });
 };
+
+export const deletePostApi = id => {
+  return axios({
+    method: 'delete',
+    url: `${api}/posts/${id}`,
+    headers,
+    data: {
+      id,
+    },
+  });
+};

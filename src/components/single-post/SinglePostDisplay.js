@@ -22,6 +22,8 @@ class SinglePostDisplay extends Component {
           postsLoading={this.props.postsLoading}
           postVotesNowProcessing={this.props.postVotesNowProcessing}
           handlePostVote={this.props.voteForPost}
+          deletePostFormSubmitted={this.props.deletePostFormSubmitted}
+          history={this.props.history}
         />
         <CommentList />
       </div>
@@ -33,6 +35,7 @@ const mapStateToProps = state => ({
   postVotesNowProcessing: state.ui.processingVotes.posts,
   posts: state.posts,
   postsLoading: state.ui.postsLoading,
+  deletePostFormSubmitted: state.ui.deletePostFormSubmitted,
 });
 
 const mapDispatchToProps = dispatch => ({

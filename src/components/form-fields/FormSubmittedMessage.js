@@ -5,9 +5,11 @@ const FormSubmittedMessage = props => (
   <div>
     <h3>{props.heading}</h3>
     <Button onClick={props.closeModal}>{props.closeButtonText}</Button>
-    <Button onClick={props.resetFormSubmitted}>
-      {props.secondaryButtonText}
-    </Button>
+    {props.secondaryButtonText && (
+      <Button onClick={props.resetFormSubmitted}>
+        {props.secondaryButtonText}
+      </Button>
+    )}
   </div>
 );
 

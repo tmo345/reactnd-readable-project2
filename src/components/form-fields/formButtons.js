@@ -6,9 +6,13 @@ export const SubmitButton = props => (
     type="submit"
     disabled={props.disableConditions}
   >
-    Submit
+    {props.buttonText}
   </button>
 );
+
+SubmitButton.defaultProps = {
+  buttonText: 'Submit',
+};
 
 export const ResetButton = props => (
   <button

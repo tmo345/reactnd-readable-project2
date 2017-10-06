@@ -2,9 +2,10 @@ import {
   fetchPosts,
   postPostToServer,
   votePostServer,
-  putPostServer
+  putPostServer,
+  deletePostApi,
 } from '../utils/api';
-import { resetPostsLoading } from './ui-actions';
+import { resetPostsLoading, startDeletePostFormSubmitted } from './ui-actions';
 import uuidv4 from 'uuid/v4';
 
 // Synchronous actions
@@ -56,6 +57,14 @@ export const editPostServerStarted = () => ({
 export const editPostServerSuccess = post => ({
   type: 'EDIT_POST_SERVER_SUCCESS',
   post
+
+export const deletePostServerStarted = () => ({
+  type: 'DELETE_POST_SERVER_STARTED',
+});
+
+export const deletePostServerSuccess = id => ({
+  type: 'DELETE_POST_SERVER_SUCCESS',
+  id,
 });
 
 export const voteForPostStarted = id => ({
@@ -82,6 +91,7 @@ export const getAllPosts = urlId => {
 export const addPostServer = ({ title, body, category, author }) => {
   const uniqueId = `post-${uuidv4()}`;
   const timestamp = Date.now();
+  const deleted = false;
   return function(dispatch) {
     dispatch(addPostServerStarted());
     postPostToServer(
@@ -90,7 +100,8 @@ export const addPostServer = ({ title, body, category, author }) => {
       timestamp,
       body,
       author,
-      category
+      category,
+      deleted,
     ).then(response => dispatch(addPostServerSuccess(response.data)));
   };
 };
@@ -111,6 +122,13 @@ export const editPostServer = ({ id, title, body }) => {
 
     return putPostServer(id, title, body).then(response => {
       return dispatch(editPostServerSuccess(response.data));
+
+export const deletePostServer = ({ id }) => {
+  return function(dispatch) {
+    dispatch(deletePostServerStarted());
+
+    return deletePostApi(id).then(response => {
+      dispatch(deletePostServerSuccess(id));
     });
   };
 };

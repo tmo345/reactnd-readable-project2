@@ -29,3 +29,21 @@ export const openEditPostModal = () => ({
 export const closeEditPostModal = () => ({
   type: 'CLOSE_EDIT_POST_MODAL',
 });
+
+export const openDeletePostModal = () => ({
+  type: 'OPEN_DELETE_POST_MODAL',
+});
+
+export const closeDeletePostModal = () => ({
+  type: 'CLOSE_DELETE_POST_MODAL',
+});
+
+export const startDeletePostFormSubmitted = () => {
+  return {
+    type: 'START_DELETE_POST_FORM_SUBMITTED',
+  };
+};
+
+export const resetDeletePostFormSubmitted = () => ({
+  type: 'RESET_DELETE_POST_FORM_SUBMITTED',
+});

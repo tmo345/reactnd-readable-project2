@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { formatTime } from '../../utils/helpers';
 import { Item, Segment, Button, Loader } from 'semantic-ui-react';
 import EditPostDisplay from '../forms/EditPostDisplay';
+import DeletePostDisplay from '../forms/DeletePostDisplay';
 
 const Body = styled.div`
   margin-top: 0.5rem;
@@ -37,11 +38,13 @@ const SinglePostBody = props => {
           <Segment attached="bottom">
             <CommentNumber>Number of comments: 5</CommentNumber>
             <EditButtonContainer>
+              <DeletePostDisplay
+                post={post}
+                postId={props.urlId}
+                history={props.history}
+              />
               <EditPostDisplay post={post} postId={props.urlId} />
             </EditButtonContainer>
-            <Button floated="right" primary>
-              Edit
-            </Button>{' '}
             <ClearFloat />
           </Segment>
         </div>

@@ -2,9 +2,12 @@ const initialUiState = {
   postsLoading: true,
   addPostModalOpen: false,
   editPostModalOpen: false,
+  deletePostModalOpen: false,
   processingNewPost: false,
   addPostFormSubmitted: false,
   processingEditPost: false,
+  processingDeletePost: false,
+  deletePostFormSubmitted: false,
   processingVotes: {
     posts: [],
     comments: [],
@@ -112,6 +115,42 @@ const ui = (state = initialUiState, action) => {
       return {
         ...state,
         processingEditPost: false,
+      };
+
+    case 'DELETE_POST_SERVER_STARTED':
+      return {
+        ...state,
+        processingDeletePost: true,
+      };
+
+    case 'DELETE_POST_SERVER_SUCCESS':
+      return {
+        ...state,
+        processingDeletePost: false,
+      };
+
+    case 'START_DELETE_POST_FORM_SUBMITTED':
+      return {
+        ...state,
+        deletePostFormSubmitted: true,
+      };
+
+    case 'RESET_DELETE_POST_FORM_SUBMITTED':
+      return {
+        ...state,
+        deletePostFormSubmitted: false,
+      };
+
+    case 'OPEN_DELETE_POST_MODAL':
+      return {
+        ...state,
+        deletePostModalOpen: true,
+      };
+
+    case 'CLOSE_DELETE_POST_MODAL':
+      return {
+        ...state,
+        deletePostModalOpen: false,
       };
 
     default:
