@@ -11,8 +11,12 @@ import PostSort from '../sorting/PostSort';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
-const PostListColumn = styled.div`padding-right: 35px !important;`;
-const PostListHeader = styled.h2`margin: 1.2rem 0 1.3rem !important;`;
+const PostListColumn = styled.div`
+  padding-right: 35px !important;
+`;
+const PostListHeader = styled.h2`
+  margin: 1.2rem 0 1.3rem !important;
+`;
 
 class PostListDisplay extends Component {
   componentDidMount() {
