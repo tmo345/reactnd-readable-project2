@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Link, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import NavigationDisplay from './components/navigation-bar/NavigationDisplay';
+import AddPostDisplay from './components/forms/AddPostDisplay';
 import { Container, Grid, Menu, Loader } from 'semantic-ui-react';
 import PostListDisplay from './components/post-list/PostListDisplay';
 import { getAllPosts } from './actions/post-actions';
@@ -32,7 +32,7 @@ class App extends React.Component {
               </SiteBranding>
 
               <Menu.Menu position="right">
-                <NavigationDisplay />
+                <AddPostDisplay />
               </Menu.Menu>
             </Container>
           </Menu>

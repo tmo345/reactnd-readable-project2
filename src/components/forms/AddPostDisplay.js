@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   openAddPostModal,
   closeAddPostModal,
-  resetAddPostFormSubmitted
+  resetAddPostFormSubmitted,
 } from '../../actions/ui-actions';
 import { setActiveCategory } from '../../actions/category-actions';
 import ModalWithHeader from '../modals/ModalWithHeader';
@@ -12,20 +12,7 @@ import OpenModalButton from '../modals/OpenModalButton';
 import AddPostForm from '../forms/AddPostForm';
 import FormSubmittedMessage from '../form-fields/FormSubmittedMessage';
 
-class NavigationDisplay extends Component {
-  setCategoryOptions = categories => {
-    return (
-      categories
-        // we don't want all as an option in the add post category field
-        .filter(category => category.name !== 'all')
-        .map(category => ({
-          text:
-            category.name.slice(0, 1).toUpperCase() + category.name.slice(1),
-          value: category.name
-        }))
-    );
-  };
-
+class AddPostDisplay extends Component {
   submit = values => {
     this.props.addPostServer(values);
   };
@@ -55,9 +42,6 @@ class NavigationDisplay extends Component {
           ) : (
             <AddPostForm
               onSubmit={this.submit}
-              categories={this.setCategoryOptions(
-                this.props.categories.categories
-              )}
               processingNewPost={this.props.processingNewPost}
             />
           )}
@@ -71,7 +55,7 @@ const mapStateToProps = state => ({
   categories: state.categories,
   addPostModalOpen: state.ui.addPostModalOpen,
   processingNewPost: state.ui.processingNewPost,
-  addPostFormSubmitted: state.ui.addPostFormSubmitted
+  addPostFormSubmitted: state.ui.addPostFormSubmitted,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -81,8 +65,8 @@ const mapDispatchToProps = dispatch => {
     closeAddPostModal: () => dispatch(closeAddPostModal()),
     addPostServer: ({ title, body, author, category }) =>
       dispatch(addPostServer({ title, body, author, category })),
-    resetAddPostFormSubmitted: () => dispatch(resetAddPostFormSubmitted())
+    resetAddPostFormSubmitted: () => dispatch(resetAddPostFormSubmitted()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(AddPostDisplay);
