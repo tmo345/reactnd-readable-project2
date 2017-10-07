@@ -28,6 +28,7 @@ const AddPostForm = props => {
       <ResetButton
         disableConditions={pristine || submitting}
         resetForm={reset}
+        buttonText="Clear Form"
       />
     </form>
   );
