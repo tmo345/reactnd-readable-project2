@@ -46,6 +46,7 @@ class PostListDisplay extends Component {
         <Grid.Row>
           <Grid.Column largeScreen={11} as={PostListColumn}>
             <PostListHeader>Posts</PostListHeader>
+            <PostSort setSortPostByFlag={this.props.setSortPostByFlag} />
             <PostList
               posts={sortPosts(convertToList(this.props.posts))}
               activeCategory={this.props.activeCategory}
@@ -58,7 +59,6 @@ class PostListDisplay extends Component {
               categories={this.props.categories}
               activeCategory={this.props.activeCategory}
             />
-            <PostSort setSortPostByFlag={this.props.setSortPostByFlag} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
