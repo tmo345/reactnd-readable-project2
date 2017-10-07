@@ -35,16 +35,15 @@ const comments = (state = initialComments, action) => {
         ...state,
         [action.id]: {
           ...state[action.id],
-          body: action.body
-        }
+          body: action.body,
+        },
       };
 
     case 'DELETE_COMMENT': {
-      // block scope destructured action properties
       const { id } = action;
       const commentArray = stateObjectToArray(state);
       const remainingComments = commentArray.filter(
-        comment => comment.id !== id
+        comment => comment.id !== id,
       );
       return stateArraytoObject(remainingComments);
     }
@@ -54,8 +53,8 @@ const comments = (state = initialComments, action) => {
         ...state,
         [action.id]: {
           ...state[action.id],
-          voteScore: state[action.id]['voteScore'] + 1
-        }
+          voteScore: state[action.id]['voteScore'] + 1,
+        },
       };
 
     case 'DOWN_VOTE_COMMENT':
@@ -63,8 +62,8 @@ const comments = (state = initialComments, action) => {
         ...state,
         [action.id]: {
           ...state[action.id],
-          voteScore: state[action.id]['voteScore'] - 1
-        }
+          voteScore: state[action.id]['voteScore'] - 1,
+        },
       };
 
     default:

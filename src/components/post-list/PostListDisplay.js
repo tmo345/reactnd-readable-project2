@@ -4,7 +4,7 @@ import PostList from './PostList';
 import { setSortPostByFlag } from '../../actions/sorting-actions';
 import { setActiveCategory } from '../../actions/category-actions';
 import SelectCategory from '../categories/SelectCategory';
-import { Grid, Dimmer, Loader } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { sort, ascend, descend, prop as _prop } from 'ramda';
 import { convertToList } from '../../utils/helpers';
 import PostSort from '../sorting/PostSort';

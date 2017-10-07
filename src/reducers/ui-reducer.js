@@ -13,6 +13,7 @@ const initialUiState = {
     comments: [],
   },
 };
+
 const ui = (state = initialUiState, action) => {
   switch (action.type) {
     case 'GET_ALL_POSTS_STARTED':

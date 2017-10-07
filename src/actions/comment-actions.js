@@ -50,20 +50,20 @@ export const editComment = ({ id, body }) => ({
   type: 'EDIT_COMMENT',
   timestamp: Date.now(),
   id,
-  body
+  body,
 });
 
 export const deleteComment = id => ({
   type: 'DELETE_COMMENT',
-  id
+  id,
 });
 
 export const upVoteComment = id => ({
   type: 'UP_VOTE_COMMENT',
-  id
+  id,
 });
 
 export const downVoteComment = id => ({
   type: 'DOWN_VOTE_COMMENT',
-  id
+  id,
 });

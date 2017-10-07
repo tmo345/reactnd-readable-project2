@@ -44,7 +44,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   setCommentsForPost: postId => dispatch(setCommentsForPost(postId)),
-  voteForPost: (id, direction) => dispatch(voteForPost(id, direction))
+  voteForPost: (id, direction) => dispatch(voteForPost(id, direction)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostCardDisplay);
