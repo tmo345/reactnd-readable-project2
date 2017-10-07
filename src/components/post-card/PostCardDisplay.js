@@ -4,47 +4,43 @@ import { setCommentsForPost } from '../../actions/comment-actions';
 import PostCard from './PostCard';
 import { stateObjectToArray } from '../../reducers/helpers';
 import { voteForPost } from '../../actions/post-actions';
+import { Loader } from 'semantic-ui-react';
 
 class PostCardDisplay extends Component {
-  state = {
-    commentNumberLoading: true,
-    commentNumber: 0
-  };
-
   componentDidMount = () => {
-    this.props.setCommentsForPost(this.props.post.id).then(() => {
-      this.setState({
-        commentNumberLoading: false,
-        commentNumber: this.calculateCommentNumber()
-      });
-    });
+    this.props.setCommentsForPost(this.props.post.id);
   };
 
   calculateCommentNumber = () => {
     const commentsArray = stateObjectToArray(this.props.comments);
-    const commentsForPost = commentsArray.filter(
-      comment => comment.parentId === this.props.post.id
-    );
-    return commentsForPost.length;
+    return commentsArray.length;
   };
 
   render() {
     return (
       <PostCard
         post={this.props.post}
-        commentNumber={this.state.commentNumber}
-        commentNumberLoading={this.state.commentNumberLoading}
+        comments={this.props.comments}
         handlePostVote={this.props.voteForPost}
         votesNowProcessing={this.props.postVotesNowProcessing}
+        commentNumber={
+          this.props.comments ? (
+            this.calculateCommentNumber(this.props.comments)
+          ) : (
+            <Loader active inline size="tiny" />
+          )
+        }
       />
     );
   }
 }
 
-const mapStateToProps = state => ({
-  comments: state.comments,
-  postVotesNowProcessing: state.ui.processingVotes.posts
-});
+const mapStateToProps = (state, ownProps) => {
+  return {
+    postVotesNowProcessing: state.ui.processingVotes.posts,
+    comments: state.comments[ownProps.post.id],
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   setCommentsForPost: postId => dispatch(setCommentsForPost(postId)),

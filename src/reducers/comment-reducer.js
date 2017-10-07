@@ -5,27 +5,28 @@ const initialComments = {};
 const comments = (state = initialComments, action) => {
   switch (action.type) {
     case 'COMMENT_FETCH_SUCCEEDED': {
-      const { comments } = action;
-      const commentsArray = stateObjectToArray(comments);
+      const { commentsByParentId } = action;
       return {
         ...state,
-        ...comments
+        ...commentsByParentId,
       };
     }
 
     case 'ADD_COMMENT': {
-      // block scope destructured action properties
       const { id, parentId, timestamp, body, author, voteScore } = action;
       return {
         ...state,
-        [id]: {
-          id,
-          parentId,
-          timestamp,
-          body,
-          author,
-          voteScore
-        }
+        [parentId]: {
+          ...state[parentId],
+          [id]: {
+            id,
+            parentId,
+            timestamp,
+            body,
+            author,
+            voteScore,
+          },
+        },
       };
     }
 

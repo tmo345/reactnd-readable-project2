@@ -11,24 +11,37 @@ export const addComment = ({ parentId, title, body, author }) => {
     parentId,
     title,
     body,
-    author
+    author,
   };
 };
 
-export const commentFetchStarted = () => ({
-  type: 'COMMENT_FETCH_STARTED'
-});
-
-export const commentFetchSucceeded = comments => ({
-  type: 'COMMENT_FETCH_SUCCEEDED',
-  comments
-});
+export const commentFetchSucceeded = (comments, postId) => {
+  let commentsByParentId;
+  if (comments.length > 0) {
+    commentsByParentId = comments.reduce(
+      (acc, currentItem) => {
+        acc[postId][currentItem.id] = currentItem;
+        return acc;
+      },
+      {
+        [postId]: {},
+      },
+    );
+  } else {
+    commentsByParentId = {
+      [postId]: {},
+    };
+  }
+  return {
+    type: 'COMMENT_FETCH_SUCCEEDED',
+    commentsByParentId,
+  };
+};
 
 export const setCommentsForPost = postId => {
   return function(dispatch) {
-    dispatch(commentFetchStarted());
     return fetchComments(postId).then(response =>
-      dispatch(commentFetchSucceeded(response.data))
+      dispatch(commentFetchSucceeded(response.data, postId)),
     );
   };
 };
