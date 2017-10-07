@@ -8,6 +8,10 @@ const PostListElement = styled.ul`
   text-align: left;
   padding-left: 0;
 `;
+const NoPostsMessage = styled.p`
+  margin-top: 20px !important;
+  font-size: 1.15rem;
+`;
 
 const PostList = props => {
   const postsArray = convertToList(props.posts);
@@ -17,15 +21,13 @@ const PostList = props => {
       ? postsArray
       : postsArray.filter(post => post.category === props.activeCategory);
 
-  if (postsByCategory.length === 0) {
-    return <p>Sorry there are no posts in this category.</p>;
-  }
-
   return (
     <div>
       <PostListElement>
         {postsByCategory.length === 0 ? (
-          <p>Sorry there are no posts in this category.</p>
+          <NoPostsMessage>
+            Sorry there are no posts in this category.
+          </NoPostsMessage>
         ) : (
           postsByCategory.map(post => {
             return <PostCardDisplay key={post.id} post={post} />;
