@@ -40,9 +40,11 @@ export const commentFetchSucceeded = (comments, postId) => {
 
 export const setCommentsForPost = postId => {
   return function(dispatch) {
-    return fetchComments(postId).then(response =>
-      dispatch(commentFetchSucceeded(response.data, postId)),
-    );
+    return fetchComments(postId)
+      .then(response => response.data)
+      .then(comments => {
+        dispatch(commentFetchSucceeded(comments, postId));
+      });
   };
 };
 

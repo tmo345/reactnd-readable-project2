@@ -25,7 +25,7 @@ class PostListDisplay extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location !== this.props.location) {
-      this.props.setActiveCategory(nextProps.urlCategory);
+      this.props.setActiveCategory(nextProps.match.params.category);
     }
   }
 
@@ -72,6 +72,7 @@ const mapStateToProps = (state, ownProps) => ({
   sorting: state.sorting,
   comments: state.comments,
   postsLoading: state.ui.postsLoading,
+  posts: state.posts,
 });
 
 const mapDispatchToProps = (dispatch: *) => ({

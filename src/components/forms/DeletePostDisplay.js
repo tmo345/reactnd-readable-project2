@@ -6,11 +6,13 @@ import FormSubmittedMessage from '../form-fields/FormSubmittedMessage';
 import DeletePostForm from '../forms/DeletePostForm';
 import { deletePostServer } from '../../actions/post-actions';
 import {
-  openDeletePostModal,
-  closeDeletePostModal,
   resetDeletePostFormSubmitted,
   startDeletePostFormSubmitted,
-} from '../../actions/ui-actions';
+} from '../../actions/ui-actions/ui-forms';
+import {
+  openDeletePostModal,
+  closeDeletePostModal,
+} from '../../actions/ui-actions/ui-modal';
 import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 
@@ -23,7 +25,7 @@ class DeletePostDisplay extends Component {
         setTimeout(() => {
           this.props.resetDeletePostFormSubmitted();
           this.props.history.push('/');
-        }, 3000),
+        }, 2000),
       );
   };
 

@@ -22,10 +22,11 @@ const ui = (state = initialUiState, action) => {
         postsLoading: true,
       };
 
-    case 'RESET_POSTS_LOADING':
+    case 'HYDRATING_COMMENTS_COMPLETE':
       return {
         ...state,
-        postsLoading: false,
+        hydratingComments: false,
+      };
       };
 
     case 'ADD_POST_SERVER_SUCCESS':

@@ -7,10 +7,6 @@ import { voteForPost } from '../../actions/post-actions';
 import { Loader } from 'semantic-ui-react';
 
 class PostCardDisplay extends Component {
-  componentDidMount = () => {
-    this.props.setCommentsForPost(this.props.post.id);
-  };
-
   calculateCommentNumber = () => {
     const commentsArray = stateObjectToArray(this.props.comments);
     return commentsArray.length;

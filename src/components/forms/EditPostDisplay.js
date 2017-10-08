@@ -7,11 +7,10 @@ import EditPostForm from '../forms/EditPostForm';
 import { editPostServer } from '../../actions/post-actions';
 
 import {
-  openEditPostModal,
-  closeEditPostModal,
   resetEditPostFormSubmitted,
   startEditPostFormSubmitted,
-} from '../../actions/ui-actions';
+} from '../../actions/ui-actions/ui-forms';
+import { openEditPostModal, closeEditPostModal } from '../../actions/ui-actions/ui-modal'
 
 class EditPostDisplay extends Component {
   submit = values => {

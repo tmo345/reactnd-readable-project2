@@ -5,7 +5,8 @@ import {
   putPostServer,
   deletePostApi,
 } from '../utils/api';
-import { resetPostsLoading, startDeletePostFormSubmitted } from './ui-actions';
+import { startDeletePostFormSubmitted } from './ui-actions/ui-forms';
+import { hydratingPostsComplete } from './ui-actions/ui-hydration';
 import uuidv4 from 'uuid/v4';
 
 // Synchronous actions
@@ -82,10 +83,9 @@ export const voteForPostSucceeded = (post, id) => ({
 // Asynchronous actions
 export const getAllPosts = urlId => {
   return function(dispatch) {
-    dispatch(getAllPostsStarted());
-    fetchPosts()
+    return fetchPosts()
       .then(posts => dispatch(getAllPostsSucceeded(posts)))
-      .then(() => dispatch(resetPostsLoading()));
+      .then(() => dispatch(hydratingPostsComplete()));
   };
 };
 
@@ -95,7 +95,7 @@ export const addPostServer = ({ title, body, category, author }) => {
   const deleted = false;
   return function(dispatch) {
     dispatch(addPostServerStarted());
-    postPostToServer(
+    return postPostToServer(
       title,
       uniqueId,
       timestamp,
@@ -103,7 +103,10 @@ export const addPostServer = ({ title, body, category, author }) => {
       author,
       category,
       deleted,
-    ).then(response => dispatch(addPostServerSuccess(response.data)));
+    ).then(response => {
+      dispatch(addPostServerSuccess(response.data));
+      return response;
+    });
   };
 };
 
