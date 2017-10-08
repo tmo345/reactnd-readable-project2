@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
+  startAddPostFormSubmitted,
+  resetAddPostFormSubmitted,
+} from '../../actions/ui-actions/ui-forms';
+import {
   openAddPostModal,
   closeAddPostModal,
-  resetAddPostFormSubmitted,
-} from '../../actions/ui-actions';
+} from '../../actions/ui-actions/ui-modal';
 import { setActiveCategory } from '../../actions/category-actions';
 import ModalWithHeader from '../modals/ModalWithHeader';
 import { addPostServer } from '../../actions/post-actions';
 import OpenModalButton from '../modals/OpenModalButton';
 import AddPostForm from '../forms/AddPostForm';
 import FormSubmittedMessage from '../form-fields/FormSubmittedMessage';
+import { setCommentsForPost } from '../../actions/comment-actions';
 
 class AddPostDisplay extends Component {
   submit = values => {
-    this.props.addPostServer(values);
+    this.props
+      .addPostServer(values)
+      .then(response => this.props.setCommentsForPost(response.data.id))
+      .then(() => this.props.startAddPostFormSubmitted());
+  };
+
+  handleCloseModal = () => {
+    this.props.closeAddPostModal();
+    this.props.resetAddPostFormSubmitted();
   };
 
   render() {
@@ -29,11 +41,11 @@ class AddPostDisplay extends Component {
         <ModalWithHeader
           label="Add New Post"
           isOpen={this.props.addPostModalOpen}
-          closeModal={this.props.closeAddPostModal}
+          closeModal={this.handleCloseModal}
         >
           {this.props.addPostFormSubmitted ? (
             <FormSubmittedMessage
-              closeModal={this.props.closeAddPostModal}
+              closeModal={this.handleCloseModal}
               resetFormSubmitted={this.props.resetAddPostFormSubmitted}
               heading="Post Form Submitted"
               closeButtonText="Close Modal"
@@ -65,7 +77,9 @@ const mapDispatchToProps = dispatch => {
     closeAddPostModal: () => dispatch(closeAddPostModal()),
     addPostServer: ({ title, body, author, category }) =>
       dispatch(addPostServer({ title, body, author, category })),
+    startAddPostFormSubmitted: () => dispatch(startAddPostFormSubmitted()),
     resetAddPostFormSubmitted: () => dispatch(resetAddPostFormSubmitted()),
+    setCommentsForPost: id => dispatch(setCommentsForPost(id)),
   };
 };
 

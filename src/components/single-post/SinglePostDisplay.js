@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import SinglePostBody from './SinglePostBody';
 import { connect } from 'react-redux';
 import { voteForPost } from '../../actions/post-actions';
-import CommentList from '../comment-list/CommentList';
+import CommentListDisplay from '../comment-list/CommentListDisplay';
 import SinglePostHeader from './SinglePostHeader';
+import { setCommentsForPost } from '../../actions/comment-actions';
+import { Redirect } from 'react-router-dom';
 
 class SinglePostDisplay extends Component {
+  componentDidMount() {
+    if (!this.props.comments.hasOwnProperty(this.props.match.params.id)) {
+      setCommentsForPost(this.props.match.params.id);
+    }
+  }
   render() {
     const post = this.props.posts[this.props.match.params.id];
     return (
@@ -25,7 +32,7 @@ class SinglePostDisplay extends Component {
           deletePostFormSubmitted={this.props.deletePostFormSubmitted}
           history={this.props.history}
         />
-        <CommentList />
+        <CommentListDisplay parentId={this.props.match.params.id} />
       </div>
     );
   }
@@ -36,6 +43,7 @@ const mapStateToProps = state => ({
   posts: state.posts,
   postsLoading: state.ui.postsLoading,
   deletePostFormSubmitted: state.ui.deletePostFormSubmitted,
+  comments: state.comments,
 });
 
 const mapDispatchToProps = dispatch => ({

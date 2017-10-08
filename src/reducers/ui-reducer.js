@@ -1,5 +1,6 @@
 const initialUiState = {
-  postsLoading: true,
+  hydratingPosts: true,
+  hydratingComments: true,
   addPostModalOpen: false,
   editPostModalOpen: false,
   deletePostModalOpen: false,
@@ -16,23 +17,22 @@ const initialUiState = {
 
 const ui = (state = initialUiState, action) => {
   switch (action.type) {
-    case 'GET_ALL_POSTS_STARTED':
+    case 'HYDRATING_POSTS_COMPLETE':
       return {
         ...state,
-        postsLoading: true,
+        hydratingPosts: false,
       };
 
-    case 'RESET_POSTS_LOADING':
+    case 'HYDRATING_COMMENTS_COMPLETE':
       return {
         ...state,
-        postsLoading: false,
+        hydratingComments: false,
       };
 
     case 'ADD_POST_SERVER_SUCCESS':
       return {
         ...state,
         processingNewPost: false,
-        addPostFormSubmitted: true,
       };
 
     case 'ADD_POST_SERVER_STARTED':
@@ -75,6 +75,12 @@ const ui = (state = initialUiState, action) => {
       return {
         ...state,
         editPostFormSubmitted: false,
+      };
+
+    case 'START_ADD_POST_FORM_SUBMITTED':
+      return {
+        ...state,
+        addPostFormSubmitted: true,
       };
 
     case 'RESET_ADD_POST_FORM_SUBMITTED':
