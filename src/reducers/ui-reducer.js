@@ -27,10 +27,6 @@ const ui = (state = initialUiState, action) => {
       return {
         ...state,
         hydratingComments: false,
-<<<<<<< HEAD
-=======
-      };
->>>>>>> 686cd6b0ed9e25bc0a6045ea2a190636c556f434
       };
 
     case 'ADD_POST_SERVER_SUCCESS':
