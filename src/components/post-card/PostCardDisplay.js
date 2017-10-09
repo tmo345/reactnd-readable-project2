@@ -33,7 +33,7 @@ class PostCardDisplay extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    postVotesNowProcessing: state.ui.processingVotes.posts,
+    postVotesNowProcessing: state.ui.votes.processingPostVotes,
     comments: state.comments[ownProps.post.id],
   };
 };
