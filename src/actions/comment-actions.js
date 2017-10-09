@@ -92,7 +92,6 @@ export const addCommentServer = ({ parentId, body, author }) => {
       author,
     }).then(response => {
       return dispatch(addCommentServerSucceeded(response.data));
-      //return response;
     });
   };
 };
