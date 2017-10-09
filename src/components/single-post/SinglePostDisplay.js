@@ -6,15 +6,17 @@ import CommentListDisplay from '../comment-list/CommentListDisplay';
 import SinglePostHeader from './SinglePostHeader';
 import { setCommentsForPost } from '../../actions/comment-actions';
 import { Redirect } from 'react-router-dom';
+import { Loader } from 'semantic-ui-react';
 
 class SinglePostDisplay extends Component {
-  componentDidMount() {
-    if (!this.props.comments.hasOwnProperty(this.props.match.params.id)) {
-      setCommentsForPost(this.props.match.params.id);
-    }
-  }
   render() {
-    const post = this.props.posts[this.props.match.params.id];
+    const postId = this.props.match.params.id;
+    const post = this.props.posts[postId];
+    const commentNumber = this.props.comments[postId] ? (
+      Object.keys(this.props.comments[postId]).length
+    ) : (
+      <Loader inline active size="mini" />
+    );
     return (
       <div>
         <SinglePostHeader
@@ -31,6 +33,7 @@ class SinglePostDisplay extends Component {
           handlePostVote={this.props.voteForPost}
           deletePostFormSubmitted={this.props.deletePostFormSubmitted}
           history={this.props.history}
+          commentNumber={commentNumber}
         />
         <CommentListDisplay parentId={this.props.match.params.id} />
       </div>

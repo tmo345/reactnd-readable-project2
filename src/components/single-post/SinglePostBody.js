@@ -10,7 +10,7 @@ const Body = styled.div`
 `;
 const Author = styled.div``;
 const CreatedAt = styled.div``;
-const CommentNumber = styled.p`
+const CommentNumber = styled.div`
   float: left;
 `;
 const ClearFloat = styled.div`
@@ -35,7 +35,9 @@ const SinglePostBody = props => {
             <Body>{post ? post.body : renderLoader}</Body>
           </Segment>
           <Segment attached="bottom">
-            <CommentNumber>Number of comments: 5</CommentNumber>
+            <CommentNumber>
+              Number of comments: {props.commentNumber}
+            </CommentNumber>
             <EditButtonContainer>
               <DeletePostDisplay
                 post={post}
