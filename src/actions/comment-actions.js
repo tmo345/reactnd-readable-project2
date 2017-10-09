@@ -1,5 +1,24 @@
 import uuidv4 from 'uuid/v4';
-import { fetchComments } from '../utils/api';
+import {
+  fetchComments,
+  postCommentToServer,
+  voteCommentServer,
+} from '../utils/api';
+
+export const VOTE_FOR_COMMENT_STARTED = 'VOTE_FOR_COMMENT_STARTED';
+export const VOTE_FOR_COMMENT_SUCCEEDED = 'VOTE_FOR_COMMENT_SUCCEEDED';
+
+export const ADD_COMMENT_SERVER_STARTED = 'ADD_COMMENT_SERVER_STARTED';
+export const ADD_COMMENT_SERVER_SUCCEEDED = 'ADD_COMMENT_SERVER_SUCCEEDED';
+
+export const addCommentServerStarted = () => ({
+  type: ADD_COMMENT_SERVER_STARTED,
+});
+
+export const addCommentServerSucceeded = comment => ({
+  type: ADD_COMMENT_SERVER_SUCCEEDED,
+  comment,
+});
 
 export const addComment = ({ parentId, title, body, author }) => {
   const uniqueId = `comment-${uuidv4()}`;
@@ -14,6 +33,17 @@ export const addComment = ({ parentId, title, body, author }) => {
     author,
   };
 };
+
+export const voteForCommentStarted = id => ({
+  type: VOTE_FOR_COMMENT_STARTED,
+  id,
+});
+
+export const voteForCommentSucceeded = (comment, id) => ({
+  type: VOTE_FOR_COMMENT_SUCCEEDED,
+  comment,
+  id,
+});
 
 export const commentFetchSucceeded = (comments, postId) => {
   let commentsByParentId;
@@ -45,6 +75,34 @@ export const setCommentsForPost = postId => {
       .then(comments => {
         dispatch(commentFetchSucceeded(comments, postId));
       });
+  };
+};
+
+export const addCommentServer = ({ parentId, body, author }) => {
+  console.log(parentId);
+  const uniqueId = `comment-${uuidv4()}`;
+  const timestamp = Date.now();
+  return function(dispatch) {
+    dispatch(addCommentServerStarted());
+    return postCommentToServer({
+      id: uniqueId,
+      parentId,
+      timestamp,
+      body,
+      author,
+    }).then(response => {
+      return dispatch(addCommentServerSucceeded(response.data));
+      //return response;
+    });
+  };
+};
+
+export const voteForComment = (comment, direction) => {
+  return function(dispatch) {
+    dispatch(voteForCommentStarted(comment.id));
+    return voteCommentServer(comment.id, direction).then(response => {
+      dispatch(voteForCommentSucceeded(response.data, comment.id));
+    });
   };
 };
 

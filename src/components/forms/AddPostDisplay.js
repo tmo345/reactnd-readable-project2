@@ -62,9 +62,9 @@ class AddPostDisplay extends Component {
 
 const mapStateToProps = state => ({
   categories: state.categories,
-  addPostModalOpen: state.ui.addPostModalOpen,
-  processingNewPost: state.ui.processingNewPost,
-  addPostFormSubmitted: state.ui.addPostFormSubmitted,
+  addPostModalOpen: state.ui.modals.addPostModalOpen,
+  processingNewPost: state.ui.forms.processingNewPost,
+  addPostFormSubmitted: state.ui.forms.addPostFormSubmitted,
 });
 
 const mapDispatchToProps = dispatch => {

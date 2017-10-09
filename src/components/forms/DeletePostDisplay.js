@@ -72,9 +72,9 @@ class DeletePostDisplay extends Component {
 
 const mapStateToProps = state => ({
   posts: state.posts,
-  deletePostModalOpen: state.ui.deletePostModalOpen,
-  deletePostFormSubmitted: state.ui.deletePostFormSubmitted,
-  processingDeletePost: state.ui.processingDeletePost,
+  deletePostModalOpen: state.ui.modals.deletePostModalOpen,
+  deletePostFormSubmitted: state.ui.forms.deletePostFormSubmitted,
+  processingDeletePost: state.ui.forms.processingDeletePost,
 });
 
 const mapDispatchToProps = dispatch => ({

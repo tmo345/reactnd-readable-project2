@@ -5,6 +5,12 @@ import {
   RESET_EDIT_POST_FORM_SUBMITTED,
   START_DELETE_POST_FORM_SUBMITTED,
   RESET_DELETE_POST_FORM_SUBMITTED,
+  START_ADD_COMMENT_FORM_SUBMITTED,
+  RESET_ADD_COMMENT_FORM_SUBMITTED,
+  START_EDIT_COMMENT_FORM_SUBMITTED,
+  RESET_EDIT_COMMENT_FORM_SUBMITTED,
+  START_DELETE_COMMENT_FORM_SUBMITTED,
+  RESET_DELETE_COMMENT_FORM_SUBMITTED,
 } from '../../actions/ui/forms';
 
 const initialUiForms = {
@@ -14,6 +20,12 @@ const initialUiForms = {
   processingEditPost: false,
   deletePostFormSubmitted: false,
   processingDeletePost: false,
+  addCommentFormSubmitted: false,
+  processingNewComment: false,
+  editCommentFormSubmitted: false,
+  processingEditComment: false,
+  deleteCommentFormSubmitted: false,
+  processingDeleteComment: false,
 };
 
 const forms = (state = initialUiForms, action) => {
@@ -68,7 +80,7 @@ const forms = (state = initialUiForms, action) => {
         processingEditPost: false,
       };
 
-    // Delete Post From
+    // Delete Post Form
     case 'START_DELETE_POST_FORM_SUBMITTED':
       return {
         ...state,
@@ -91,6 +103,74 @@ const forms = (state = initialUiForms, action) => {
       return {
         ...state,
         processingDeletePost: false,
+      };
+
+    case 'START_ADD_COMMENT_FORM_SUBMITTED':
+      return {
+        ...state,
+        addCommentFormSubmitted: true,
+      };
+
+    case 'RESET_ADD_COMMENT_FORM_SUBMITTED':
+      return {
+        ...state,
+        addCommentFormSubmitted: false,
+      };
+
+    case 'ADD_COMMENT_SERVER_SUCCEEDED':
+      return {
+        ...state,
+        processingNewComment: false,
+      };
+
+    case 'ADD_COMMENT_SERVER_STARTED':
+      return {
+        ...state,
+        processingNewComment: true,
+      };
+
+    // Edit Comment Form
+    case 'START_EDIT_COMMENT_FORM_SUBMITTED':
+      return {
+        ...state,
+        editCommentFormSubmitted: true,
+      };
+
+    case 'RESET_EDIT_COMMENT_FORM_SUBMITTED':
+      return {
+        ...state,
+        editCommentFormSubmitted: false,
+      };
+
+    case 'EDIT_COMMENT_SERVER_STARTED':
+      return {
+        ...state,
+        processingEditComment: true,
+      };
+
+    case 'EDIT_COMMENT_SERVER_SUCCESS':
+      return {
+        ...state,
+        processingEditComment: false,
+      };
+
+    // Delete Comment Form
+    case 'START_DELETE_COMMENT_FORM_SUBMITTED':
+      return {
+        ...state,
+        deleteCommentFormSubmitted: true,
+      };
+
+    case 'RESET_DELETE_COMMENT_FORM_SUBMITTED':
+      return {
+        ...state,
+        deleteCommentFormSubmitted: false,
+      };
+
+    case 'DELETE_COMMENT_SERVER_STARTED':
+      return {
+        ...state,
+        processingDeleteComment: true,
       };
 
     default:

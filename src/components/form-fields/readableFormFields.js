@@ -64,3 +64,7 @@ export const BodyTextAreaField = props => (
 export const IdHiddenInputField = props => (
   <Field component="input" type="hidden" name="id" />
 );
+
+export const ParentIdHiddenInputField = props => (
+  <Field component="input" type="hidden" name="parentId" value="props.value" />
+);

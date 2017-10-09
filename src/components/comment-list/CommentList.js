@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Comment } from 'semantic-ui-react';
 import styled from 'styled-components';
-import CommentCard from '../comment-card/CommentCard';
+import CommentCardDisplay from '../comment-card/CommentCardDisplay';
 
 const CommentContainer = styled(Comment)`
   margin-top: 0 !important;
@@ -15,7 +15,7 @@ const CommentList = props => {
       <div>
         {props.comments.map(comment => (
           <Comment key={comment.id} as={CommentContainer}>
-            <CommentCard comment={comment} />
+            <CommentCardDisplay comment={comment} />
           </Comment>
         ))}
       </div>

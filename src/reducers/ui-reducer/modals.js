@@ -5,6 +5,12 @@ import {
   CLOSE_ADD_POST_MODAL,
   CLOSE_EDIT_POST_MODAL,
   CLOSE_DELETE_POST_MODAL,
+  OPEN_ADD_COMMENT_MODAL,
+  OPEN_EDIT_COMMENT_MODAL,
+  OPEN_DELETE_COMMENT_MODAL,
+  CLOSE_ADD_COMMENT_MODAL,
+  CLOSE_EDIT_COMMENT_MODAL,
+  CLOSE_DELETE_COMMENT_MODAL,
 } from '../../actions/ui/modal';
 
 const initialUiModals = {
@@ -49,6 +55,42 @@ const modals = (state = initialUiModals, action) => {
       return {
         ...state,
         deletePostModalOpen: false,
+      };
+
+    case OPEN_ADD_COMMENT_MODAL:
+      return {
+        ...state,
+        addCommentModalOpen: true,
+      };
+
+    case CLOSE_ADD_COMMENT_MODAL:
+      return {
+        ...state,
+        addCommentModalOpen: false,
+      };
+
+    case OPEN_EDIT_COMMENT_MODAL:
+      return {
+        ...state,
+        editCommentModalOpen: true,
+      };
+
+    case CLOSE_EDIT_COMMENT_MODAL:
+      return {
+        ...state,
+        editCommentModalOpen: false,
+      };
+
+    case OPEN_DELETE_COMMENT_MODAL:
+      return {
+        ...state,
+        deleteCommentModalOpen: true,
+      };
+
+    case CLOSE_DELETE_COMMENT_MODAL:
+      return {
+        ...state,
+        deleteCommentModalOpen: false,
       };
 
     default:

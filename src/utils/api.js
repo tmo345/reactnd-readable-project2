@@ -74,10 +74,42 @@ export const postPostToServer = (
   });
 };
 
+export const postCommentToServer = ({
+  id,
+  parentId,
+  timestamp,
+  body,
+  author,
+}) => {
+  return axios({
+    method: 'post',
+    url: `${api}/comments`,
+    headers,
+    data: {
+      id,
+      timestamp,
+      body,
+      author,
+      parentId,
+    },
+  });
+};
+
 export const votePostServer = (id, option) => {
   return axios({
     method: 'post',
     url: `${api}/posts/${id}`,
+    headers,
+    data: {
+      option,
+    },
+  });
+};
+
+export const voteCommentServer = (id, option) => {
+  return axios({
+    method: 'post',
+    url: `${api}/comments/${id}`,
     headers,
     data: {
       option,

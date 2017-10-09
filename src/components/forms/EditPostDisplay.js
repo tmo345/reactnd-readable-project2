@@ -56,9 +56,9 @@ class EditPostDisplay extends Component {
 }
 
 const mapStateToProps = state => ({
-  editPostModalOpen: state.ui.editPostModalOpen,
-  editPostFormSubmitted: state.ui.editPostFormSubmitted,
-  processingEditPost: state.ui.processingEditPost,
+  editPostModalOpen: state.ui.modals.editPostModalOpen,
+  editPostFormSubmitted: state.ui.forms.editPostFormSubmitted,
+  processingEditPost: state.ui.forms.processingEditPost,
 });
 
 const mapDispatchToProps = dispatch => ({

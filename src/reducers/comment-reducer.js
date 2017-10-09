@@ -1,4 +1,5 @@
 import { stateObjectToArray, stateArraytoObject } from './helpers';
+import { VOTE_FOR_COMMENT_SUCCEEDED } from '../actions/comment-actions';
 
 const initialComments = {};
 
@@ -12,8 +13,15 @@ const comments = (state = initialComments, action) => {
       };
     }
 
-    case 'ADD_COMMENT': {
-      const { id, parentId, timestamp, body, author, voteScore } = action;
+    case 'ADD_COMMENT_SERVER_SUCCEEDED': {
+      const {
+        id,
+        parentId,
+        timestamp,
+        body,
+        author,
+        voteScore,
+      } = action.comment;
       return {
         ...state,
         [parentId]: {
@@ -65,6 +73,20 @@ const comments = (state = initialComments, action) => {
           voteScore: state[action.id]['voteScore'] - 1,
         },
       };
+
+    case VOTE_FOR_COMMENT_SUCCEEDED: {
+      const { comment: { id, parentId } } = action;
+      return {
+        ...state,
+        [parentId]: {
+          ...state[parentId],
+          [id]: {
+            ...state[parentId][id],
+            voteScore: action.comment.voteScore,
+          },
+        },
+      };
+    }
 
     default:
       return state;

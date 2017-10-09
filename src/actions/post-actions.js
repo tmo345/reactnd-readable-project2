@@ -110,11 +110,11 @@ export const addPostServer = ({ title, body, category, author }) => {
   };
 };
 
-export const voteForPost = (id, direction) => {
+export const voteForPost = (post, direction) => {
   return function(dispatch) {
-    dispatch(voteForPostStarted(id));
-    return votePostServer(id, direction).then(response => {
-      dispatch(voteForPostSucceeded(response.data, id));
+    dispatch(voteForPostStarted(post.id));
+    return votePostServer(post.id, direction).then(response => {
+      dispatch(voteForPostSucceeded(response.data, post.id));
     });
   };
 };
