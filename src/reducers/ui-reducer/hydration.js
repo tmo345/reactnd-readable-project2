@@ -1,7 +1,7 @@
 import {
   HYDRATING_POSTS_COMPLETE,
   HYDRATING_COMMENTS_COMPLETE,
-} from '../../actions/ui-actions';
+} from '../../actions/ui/hydration';
 
 /**
  * Tracks whether the initial hydration of posts and comments has completed.

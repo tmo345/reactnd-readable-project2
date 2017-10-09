@@ -1,3 +1,12 @@
+import {
+  START_ADD_POST_FORM_SUBMITTED,
+  RESET_ADD_POST_FORM_SUBMITTED,
+  START_EDIT_POST_FORM_SUBMITTED,
+  RESET_EDIT_POST_FORM_SUBMITTED,
+  START_DELETE_POST_FORM_SUBMITTED,
+  RESET_DELETE_POST_FORM_SUBMITTED,
+} from '../../actions/ui/forms';
+
 const initialUiForms = {
   addPostFormSubmitted: false,
   processingNewPost: false,

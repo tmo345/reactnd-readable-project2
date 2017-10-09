@@ -23,7 +23,7 @@ class CommentListDisplay extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        {!this.props.commentsHydrating ? (
+        {this.props.hydratingCommentsComplete ? (
           <CommentList
             comments={stateObjectToArray(
               this.props.comments[this.props.parentId],
@@ -39,7 +39,7 @@ class CommentListDisplay extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   comments: state.comments,
-  commentsHydrating: state.ui.commentsHydrating,
+  hydratingCommentsComplete: state.ui.hydration.hydratingCommentsComplete,
 });
 
 const mapDispatchToProps = dispatch => ({});

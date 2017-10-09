@@ -8,11 +8,11 @@ import { deletePostServer } from '../../actions/post-actions';
 import {
   resetDeletePostFormSubmitted,
   startDeletePostFormSubmitted,
-} from '../../actions/ui-actions/ui-forms';
+} from '../../actions/ui/forms';
 import {
   openDeletePostModal,
   closeDeletePostModal,
-} from '../../actions/ui-actions/ui-modal';
+} from '../../actions/ui/modal';
 import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 

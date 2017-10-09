@@ -12,7 +12,7 @@ import {
 } from './actions/comment-actions';
 import SinglePostDisplay from './components/single-post/SinglePostDisplay';
 import styled from 'styled-components';
-import { hydratingCommentsComplete } from './actions/ui-actions/ui-hydration';
+import { hydratingCommentsComplete } from './actions/ui/hydration';
 import axios from 'axios';
 
 const SiteBranding = styled(Menu.Menu)`
@@ -61,7 +61,8 @@ class App extends React.Component {
             </Container>
           </Menu>
         </Grid.Row>
-        {this.props.hydratingPosts || this.props.hydratingComments ? (
+        {!this.props.hydratingPostsComplete ||
+        !this.props.hydratingCommentsComplete ? (
           <Loader active />
         ) : (
           <Container>
@@ -117,8 +118,8 @@ const mapStateToProps = state => ({
   posts: state.posts,
   postsLoading: state.ui.postsLoading,
   deletePostFormSubmitted: state.ui.deletePostFormSubmitted,
-  hydratingPosts: state.ui.hydratingPosts,
-  hydratingComments: state.ui.hydratingComments,
+  hydratingPostsComplete: state.ui.hydration.hydratingPostsComplete,
+  hydratingCommentsComplete: state.ui.hydration.hydratingCommentsComplete,
 });
 
 const mapDispatchToProps = dispatch => ({

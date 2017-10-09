@@ -39,7 +39,7 @@ class SinglePostDisplay extends Component {
 }
 
 const mapStateToProps = state => ({
-  postVotesNowProcessing: state.ui.processingVotes.posts,
+  postVotesNowProcessing: state.ui.votes.processingPostVotes,
   posts: state.posts,
   postsLoading: state.ui.postsLoading,
   deletePostFormSubmitted: state.ui.deletePostFormSubmitted,

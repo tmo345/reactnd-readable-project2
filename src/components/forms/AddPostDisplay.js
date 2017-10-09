@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 import {
   startAddPostFormSubmitted,
   resetAddPostFormSubmitted,
-} from '../../actions/ui-actions/ui-forms';
-import {
-  openAddPostModal,
-  closeAddPostModal,
-} from '../../actions/ui-actions/ui-modal';
+} from '../../actions/ui/forms';
+import { openAddPostModal, closeAddPostModal } from '../../actions/ui/modal';
 import { setActiveCategory } from '../../actions/category-actions';
 import ModalWithHeader from '../modals/ModalWithHeader';
 import { addPostServer } from '../../actions/post-actions';
