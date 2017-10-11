@@ -117,7 +117,7 @@ class App extends React.Component {
 const mapStateToProps = state => ({
   posts: state.posts,
   postsLoading: state.ui.postsLoading,
-  deletePostFormSubmitted: state.ui.deletePostFormSubmitted,
+  deletePostFormSubmitted: state.ui.forms.deletePostFormSubmitted,
   hydratingPostsComplete: state.ui.hydration.hydratingPostsComplete,
   hydratingCommentsComplete: state.ui.hydration.hydratingCommentsComplete,
 });
