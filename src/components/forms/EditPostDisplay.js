@@ -18,24 +18,28 @@ class EditPostDisplay extends Component {
       .editPostServer(values)
       .then(() => this.props.startEditPostFormSubmitted());
   };
+
+  handleCloseModal = () => {
+    this.props.closeEditPostModal();
+    this.props.resetEditPostFormSubmitted();
+  };
   render() {
-    console.log(this.props);
     return (
       <div>
         <OpenModalButton
           openModal={this.props.openEditPostModal}
           resetFormSubmitted={this.props.resetEditPostFormSubmitted}
           buttonText="Edit"
-          icon="write"
+          icon="edit"
         />
         <ModalWithHeader
           label="Edit Post"
           isOpen={this.props.editPostModalOpen}
-          closeModal={this.props.closeEditPostModal}
+          closeModal={this.handleCloseModal}
         >
           {this.props.editPostFormSubmitted ? (
             <FormSubmittedMessage
-              closeModal={this.props.closeEditPostModal}
+              closeModal={this.handleCloseModal}
               resetFormSubmitted={this.props.resetEditPostFormSubmitted}
               heading="Edit Post Form Submitted"
               closeButtonText="Close Modal"
@@ -66,7 +70,7 @@ const mapDispatchToProps = dispatch => ({
   closeEditPostModal: () => dispatch(closeEditPostModal()),
   startEditPostFormSubmitted: () => dispatch(startEditPostFormSubmitted()),
   resetEditPostFormSubmitted: () => dispatch(resetEditPostFormSubmitted()),
-  editPostServer: values => dispatch(editPostServer(values)),
+  editPostServer: ({ id, body }) => dispatch(editPostServer({ id, body })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPostDisplay);

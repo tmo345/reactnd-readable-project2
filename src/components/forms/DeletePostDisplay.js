@@ -21,12 +21,18 @@ class DeletePostDisplay extends Component {
     this.props
       .deletePostServer(values)
       .then(this.props.startDeletePostFormSubmitted)
-      .then(() =>
+      .then(() => {
+        this.props.closeDeletePostModal();
         setTimeout(() => {
           this.props.resetDeletePostFormSubmitted();
           this.props.history.push('/');
-        }, 2000),
-      );
+        }, 2000);
+      });
+  };
+
+  handleCloseModal = () => {
+    this.props.closeDeletePostModal();
+    this.props.resetDeletePostFormSubmitted();
   };
 
   render() {
@@ -36,12 +42,13 @@ class DeletePostDisplay extends Component {
           openModal={this.props.openDeletePostModal}
           resetFormSubmitted={this.props.resetDeletePostFormSubmitted}
           buttonText="Delete"
-          icon="write"
+          icon="delete"
+          color="red"
         />
         <ModalWithHeader
           label="Delete Post"
           isOpen={this.props.deletePostModalOpen}
-          closeModal={this.props.closeDeletePostModal}
+          closeModal={this.handleCloseModal}
         >
           {this.props.deletePostFormSubmitted ? (
             <p>Post successfully deleted, redirecting you to main page...</p>
