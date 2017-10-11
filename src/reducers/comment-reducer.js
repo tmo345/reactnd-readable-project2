@@ -38,14 +38,20 @@ const comments = (state = initialComments, action) => {
       };
     }
 
-    case 'EDIT_COMMENT':
+    case 'EDIT_COMMENT_SERVER_SUCCESS': {
+      console.log(action);
+      const { parentId, id, body } = action.comment;
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
-          body: action.body,
+        [parentId]: {
+          ...state[parentId],
+          [id]: {
+            ...state[parentId][id],
+            body,
+          },
         },
       };
+    }
 
     case 'DELETE_COMMENT': {
       const { id } = action;

@@ -17,6 +17,13 @@ const initialUiModals = {
   addPostModalOpen: false,
   editPostModalOpen: false,
   deletePostModalOpen: false,
+  addCommentModalOpen: false,
+  editCommentModal: {
+    isOpen: false,
+    forCommentId: '',
+    parentId: '',
+  },
+  deleteCommentModalOpen: false,
 };
 
 const modals = (state = initialUiModals, action) => {
@@ -72,13 +79,21 @@ const modals = (state = initialUiModals, action) => {
     case OPEN_EDIT_COMMENT_MODAL:
       return {
         ...state,
-        editCommentModalOpen: true,
+        editCommentModal: {
+          isOpen: true,
+          forCommentId: action.id,
+          parentId: action.parentId,
+        },
       };
 
     case CLOSE_EDIT_COMMENT_MODAL:
       return {
         ...state,
-        editCommentModalOpen: false,
+        editCommentModal: {
+          isOpen: false,
+          forCommentId: '',
+          parentId: '',
+        },
       };
 
     case OPEN_DELETE_COMMENT_MODAL:

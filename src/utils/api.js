@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api = 'http://localhost:5001';
+const api = 'http://localhost:3001';
 
 const token = 'authtoken135';
 
@@ -125,6 +125,19 @@ export const putPostServer = (id, title, body) => {
     data: {
       id,
       title,
+      body,
+    },
+  });
+};
+
+export const putCommentServer = (id, body) => {
+  console.log(id, body);
+  return axios({
+    method: 'put',
+    url: `${api}/comments/${id}`,
+    headers,
+    data: {
+      id,
       body,
     },
   });

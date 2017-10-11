@@ -13,11 +13,14 @@ const CommentList = props => {
   if (props.comments.length > 0) {
     return (
       <div>
-        {props.comments.map(comment => (
-          <Comment key={comment.id} as={CommentContainer}>
-            <CommentCardDisplay comment={comment} />
-          </Comment>
-        ))}
+        {props.comments.map(comment => {
+          console.log('comment', comment);
+          return (
+            <Comment key={comment.id} as={CommentContainer}>
+              <CommentCardDisplay comment={comment} />
+            </Comment>
+          );
+        })}
       </div>
     );
   } else {

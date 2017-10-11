@@ -66,5 +66,5 @@ export const IdHiddenInputField = props => (
 );
 
 export const ParentIdHiddenInputField = props => (
-  <Field component="input" type="hidden" name="parentId" value="props.value" />
+  <Field component="input" type="hidden" name="parentId" />
 );

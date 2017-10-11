@@ -6,17 +6,23 @@ const ButtonContainer = styled.div`
   padding-top: 10px;
 `;
 
-const OpenModalButton = props => (
-  <ButtonContainer>
-    <Button
-      onClick={() => {
-        props.openModal();
-      }}
-      icon={props.icon}
-      color="green"
-      content={props.buttonText}
-    />
-  </ButtonContainer>
-);
+const OpenModalButton = props => {
+  return (
+    <ButtonContainer>
+      <Button
+        onClick={() => {
+          props.openModal(props.id, props.parentId);
+        }}
+        icon={props.icon}
+        color={props.color}
+        content={props.buttonText}
+      />
+    </ButtonContainer>
+  );
+};
+
+OpenModalButton.defaultProps = {
+  color: 'green',
+};
 
 export default OpenModalButton;

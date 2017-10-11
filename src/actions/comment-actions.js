@@ -3,6 +3,7 @@ import {
   fetchComments,
   postCommentToServer,
   voteCommentServer,
+  putCommentServer,
 } from '../utils/api';
 
 export const VOTE_FOR_COMMENT_STARTED = 'VOTE_FOR_COMMENT_STARTED';
@@ -33,6 +34,15 @@ export const addComment = ({ parentId, title, body, author }) => {
     author,
   };
 };
+
+export const editCommentServerStarted = () => ({
+  type: 'EDIT_COMMENT_SERVER_STARTED',
+});
+
+export const editCommentServerSuccess = comment => ({
+  type: 'EDIT_COMMENT_SERVER_SUCCESS',
+  comment,
+});
 
 export const voteForCommentStarted = id => ({
   type: VOTE_FOR_COMMENT_STARTED,
@@ -101,6 +111,17 @@ export const voteForComment = (comment, direction) => {
     dispatch(voteForCommentStarted(comment.id));
     return voteCommentServer(comment.id, direction).then(response => {
       dispatch(voteForCommentSucceeded(response.data, comment.id));
+    });
+  };
+};
+
+export const editCommentServer = ({ id, body }) => {
+  return function(dispatch) {
+    const timestamp = Date.now();
+    dispatch(editCommentServerStarted());
+
+    return putCommentServer(id, body).then(response => {
+      dispatch(editCommentServerSuccess(response.data));
     });
   };
 };

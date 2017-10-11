@@ -16,7 +16,6 @@ import {
 
 class AddCommentDisplay extends Component {
   submit = values => {
-    console.log(values);
     this.props
       .addCommentServer(values)
       .then(response => this.props.startAddCommentFormSubmitted());
@@ -34,7 +33,7 @@ class AddCommentDisplay extends Component {
           openModal={this.props.openAddCommentModal}
           resetFormSubmitted={this.props.resetAddCommentFormSubmitted}
           buttonText="Make Comment"
-          icon="write"
+          icon="comment"
         />
         <ModalWithHeader
           label="Add New Comment"

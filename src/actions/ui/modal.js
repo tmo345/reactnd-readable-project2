@@ -44,8 +44,10 @@ export const closeAddCommentModal = () => ({
   type: CLOSE_ADD_COMMENT_MODAL,
 });
 
-export const openEditCommentModal = () => ({
+export const openEditCommentModal = (id, parentId) => ({
   type: OPEN_EDIT_COMMENT_MODAL,
+  id,
+  parentId,
 });
 
 export const closeEditCommentModal = () => ({

@@ -2,6 +2,8 @@ import React from 'react';
 import { Segment, Button, Comment, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import VoteButtons from '../voting/VoteButtons';
+import EditCommentDisplay from '../forms/EditCommentDisplay';
+import OpenModalButton from '../modals/OpenModalButton';
 
 const Author = styled.h4`
   display: inline-block;
@@ -40,6 +42,16 @@ const CommentCard = props => {
             {new Date(props.comment.timestamp).toDateString()}
           </Comment.Metadata>
           <Comment.Text as={CommentBody}>{props.comment.body}</Comment.Text>
+          <Comment.Content>
+            <OpenModalButton
+              openModal={props.openEditCommentModal}
+              id={props.comment.id}
+              parentId={props.comment.parentId}
+              resetFormSubmitted={props.resetEditCommentFormSubmitted}
+              buttonText="Edit"
+              icon="edit"
+            />
+          </Comment.Content>
           <Comment.Content as={CommentButtons}>
             <p>Votes: {props.comment.voteScore}</p>
             <VoteButtons

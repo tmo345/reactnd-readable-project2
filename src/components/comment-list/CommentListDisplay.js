@@ -4,6 +4,7 @@ import CommentList from './CommentList';
 import { Grid, Button, Header, Loader, Comment } from 'semantic-ui-react';
 import { stateObjectToArray } from '../../reducers/helpers';
 import AddCommentDisplay from '../forms/AddCommentDisplay';
+import EditCommentDisplay from '../forms/EditCommentDisplay';
 
 class CommentListDisplay extends Component {
   render() {
@@ -23,6 +24,7 @@ class CommentListDisplay extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        <EditCommentDisplay />
         {this.props.hydratingCommentsComplete ? (
           <CommentList
             comments={stateObjectToArray(
