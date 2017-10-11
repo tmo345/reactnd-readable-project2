@@ -4,7 +4,9 @@ import VoteButtons from '../voting/VoteButtons';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const PostCardContainer = styled.li`margin-bottom: 25px;`;
+const PostCardContainer = styled.li`
+  margin-bottom: 25px;
+`;
 const Votes = styled.div`
   float: right;
   font-size: 1.15rem;
@@ -15,8 +17,12 @@ const InlineVoteButtons = styled.div`
   display: inline-block;
   margin-left: 10px;
 `;
-const PostMeta = styled.span`color: #76768e;`;
-const PostTitle = styled.h3`color: #fff !important;`;
+const PostMeta = styled.span`
+  color: #76768e;
+`;
+const PostTitle = styled.h3`
+  color: #fff !important;
+`;
 const PostCardHeader = styled(Card.Content)`
   background-color: #2884cb !important;
 `;
@@ -24,24 +30,37 @@ const PostComments = styled.div`
   color: #76768e;
   float: right;
 `;
-const PostBody = styled.p`margin-top: 10px !important;`;
+const PostBody = styled.p`
+  margin-top: 10px !important;
+`;
 const CardFooter = styled.div`
   padding-top: 7.5px !important;
   padding-bottom: 7.5px !important;
 `;
+const PostCategory = styled.span`
+  text-transform: capitalize;
+`;
 
 const PostCard = props => {
-  const { post } = props;
+  const {
+    id,
+    category,
+    title,
+    timestamp,
+    author,
+    body,
+    voteScore,
+  } = props.post;
   return (
     <PostCardContainer>
       <Card fluid>
         <PostCardHeader>
           <Votes>
             Votes: {' '}
-            {props.votesNowProcessing.includes(post.id) ? (
+            {props.votesNowProcessing.includes(id) ? (
               <Loader size="mini" inline active />
             ) : (
-              post.voteScore
+              voteScore
             )}
             <InlineVoteButtons>
               <VoteButtons
@@ -52,20 +71,24 @@ const PostCard = props => {
             </InlineVoteButtons>
           </Votes>
           <Card.Header>
-            <Link to={`${post.category}/${post.id}`}>
-              <PostTitle>{post.title}</PostTitle>
+            <Link to={`${category}/${id}`}>
+              <PostTitle>{title}</PostTitle>
             </Link>
           </Card.Header>
         </PostCardHeader>
         <Card.Content>
           <Card.Meta>
-            <PostMeta>{new Date(post.timestamp).toDateString()}</PostMeta>
+            <PostMeta>{new Date(timestamp).toDateString()}</PostMeta>
+            <br />
+            <PostMeta>
+              Category: <PostCategory>{category}</PostCategory>
+            </PostMeta>
           </Card.Meta>
-          <PostBody>{post.body}</PostBody>
+          <PostBody>{body}</PostBody>
         </Card.Content>
         <Card.Content as={CardFooter}>
           <Card.Meta>
-            <PostMeta>Author: {post.author}</PostMeta>
+            <PostMeta>Author: {author}</PostMeta>
             <PostComments>
               Comments:{' '}
               {props.commentNumberLoading ? (
