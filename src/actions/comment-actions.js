@@ -4,6 +4,7 @@ import {
   postCommentToServer,
   voteCommentServer,
   putCommentServer,
+  deleteCommentApi,
 } from '../utils/api';
 
 export const VOTE_FOR_COMMENT_STARTED = 'VOTE_FOR_COMMENT_STARTED';
@@ -53,6 +54,15 @@ export const voteForCommentSucceeded = (comment, id) => ({
   type: VOTE_FOR_COMMENT_SUCCEEDED,
   comment,
   id,
+});
+
+export const deleteCommentServerStarted = () => ({
+  type: 'DELETE_COMMENT_SERVER_STARTED',
+});
+
+export const deleteCommentServerSuccess = comment => ({
+  type: 'DELETE_COMMENT_SERVER_SUCCESS',
+  comment,
 });
 
 export const commentFetchSucceeded = (comments, postId) => {
@@ -117,11 +127,20 @@ export const voteForComment = (comment, direction) => {
 
 export const editCommentServer = ({ id, body }) => {
   return function(dispatch) {
-    const timestamp = Date.now();
     dispatch(editCommentServerStarted());
 
     return putCommentServer(id, body).then(response => {
       dispatch(editCommentServerSuccess(response.data));
+    });
+  };
+};
+
+export const deleteCommentServer = ({ id }) => {
+  console.log('id', id);
+  return function(dispatch) {
+    dispatch(deleteCommentServerStarted());
+    return deleteCommentApi(id).then(response => {
+      dispatch(deleteCommentServerSuccess(response.data));
     });
   };
 };

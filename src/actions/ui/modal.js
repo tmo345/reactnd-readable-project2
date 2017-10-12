@@ -54,8 +54,9 @@ export const closeEditCommentModal = () => ({
   type: CLOSE_EDIT_COMMENT_MODAL,
 });
 
-export const openDeleteCommentModal = () => ({
+export const openDeleteCommentModal = id => ({
   type: OPEN_DELETE_COMMENT_MODAL,
+  id,
 });
 
 export const closeDeleteCommentModal = () => ({

@@ -3,8 +3,14 @@ import { connect } from 'react-redux';
 import CommentCard from './CommentCard';
 import { voteForComment } from '../../actions/comment-actions';
 import { Loader } from 'semantic-ui-react';
-import { resetEditCommentFormSubmitted } from '../../actions/ui/forms';
-import { openEditCommentModal } from '../../actions/ui/modal';
+import {
+  resetEditCommentFormSubmitted,
+  resetDeleteCommentFormSubmitted,
+} from '../../actions/ui/forms';
+import {
+  openEditCommentModal,
+  openDeleteCommentModal,
+} from '../../actions/ui/modal';
 
 class CommentCardDisplay extends Component {
   render() {
@@ -22,6 +28,10 @@ class CommentCardDisplay extends Component {
             openEditCommentModal={this.props.openEditCommentModal}
             resetEditCommentFormSubmitted={
               this.props.resetEditCommentFormSubmitted
+            }
+            openDeleteCommentModal={this.props.openDeleteCommentModal}
+            resetDeleteCommentFormSubmitted={
+              this.props.resetDeleteCommentFormSubmitted
             }
           />
         ) : (
@@ -42,6 +52,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(openEditCommentModal(id, parentId)),
   resetEditCommentFormSubmitted: () =>
     dispatch(resetEditCommentFormSubmitted()),
+  openDeleteCommentModal: (id, parentId) =>
+    dispatch(openDeleteCommentModal(id, parentId)),
+  resetDeleteCommentFormSubmitted: () =>
+    dispatch(resetDeleteCommentFormSubmitted()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentCardDisplay);

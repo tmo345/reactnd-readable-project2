@@ -51,6 +51,15 @@ const CommentCard = props => {
               buttonText="Edit"
               icon="edit"
             />
+            <OpenModalButton
+              openModal={props.openDeleteCommentModal}
+              id={props.comment.id}
+              parentId={props.comment.parentId}
+              resetFormSubmitted={props.resetDeleteCommentFormSubmitted}
+              buttonText="Delete"
+              icon="delete"
+              color="red"
+            />
           </Comment.Content>
           <Comment.Content as={CommentButtons}>
             <p>Votes: {props.comment.voteScore}</p>

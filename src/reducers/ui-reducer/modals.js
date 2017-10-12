@@ -23,7 +23,10 @@ const initialUiModals = {
     forCommentId: '',
     parentId: '',
   },
-  deleteCommentModalOpen: false,
+  deleteCommentModal: {
+    isOpen: false,
+    forCommentId: '',
+  },
 };
 
 const modals = (state = initialUiModals, action) => {
@@ -99,13 +102,19 @@ const modals = (state = initialUiModals, action) => {
     case OPEN_DELETE_COMMENT_MODAL:
       return {
         ...state,
-        deleteCommentModalOpen: true,
+        deleteCommentModal: {
+          isOpen: true,
+          forCommentId: action.id,
+        },
       };
 
     case CLOSE_DELETE_COMMENT_MODAL:
       return {
         ...state,
-        deleteCommentModalOpen: false,
+        deleteCommentModal: {
+          isOpen: false,
+          forCommentId: '',
+        },
       };
 
     default:

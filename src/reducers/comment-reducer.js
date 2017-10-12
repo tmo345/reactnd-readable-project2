@@ -39,7 +39,6 @@ const comments = (state = initialComments, action) => {
     }
 
     case 'EDIT_COMMENT_SERVER_SUCCESS': {
-      console.log(action);
       const { parentId, id, body } = action.comment;
       return {
         ...state,
@@ -53,13 +52,17 @@ const comments = (state = initialComments, action) => {
       };
     }
 
-    case 'DELETE_COMMENT': {
-      const { id } = action;
-      const commentArray = stateObjectToArray(state);
+    case 'DELETE_COMMENT_SERVER_SUCCESS': {
+      console.log('delcomsuccess', state);
+      const { parentId, id } = action.comment;
+      const commentArray = stateObjectToArray(state[parentId]);
       const remainingComments = commentArray.filter(
         comment => comment.id !== id,
       );
-      return stateArraytoObject(remainingComments);
+      return {
+        ...state,
+        [parentId]: stateArraytoObject(remainingComments),
+      };
     }
 
     case 'UP_VOTE_COMMENT':

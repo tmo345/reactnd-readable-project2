@@ -153,3 +153,14 @@ export const deletePostApi = id => {
     },
   });
 };
+
+export const deleteCommentApi = id => {
+  return axios({
+    method: 'delete',
+    url: `${api}/comments/${id}`,
+    headers,
+    data: {
+      id,
+    },
+  });
+};

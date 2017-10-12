@@ -5,6 +5,7 @@ import { Grid, Button, Header, Loader, Comment } from 'semantic-ui-react';
 import { stateObjectToArray } from '../../reducers/helpers';
 import AddCommentDisplay from '../forms/AddCommentDisplay';
 import EditCommentDisplay from '../forms/EditCommentDisplay';
+import DeleteCommentDisplay from '../forms/DeleteCommentDisplay';
 
 class CommentListDisplay extends Component {
   render() {
@@ -25,6 +26,7 @@ class CommentListDisplay extends Component {
           </Grid.Row>
         </Grid>
         <EditCommentDisplay />
+        <DeleteCommentDisplay />
         {this.props.hydratingCommentsComplete ? (
           <CommentList
             comments={stateObjectToArray(
