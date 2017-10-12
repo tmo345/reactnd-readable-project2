@@ -65,7 +65,7 @@ class EditCommentDisplay extends Component {
 
 const mapStateToProps = state => ({
   editCommentModalOpen: state.ui.modals.editCommentModal.isOpen,
-  processingNewComment: state.ui.forms.processingNewComment,
+  processingEditComment: state.ui.forms.processingEditComment,
   editCommentFormSubmitted: state.ui.forms.editCommentFormSubmitted,
   hydratingCommentsComplete: state.ui.hydration.hydratingCommentsComplete,
 });

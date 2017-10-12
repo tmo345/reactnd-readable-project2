@@ -40,7 +40,7 @@ class EditCommentForm extends React.Component {
     const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit} form={this.props.form} className="ui form">
-        <Loader active={this.props.processingNewComment} />
+        <Loader active={this.props.processingEditComment} />
 
         <BodyTextAreaField />
         <Field component="input" type="hidden" name="parentId" />
