@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import OpenModalButton from '../modals/OpenModalButton';
 import ModalWithHeader from '../modals/ModalWithHeader';
 import FormSubmittedMessage from '../form-fields/FormSubmittedMessage';
 import EditCommentForm from './EditCommentForm';
 import { editCommentServer } from '../../actions/comment-actions';
-import { putCommentServer } from '../../utils/api';
 import {
   startEditCommentFormSubmitted,
   resetEditCommentFormSubmitted,
 } from '../../actions/ui/forms';
-import {
-  openEditCommentModal,
-  closeEditCommentModal,
-} from '../../actions/ui/modal';
+import { closeEditCommentModal } from '../../actions/ui/modal';
 
 class EditCommentDisplay extends Component {
   submit = values => {
-    const { id, body } = values;
     this.props
       .editCommentServer(values)
       .then(response => this.props.startEditCommentFormSubmitted());
@@ -32,12 +26,6 @@ class EditCommentDisplay extends Component {
     console.log(this.props, 'ecd');
     return (
       <div>
-        {/*        <OpenModalButton
-          openModal={this.props.openEditCommentModal}
-          resetFormSubmitted={this.props.resetEditCommentFormSubmitted}
-          buttonText="Edit"
-          icon="edit"
-        />*/}
         <ModalWithHeader
           label="Edit Comment"
           isOpen={this.props.editCommentModalOpen}
@@ -71,7 +59,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  //openEditCommentModal: () => dispatch(openEditCommentModal()),
   closeEditCommentModal: () => dispatch(closeEditCommentModal()),
   editCommentServer: ({ id, body }) =>
     dispatch(editCommentServer({ id, body })),

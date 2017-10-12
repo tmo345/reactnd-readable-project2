@@ -5,7 +5,6 @@ import {
   putPostServer,
   deletePostApi,
 } from '../utils/api';
-import { startDeletePostFormSubmitted } from './ui/forms';
 import { hydratingPostsComplete } from './ui/hydration';
 import uuidv4 from 'uuid/v4';
 
