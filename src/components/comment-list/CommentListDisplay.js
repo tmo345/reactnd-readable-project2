@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CommentList from './CommentList';
 import { Grid, Button, Header, Loader, Comment } from 'semantic-ui-react';
-import { stateObjectToArray } from '../../reducers/helpers';
 import AddCommentDisplay from '../forms/AddCommentDisplay';
 import EditCommentDisplay from '../forms/EditCommentDisplay';
 import DeleteCommentDisplay from '../forms/DeleteCommentDisplay';
+import SortingDisplay from '../sorting/SortingDisplay';
+import { convertToList, sortListBy } from '../../utils/helpers';
+import { pipe } from 'ramda';
 
 class CommentListDisplay extends Component {
   render() {
+    const { flag, direction } = this.props.sorting;
+    const sortComments = pipe(convertToList, sortListBy(flag, direction));
     return (
       <Comment.Group size="large">
         <Header>Comments</Header>
@@ -18,10 +22,7 @@ class CommentListDisplay extends Component {
               <AddCommentDisplay parentId={this.props.parentId} />
             </Grid.Column>
             <Grid.Column largeScreen={8} floated="right">
-              <span>Sort By: </span>
-              <span>Date</span>
-              <span> | </span>
-              <span to="">Vote</span>
+              <SortingDisplay toSort="comments" />
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -29,9 +30,7 @@ class CommentListDisplay extends Component {
         <DeleteCommentDisplay />
         {this.props.hydratingCommentsComplete ? (
           <CommentList
-            comments={stateObjectToArray(
-              this.props.comments[this.props.parentId],
-            )}
+            comments={sortComments(this.props.comments[this.props.parentId])}
           />
         ) : (
           <Loader active />
@@ -44,6 +43,7 @@ class CommentListDisplay extends Component {
 const mapStateToProps = (state, ownProps) => ({
   comments: state.comments,
   hydratingCommentsComplete: state.ui.hydration.hydratingCommentsComplete,
+  sorting: state.sorting.comments,
 });
 
 const mapDispatchToProps = dispatch => ({});

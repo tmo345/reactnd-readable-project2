@@ -5,9 +5,9 @@ import { setSortPostByFlag } from '../../actions/sorting-actions';
 import { setActiveCategory } from '../../actions/category-actions';
 import SelectCategory from '../categories/SelectCategory';
 import { Grid } from 'semantic-ui-react';
-import { sort, ascend, descend, prop as _prop } from 'ramda';
-import { convertToList } from '../../utils/helpers';
-import PostSort from '../sorting/PostSort';
+import { pipe } from 'ramda';
+import { convertToList, sortListBy } from '../../utils/helpers';
+import SortingDisplay from '../sorting/SortingDisplay';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -29,26 +29,17 @@ class PostListDisplay extends Component {
     }
   }
 
-  sortPostsBy = (flag, direction) => {
-    const isAscending = direction === 'ascending';
-    if (isAscending) {
-      return sort(ascend(_prop(flag)));
-    } else {
-      return sort(descend(_prop(flag)));
-    }
-  };
-
   render() {
     const { flag, direction } = this.props.sorting;
-    const sortPosts = this.sortPostsBy(flag, direction);
+    const sortPosts = pipe(convertToList, sortListBy(flag, direction));
     return (
       <Grid columns={2}>
         <Grid.Row>
           <Grid.Column largeScreen={11} as={PostListColumn}>
             <PostListHeader>Posts</PostListHeader>
-            <PostSort setSortPostByFlag={this.props.setSortPostByFlag} />
+            <SortingDisplay toSort="posts" />
             <PostList
-              posts={sortPosts(convertToList(this.props.posts))}
+              posts={sortPosts(this.props.posts)}
               activeCategory={this.props.activeCategory}
             />
           </Grid.Column>
@@ -69,15 +60,13 @@ class PostListDisplay extends Component {
 const mapStateToProps = (state, ownProps) => ({
   activeCategory: state.categories.active,
   categories: state.categories.categories,
-  sorting: state.sorting,
   comments: state.comments,
   postsLoading: state.ui.postsLoading,
   posts: state.posts,
+  sorting: state.sorting.posts,
 });
 
 const mapDispatchToProps = (dispatch: *) => ({
-  setSortPostByFlag: (flag, direction) =>
-    dispatch(setSortPostByFlag({ flag, direction })),
   setActiveCategory: category => dispatch(setActiveCategory(category)),
 });
 
