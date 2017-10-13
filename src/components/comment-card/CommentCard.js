@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import VoteButtons from '../voting/VoteButtons';
 import EditCommentDisplay from '../forms/EditCommentDisplay';
 import OpenModalButton from '../modals/OpenModalButton';
+import { formatTime } from '../../utils/helpers';
 
 const Author = styled.h4`
   display: inline-block;
@@ -39,7 +40,7 @@ const CommentCard = props => {
         <Comment.Content>
           <Comment.Author as={Author}>{props.comment.author}</Comment.Author>
           <Comment.Metadata as={MetaData}>
-            {new Date(props.comment.timestamp).toDateString()}
+            {formatTime(props.comment.timestamp)}
           </Comment.Metadata>
           <Comment.Text as={CommentBody}>{props.comment.body}</Comment.Text>
           <Comment.Content>
