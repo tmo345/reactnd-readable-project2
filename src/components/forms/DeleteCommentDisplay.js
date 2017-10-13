@@ -12,17 +12,9 @@ import { closeDeleteCommentModal } from '../../actions/ui/modal';
 
 class DeleteCommentDisplay extends Component {
   submit = values => {
-    console.log('values', values);
     this.props
       .deleteCommentServer(values)
       .then(this.props.startDeleteCommentFormSubmitted);
-    //.then(() => {
-    //this.props.closeDeleteCommentModal();
-    //setTimeout(() => {
-    //this.props.resetDeleteCommentFormSubmitted();
-    //this.props.history.push('/');
-    //}, 2000);
-    //});
   };
 
   handleCloseModal = () => {

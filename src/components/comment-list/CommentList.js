@@ -14,7 +14,6 @@ const CommentList = props => {
     return (
       <div>
         {props.comments.map(comment => {
-          console.log('comment', comment);
           return (
             <Comment key={comment.id} as={CommentContainer}>
               <CommentCardDisplay comment={comment} />
