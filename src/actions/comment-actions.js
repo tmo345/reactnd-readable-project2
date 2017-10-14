@@ -7,64 +7,25 @@ import {
   deleteCommentApi,
 } from '../utils/api';
 
-export const VOTE_FOR_COMMENT_STARTED = 'VOTE_FOR_COMMENT_STARTED';
-export const VOTE_FOR_COMMENT_SUCCEEDED = 'VOTE_FOR_COMMENT_SUCCEEDED';
+export const COMMENT_FETCH_SUCCEEDED = 'COMMENT_FETCH_SUCCEEDED';
 
 export const ADD_COMMENT_SERVER_STARTED = 'ADD_COMMENT_SERVER_STARTED';
 export const ADD_COMMENT_SERVER_SUCCEEDED = 'ADD_COMMENT_SERVER_SUCCEEDED';
 
-export const addCommentServerStarted = () => ({
-  type: ADD_COMMENT_SERVER_STARTED,
-});
+export const EDIT_COMMENT_SERVER_STARTED = 'EDIT_COMMENT_SERVER_STARTED';
+export const EDIT_COMMENT_SERVER_SUCCESS = 'EDIT_COMMENT_SERVER_SUCCESS';
 
-export const addCommentServerSucceeded = comment => ({
-  type: ADD_COMMENT_SERVER_SUCCEEDED,
-  comment,
-});
+export const DELETE_COMMENT_SERVER_STARTED = 'DELETE_COMMENT_SERVER_STARTED';
+export const DELETE_COMMENT_SERVER_SUCCESS = 'DELETE_COMMENT_SERVER_SUCCESS';
 
-export const addComment = ({ parentId, title, body, author }) => {
-  const uniqueId = `comment-${uuidv4()}`;
-  return {
-    type: 'ADD_COMMENT',
-    id: uniqueId,
-    timestamp: Date.now(),
-    voteScore: 1,
-    parentId,
-    title,
-    body,
-    author,
-  };
-};
+export const VOTE_FOR_COMMENT_STARTED = 'VOTE_FOR_COMMENT_STARTED';
+export const VOTE_FOR_COMMENT_SUCCEEDED = 'VOTE_FOR_COMMENT_SUCCEEDED';
 
-export const editCommentServerStarted = () => ({
-  type: 'EDIT_COMMENT_SERVER_STARTED',
-});
+/**
+ * Synchronous Actions
+ */
 
-export const editCommentServerSuccess = comment => ({
-  type: 'EDIT_COMMENT_SERVER_SUCCESS',
-  comment,
-});
-
-export const voteForCommentStarted = id => ({
-  type: VOTE_FOR_COMMENT_STARTED,
-  id,
-});
-
-export const voteForCommentSucceeded = (comment, id) => ({
-  type: VOTE_FOR_COMMENT_SUCCEEDED,
-  comment,
-  id,
-});
-
-export const deleteCommentServerStarted = () => ({
-  type: 'DELETE_COMMENT_SERVER_STARTED',
-});
-
-export const deleteCommentServerSuccess = comment => ({
-  type: 'DELETE_COMMENT_SERVER_SUCCESS',
-  comment,
-});
-
+// Set comment state after retrieval of comments during hydration
 export const commentFetchSucceeded = (comments, postId) => {
   let commentsByParentId;
   if (comments.length > 0) {
@@ -83,11 +44,55 @@ export const commentFetchSucceeded = (comments, postId) => {
     };
   }
   return {
-    type: 'COMMENT_FETCH_SUCCEEDED',
+    type: COMMENT_FETCH_SUCCEEDED,
     commentsByParentId,
   };
 };
+// Add Comments
+export const addCommentServerStarted = () => ({
+  type: ADD_COMMENT_SERVER_STARTED,
+});
 
+export const addCommentServerSucceeded = comment => ({
+  type: ADD_COMMENT_SERVER_SUCCEEDED,
+  comment,
+});
+
+// Edit Comments
+export const editCommentServerStarted = () => ({
+  type: EDIT_COMMENT_SERVER_STARTED,
+});
+
+export const editCommentServerSuccess = comment => ({
+  type: EDIT_COMMENT_SERVER_SUCCESS,
+  comment,
+});
+
+// Delete Comments
+export const deleteCommentServerStarted = () => ({
+  type: DELETE_COMMENT_SERVER_STARTED,
+});
+
+export const deleteCommentServerSuccess = comment => ({
+  type: DELETE_COMMENT_SERVER_SUCCESS,
+  comment,
+});
+
+// Voting for Comments
+export const voteForCommentStarted = id => ({
+  type: VOTE_FOR_COMMENT_STARTED,
+  id,
+});
+
+export const voteForCommentSucceeded = (comment, id) => ({
+  type: VOTE_FOR_COMMENT_SUCCEEDED,
+  comment,
+  id,
+});
+
+/**
+ * Asynchronous Actions
+ */
 export const setCommentsForPost = postId => {
   return function(dispatch) {
     return fetchComments(postId)
@@ -99,7 +104,6 @@ export const setCommentsForPost = postId => {
 };
 
 export const addCommentServer = ({ parentId, body, author }) => {
-  console.log(parentId);
   const uniqueId = `comment-${uuidv4()}`;
   const timestamp = Date.now();
   return function(dispatch) {
@@ -136,7 +140,6 @@ export const editCommentServer = ({ id, body }) => {
 };
 
 export const deleteCommentServer = ({ id }) => {
-  console.log('id', id);
   return function(dispatch) {
     dispatch(deleteCommentServerStarted());
     return deleteCommentApi(id).then(response => {
@@ -144,25 +147,3 @@ export const deleteCommentServer = ({ id }) => {
     });
   };
 };
-
-export const editComment = ({ id, body }) => ({
-  type: 'EDIT_COMMENT',
-  timestamp: Date.now(),
-  id,
-  body,
-});
-
-export const deleteComment = id => ({
-  type: 'DELETE_COMMENT',
-  id,
-});
-
-export const upVoteComment = id => ({
-  type: 'UP_VOTE_COMMENT',
-  id,
-});
-
-export const downVoteComment = id => ({
-  type: 'DOWN_VOTE_COMMENT',
-  id,
-});

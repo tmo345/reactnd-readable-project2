@@ -6,7 +6,6 @@ export const hydratingPostsComplete = () => ({
 });
 
 export const hydratingCommentsComplete = () => {
-  console.log(HYDRATING_COMMENTS_COMPLETE);
   return {
     type: HYDRATING_COMMENTS_COMPLETE,
   };
