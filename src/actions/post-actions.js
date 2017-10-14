@@ -1,139 +1,149 @@
-import {
-  fetchPosts,
-  postPostToServer,
-  votePostServer,
-  putPostServer,
-  deletePostApi,
-} from '../utils/api';
-import { hydratingPostsComplete } from './ui/hydration';
 import uuidv4 from 'uuid/v4';
+import {
+  fetchComments,
+  postCommentToServer,
+  voteCommentServer,
+  putCommentServer,
+  deleteCommentApi,
+} from '../utils/api';
 
-// Synchronous actions
+export const COMMENT_FETCH_SUCCEEDED = 'COMMENT_FETCH_SUCCEEDED';
 
-export const editPost = ({ id, title, body }) => ({
-  type: 'EDIT_POST',
+export const ADD_COMMENT_SERVER_STARTED = 'ADD_COMMENT_SERVER_STARTED';
+export const ADD_COMMENT_SERVER_SUCCEEDED = 'ADD_COMMENT_SERVER_SUCCEEDED';
+
+export const EDIT_COMMENT_SERVER_STARTED = 'EDIT_COMMENT_SERVER_STARTED';
+export const EDIT_COMMENT_SERVER_SUCCESS = 'EDIT_COMMENT_SERVER_SUCCESS';
+
+export const DELETE_COMMENT_SERVER_STARTED = 'DELETE_COMMENT_SERVER_STARTED';
+export const DELETE_COMMENT_SERVER_SUCCESS = 'DELETE_COMMENT_SERVER_SUCCESS';
+
+export const VOTE_FOR_COMMENT_STARTED = 'VOTE_FOR_COMMENT_STARTED';
+export const VOTE_FOR_COMMENT_SUCCEEDED = 'VOTE_FOR_COMMENT_SUCCEEDED';
+
+/**
+ * Synchronous Actions
+ */
+
+export const commentFetchSucceeded = (comments, postId) => {
+  let commentsByParentId;
+  if (comments.length > 0) {
+    commentsByParentId = comments.reduce(
+      (acc, currentItem) => {
+        acc[postId][currentItem.id] = currentItem;
+        return acc;
+      },
+      {
+        [postId]: {},
+      },
+    );
+  } else {
+    commentsByParentId = {
+      [postId]: {},
+    };
+  }
+  return {
+    type: COMMENT_FETCH_SUCCEEDED,
+    commentsByParentId,
+  };
+};
+// Add Comments
+export const addCommentServerStarted = () => ({
+  type: ADD_COMMENT_SERVER_STARTED,
+});
+
+export const addCommentServerSucceeded = comment => ({
+  type: ADD_COMMENT_SERVER_SUCCEEDED,
+  comment,
+});
+
+// Edit Comments
+export const editCommentServerStarted = () => ({
+  type: EDIT_COMMENT_SERVER_STARTED,
+});
+
+export const editCommentServerSuccess = comment => ({
+  type: EDIT_COMMENT_SERVER_SUCCESS,
+  comment,
+});
+
+// Delete Comments
+export const deleteCommentServerStarted = () => ({
+  type: DELETE_COMMENT_SERVER_STARTED,
+});
+
+export const deleteCommentServerSuccess = comment => ({
+  type: DELETE_COMMENT_SERVER_SUCCESS,
+  comment,
+});
+
+// Voting for Comments
+export const voteForCommentStarted = id => ({
+  type: VOTE_FOR_COMMENT_STARTED,
   id,
-  title,
-  body,
 });
 
-export const deletePost = id => ({
-  type: 'DELETE_POST',
+export const voteForCommentSucceeded = (comment, id) => ({
+  type: VOTE_FOR_COMMENT_SUCCEEDED,
+  comment,
   id,
 });
 
-export const upVotePost = id => ({
-  type: 'UP_VOTE_POST',
-  id,
-});
-
-export const downVotePost = id => ({
-  type: 'DOWN_VOTE_POST',
-  id,
-});
-
-export const getAllPostsStarted = () => ({
-  type: 'GET_ALL_POSTS_STARTED',
-});
-
-export const getAllPostsSucceeded = posts => ({
-  type: 'GET_ALL_POSTS_SUCCEEDED',
-  posts,
-});
-
-export const addPostServerStarted = () => ({
-  type: 'ADD_POST_SERVER_STARTED',
-});
-
-export const addPostServerSuccess = post => ({
-  type: 'ADD_POST_SERVER_SUCCESS',
-  post,
-});
-
-export const editPostServerStarted = () => ({
-  type: 'EDIT_POST_SERVER_STARTED',
-});
-
-export const editPostServerSuccess = post => ({
-  type: 'EDIT_POST_SERVER_SUCCESS',
-  post,
-});
-
-export const deletePostServerStarted = () => ({
-  type: 'DELETE_POST_SERVER_STARTED',
-});
-
-export const deletePostServerSuccess = id => ({
-  type: 'DELETE_POST_SERVER_SUCCESS',
-  id,
-});
-
-export const voteForPostStarted = id => ({
-  type: 'VOTE_FOR_POST_STARTED',
-  id,
-});
-
-export const voteForPostSucceeded = (post, id) => ({
-  type: 'VOTE_FOR_POST_SUCCEEDED',
-  post,
-  id,
-});
-
-// Asynchronous actions
-export const getAllPosts = urlId => {
+/**
+ * Asynchronous Actions
+ */
+//
+export const setCommentsForPost = postId => {
   return function(dispatch) {
-    return fetchPosts()
-      .then(posts => dispatch(getAllPostsSucceeded(posts)))
-      .then(() => dispatch(hydratingPostsComplete()));
+    return fetchComments(postId)
+      .then(response => response.data)
+      .then(comments => {
+        dispatch(commentFetchSucceeded(comments, postId));
+      });
   };
 };
 
-export const addPostServer = ({ title, body, category, author }) => {
-  const uniqueId = `post-${uuidv4()}`;
+export const addCommentServer = ({ parentId, body, author }) => {
+  const uniqueId = `comment-${uuidv4()}`;
   const timestamp = Date.now();
-  const deleted = false;
   return function(dispatch) {
-    dispatch(addPostServerStarted());
-    return postPostToServer(
-      title,
-      uniqueId,
+    dispatch(addCommentServerStarted());
+    return postCommentToServer({
+      id: uniqueId,
+      parentId,
       timestamp,
       body,
       author,
-      category,
-      deleted,
-    ).then(response => {
-      dispatch(addPostServerSuccess(response.data));
-      return response;
+    }).then(response => {
+      return dispatch(addCommentServerSucceeded(response.data));
     });
   };
 };
 
-export const voteForPost = (post, direction) => {
+export const voteForComment = (comment, direction) => {
   return function(dispatch) {
-    dispatch(voteForPostStarted(post.id));
-    return votePostServer(post.id, direction).then(response => {
-      dispatch(voteForPostSucceeded(response.data, post.id));
+    dispatch(voteForCommentStarted(comment.id));
+    return voteCommentServer(comment.id, direction).then(response => {
+      dispatch(voteForCommentSucceeded(response.data, comment.id));
     });
   };
 };
 
-export const editPostServer = ({ id, title, body }) => {
+export const editCommentServer = ({ id, body }) => {
   return function(dispatch) {
-    dispatch(editPostServerStarted());
+    dispatch(editCommentServerStarted());
 
-    return putPostServer(id, title, body).then(response => {
-      dispatch(editPostServerSuccess(response.data));
+    return putCommentServer(id, body).then(response => {
+      dispatch(editCommentServerSuccess(response.data));
     });
   };
 };
 
-export const deletePostServer = ({ id }) => {
+export const deleteCommentServer = ({ id }) => {
   return function(dispatch) {
-    dispatch(deletePostServerStarted());
-
-    return deletePostApi(id).then(response => {
-      dispatch(deletePostServerSuccess(id));
+    dispatch(deleteCommentServerStarted());
+    return deleteCommentApi(id).then(response => {
+      dispatch(deleteCommentServerSuccess(response.data));
     });
   };
 };
