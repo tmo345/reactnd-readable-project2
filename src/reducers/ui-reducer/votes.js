@@ -2,6 +2,10 @@ import {
   VOTE_FOR_COMMENT_STARTED,
   VOTE_FOR_COMMENT_SUCCEEDED,
 } from '../../actions/comment-actions';
+import {
+  VOTE_FOR_POST_STARTED,
+  VOTE_FOR_POST_SUCCEEDED,
+} from '../../actions/post-actions';
 
 const initialUiVotes = {
   processingPostVotes: [],
@@ -10,13 +14,13 @@ const initialUiVotes = {
 
 const votes = (state = initialUiVotes, action) => {
   switch (action.type) {
-    case 'VOTE_FOR_POST_STARTED':
+    case VOTE_FOR_POST_STARTED:
       return {
         ...state,
         processingPostVotes: [...state.processingPostVotes, action.id],
       };
 
-    case 'VOTE_FOR_POST_SUCCEEDED': {
+    case VOTE_FOR_POST_SUCCEEDED: {
       const indexToRemove = state.processingPostVotes.indexOf(action.id);
       return {
         ...state,
@@ -33,8 +37,7 @@ const votes = (state = initialUiVotes, action) => {
         processingCommentVotes: [...state.processingCommentVotes, action.id],
       };
 
-    case 'VOTE_FOR_COMMENT_SUCCEEDED': {
-      console.log('commentvote', action.type);
+    case VOTE_FOR_COMMENT_SUCCEEDED: {
       const indexToRemove = state.processingCommentVotes.indexOf(action.id);
       return {
         ...state,
