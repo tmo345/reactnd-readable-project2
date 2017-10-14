@@ -1,18 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, initialize } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { Loader } from 'semantic-ui-react';
-import {
-  BodyTextAreaField,
-  IdHiddenInputField,
-} from '../form-fields/readableFormFields';
+import { IdHiddenInputField } from '../form-fields/readableFormFields';
 import { SubmitButton, ResetButton } from '../form-fields/formButtons';
-import { Field } from 'redux-form';
-import uuidv4 from 'uuid/v4';
 
 class DeleteCommentForm extends React.Component {
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit} form={this.props.form} className="ui form">
         <Loader active={this.props.processingDeleteComment} />

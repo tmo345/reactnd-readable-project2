@@ -1,8 +1,7 @@
 import React from 'react';
-import { Segment, Button, Comment, Icon } from 'semantic-ui-react';
+import { Segment, Comment, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import VoteButtons from '../voting/VoteButtons';
-import EditCommentDisplay from '../forms/EditCommentDisplay';
 import OpenModalButton from '../modals/OpenModalButton';
 import { formatTime } from '../../utils/helpers';
 

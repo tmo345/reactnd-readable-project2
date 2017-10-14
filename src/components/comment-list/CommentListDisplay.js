@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CommentList from './CommentList';
-import { Grid, Button, Header, Loader, Comment } from 'semantic-ui-react';
+import { Grid, Header, Loader, Comment } from 'semantic-ui-react';
 import AddCommentDisplay from '../forms/AddCommentDisplay';
 import EditCommentDisplay from '../forms/EditCommentDisplay';
 import DeleteCommentDisplay from '../forms/DeleteCommentDisplay';

@@ -6,10 +6,7 @@ import AddPostDisplay from './components/forms/AddPostDisplay';
 import { Container, Grid, Menu, Loader } from 'semantic-ui-react';
 import PostListDisplay from './components/post-list/PostListDisplay';
 import { getAllPosts } from './actions/post-actions';
-import {
-  setCommentsForPost,
-  commentFetchSucceeded,
-} from './actions/comment-actions';
+import { setCommentsForPost } from './actions/comment-actions';
 import SinglePostDisplay from './components/single-post/SinglePostDisplay';
 import styled from 'styled-components';
 import { hydratingCommentsComplete } from './actions/ui/hydration';

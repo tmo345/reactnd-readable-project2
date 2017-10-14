@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { voteForPost } from '../../actions/post-actions';
 import CommentListDisplay from '../comment-list/CommentListDisplay';
 import SinglePostHeader from './SinglePostHeader';
-import { setCommentsForPost } from '../../actions/comment-actions';
-import { Redirect } from 'react-router-dom';
 import { Loader } from 'semantic-ui-react';
 
 class SinglePostDisplay extends Component {

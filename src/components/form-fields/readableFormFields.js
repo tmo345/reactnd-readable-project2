@@ -1,5 +1,4 @@
 import React from 'react';
-import withErrorDisplay from './withErrorDisplay';
 import { initialCategoryState } from '../../reducers/category-reducer';
 import { required, checkCategories } from './validate';
 import {
