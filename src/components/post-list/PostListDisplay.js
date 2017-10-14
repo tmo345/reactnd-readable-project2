@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostList from './PostList';
-import { setSortPostByFlag } from '../../actions/sorting-actions';
 import { setActiveCategory } from '../../actions/category-actions';
 import SelectCategory from '../categories/SelectCategory';
 import { Grid } from 'semantic-ui-react';
-import { pipe } from 'ramda';
-import { convertToList, sortListBy } from '../../utils/helpers';
+import { buildSortFunction } from '../../utils/helpers';
 import SortingDisplay from '../sorting/SortingDisplay';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
@@ -31,7 +29,8 @@ class PostListDisplay extends Component {
 
   render() {
     const { flag, direction } = this.props.sorting;
-    const sortPosts = pipe(convertToList, sortListBy(flag, direction));
+    const sortPosts = buildSortFunction(flag, direction);
+
     return (
       <Grid columns={2}>
         <Grid.Row>
