@@ -23,3 +23,6 @@ yarn-error.log*
 # vim
 *.swp
 tags
+
+# server
+server-readable/api-server/node_modules
