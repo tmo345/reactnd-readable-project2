@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../../utils/helpers';
-import { Item, Segment, Loader } from 'semantic-ui-react';
+import { Item, Segment } from 'semantic-ui-react';
 import EditPostDisplay from '../forms/EditPostDisplay';
 import DeletePostDisplay from '../forms/DeletePostDisplay';
 
@@ -22,17 +22,14 @@ const EditButtonContainer = styled.div`
 
 const SinglePostBody = props => {
   const post = props.posts[props.urlId];
-  const renderLoader = <Loader inline active />;
   return (
     <div>
       <Item>
         <div>
           <Segment attached>
-            <Author>Author: {post ? post.author : renderLoader}</Author>
-            <CreatedAt>
-              {post ? formatTime(post.timestamp) : renderLoader}
-            </CreatedAt>
-            <Body>{post ? post.body : renderLoader}</Body>
+            <Author>Author: {post.author}</Author>
+            <CreatedAt>{formatTime(post.timestamp)}</CreatedAt>
+            <Body>{post.body}</Body>
           </Segment>
           <Segment attached="bottom">
             <CommentNumber>
