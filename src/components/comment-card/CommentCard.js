@@ -48,7 +48,9 @@ const CommentCard = props => {
       </Comment.Content>
       <Segment>
         <Comment.Content>
-          <Comment.Author as={Author}>{props.comment.author}</Comment.Author>
+          <Comment.Author as={Author}>
+            Author: {props.comment.author}
+          </Comment.Author>
           <Comment.Metadata as={MetaData}>
             {formatTime(props.comment.timestamp)}
           </Comment.Metadata>
