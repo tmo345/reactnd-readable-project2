@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Loader } from 'semantic-ui-react';
 import VoteButtons from '../voting/VoteButtons';
+import PostBodySnippet from './PostBodySnippet';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -40,7 +41,6 @@ const CardFooter = styled.div`
 const PostCategory = styled.span`
   text-transform: capitalize;
 `;
-
 const PostCard = props => {
   const {
     id,
@@ -51,6 +51,7 @@ const PostCard = props => {
     body,
     voteScore,
   } = props.post;
+  const postDetailUrl = `${category}/${id}`;
   return (
     <PostCardContainer>
       <Card fluid>
@@ -71,7 +72,7 @@ const PostCard = props => {
             </InlineVoteButtons>
           </Votes>
           <Card.Header>
-            <Link to={`${category}/${id}`}>
+            <Link to={postDetailUrl}>
               <PostTitle>{title}</PostTitle>
             </Link>
           </Card.Header>
@@ -84,7 +85,9 @@ const PostCard = props => {
               Category: <PostCategory>{category}</PostCategory>
             </PostMeta>
           </Card.Meta>
-          <PostBody>{body}</PostBody>
+          <PostBody>
+            <PostBodySnippet postbody={body} moreLink={postDetailUrl} />
+          </PostBody>
         </Card.Content>
         <Card.Content as={CardFooter}>
           <Card.Meta>
