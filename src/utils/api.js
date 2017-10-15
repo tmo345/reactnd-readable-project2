@@ -104,7 +104,6 @@ export const putPostServer = (id, title, body) => {
     url: `${api}/posts/${id}`,
     headers,
     data: {
-      id,
       title,
       body,
     },
@@ -112,7 +111,6 @@ export const putPostServer = (id, title, body) => {
 };
 
 export const putCommentServer = (id, body) => {
-  console.log(id, body);
   return axios({
     method: 'put',
     url: `${api}/comments/${id}`,

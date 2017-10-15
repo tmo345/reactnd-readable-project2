@@ -5,6 +5,7 @@ import { voteForPost } from '../../actions/post-actions';
 import CommentListDisplay from '../comment-list/CommentListDisplay';
 import SinglePostHeader from './SinglePostHeader';
 import { Loader } from 'semantic-ui-react';
+import { openEditPostModal, openDeletePostModal } from '../../actions/ui/modal';
 
 class SinglePostDisplay extends Component {
   render() {
@@ -32,6 +33,8 @@ class SinglePostDisplay extends Component {
           deletePostFormSubmitted={this.props.deletePostFormSubmitted}
           history={this.props.history}
           commentNumber={commentNumber}
+          openEditPostModal={this.props.openEditPostModal}
+          openDeletePostModal={this.props.openDeletePostModal}
         />
         <CommentListDisplay parentId={this.props.match.params.id} />
       </div>
@@ -49,6 +52,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   voteForPost: (id, direction) => dispatch(voteForPost(id, direction)),
+  openEditPostModal: id => dispatch(openEditPostModal(id)),
+  openDeletePostModal: id => dispatch(openDeletePostModal(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePostDisplay);

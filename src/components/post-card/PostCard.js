@@ -5,6 +5,7 @@ import PostBodySnippet from './PostBodySnippet';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { formatTime } from '../../utils/helpers';
+import OpenModalButton from '../modals/OpenModalButton';
 
 const PostCardContainer = styled.li`
   margin-bottom: 25px;
@@ -89,6 +90,21 @@ const PostCard = props => {
           <PostBody>
             <PostBodySnippet postbody={body} moreLink={postDetailUrl} />
           </PostBody>
+          <OpenModalButton
+            openModal={() => {
+              props.openEditPostModal(id);
+            }}
+            icon="edit"
+            buttonText="Edit Post"
+          />
+          <OpenModalButton
+            openModal={() => {
+              props.openDeletePostModal(id);
+            }}
+            icon="delete"
+            buttonText="Delete Post"
+            color="red"
+          />
         </Card.Content>
         <Card.Content as={CardFooter}>
           <Card.Meta>

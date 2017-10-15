@@ -40,6 +40,7 @@ class PostListDisplay extends Component {
             <PostList
               posts={sortPosts(this.props.posts)}
               activeCategory={this.props.activeCategory}
+              history={this.props.history}
             />
           </Grid.Column>
           <Grid.Column largeScreen={5}>

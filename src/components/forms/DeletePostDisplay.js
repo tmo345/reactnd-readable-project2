@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import OpenModalButton from '../modals/OpenModalButton';
 import ModalWithHeader from '../modals/ModalWithHeader';
 import DeletePostForm from '../forms/DeletePostForm';
 import { deletePostServer } from '../../actions/post-actions';
@@ -35,55 +34,32 @@ class DeletePostDisplay extends Component {
 
   render() {
     return (
-      <div>
-        <OpenModalButton
-          openModal={this.props.openDeletePostModal}
-          resetFormSubmitted={this.props.resetDeletePostFormSubmitted}
-          buttonText="Delete"
-          icon="delete"
-          color="red"
+      <ModalWithHeader
+        label="Delete Post"
+        isOpen={this.props.deletePostModal.isOpen}
+        closeModal={this.handleCloseModal}
+      >
+        <DeletePostForm
+          onSubmit={this.submit}
+          processingDeletePost={this.props.processingDeletePost}
+          postId={this.props.postId}
+          post={this.props.post}
+          closeDeletePostModal={this.handleCloseModal}
         />
-        <ModalWithHeader
-          label="Delete Post"
-          isOpen={this.props.deletePostModalOpen}
-          closeModal={this.handleCloseModal}
-        >
-          {this.props.deletePostFormSubmitted ? (
-            <p>Post successfully deleted, redirecting you to main page...</p>
-          ) : (
-            /*<FormSubmittedMessage*/
-            //closeModal={() => {
-            //this.props.closeDeletePostModal();
-            //this.props.history.push('/');
-            //}}
-            //resetFormSubmitted={() =>
-            //this.props.resetDeletePostFormSubmitted()}
-            //heading="Delete Post Form Submitted"
-            //closeButtonText="Back to Main Page"
-            /*/>*/
-            <DeletePostForm
-              onSubmit={this.submit}
-              processingDeletePost={this.props.processingDeletePost}
-              postId={this.props.postId}
-              post={this.props.post}
-              closeDeletePostModal={this.props.closeDeletePostModal}
-            />
-          )}
-        </ModalWithHeader>
-      </div>
+      </ModalWithHeader>
     );
   }
 }
 
 const mapStateToProps = state => ({
   posts: state.posts,
-  deletePostModalOpen: state.ui.modals.deletePostModalOpen,
+  deletePostModal: state.ui.modals.deletePostModal,
   deletePostFormSubmitted: state.ui.forms.deletePostFormSubmitted,
   processingDeletePost: state.ui.forms.processingDeletePost,
 });
 
 const mapDispatchToProps = dispatch => ({
-  openDeletePostModal: () => dispatch(openDeletePostModal()),
+  openDeletePostModal: id => dispatch(openDeletePostModal(id)),
   closeDeletePostModal: () => dispatch(closeDeletePostModal()),
   startDeletePostFormSubmitted: () => dispatch(startDeletePostFormSubmitted()),
   resetDeletePostFormSubmitted: () => dispatch(resetDeletePostFormSubmitted()),

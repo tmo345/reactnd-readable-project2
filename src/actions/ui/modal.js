@@ -13,16 +13,18 @@ export const closeAddPostModal = () => ({
   type: CLOSE_ADD_POST_MODAL,
 });
 
-export const openEditPostModal = () => ({
+export const openEditPostModal = postId => ({
   type: OPEN_EDIT_POST_MODAL,
+  postId,
 });
 
 export const closeEditPostModal = () => ({
   type: CLOSE_EDIT_POST_MODAL,
 });
 
-export const openDeletePostModal = () => ({
+export const openDeletePostModal = postId => ({
   type: OPEN_DELETE_POST_MODAL,
+  postId,
 });
 
 export const closeDeletePostModal = () => ({

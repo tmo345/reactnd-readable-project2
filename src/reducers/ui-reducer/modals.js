@@ -15,8 +15,14 @@ import {
 
 const initialUiModals = {
   addPostModalOpen: false,
-  editPostModalOpen: false,
-  deletePostModalOpen: false,
+  editPostModal: {
+    isOpen: false,
+    forPostId: '',
+  },
+  deletePostModal: {
+    isOpen: false,
+    forPostId: '',
+  },
   addCommentModalOpen: false,
   editCommentModal: {
     isOpen: false,
@@ -46,25 +52,37 @@ const modals = (state = initialUiModals, action) => {
     case OPEN_EDIT_POST_MODAL:
       return {
         ...state,
-        editPostModalOpen: true,
+        editPostModal: {
+          isOpen: true,
+          forPostId: action.postId,
+        },
       };
 
     case CLOSE_EDIT_POST_MODAL:
       return {
         ...state,
-        editPostModalOpen: false,
+        editPostModal: {
+          isOpen: false,
+          forPostId: '',
+        },
       };
 
     case OPEN_DELETE_POST_MODAL:
       return {
         ...state,
-        deletePostModalOpen: true,
+        deletePostModal: {
+          isOpen: true,
+          forPostId: action.postId,
+        },
       };
 
     case CLOSE_DELETE_POST_MODAL:
       return {
         ...state,
-        deletePostModalOpen: false,
+        deletePostModal: {
+          isOpen: false,
+          forPostId: '',
+        },
       };
 
     case OPEN_ADD_COMMENT_MODAL:

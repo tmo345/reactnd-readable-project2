@@ -30,7 +30,7 @@ const PostList = props => {
           </NoPostsMessage>
         ) : (
           postsByCategory.map(post => {
-            return <PostCardDisplay key={post.id} post={post} />;
+            return <PostCardDisplay key={post.id} post={post} history={props.history} />;
           })
         )}
       </PostListElement>

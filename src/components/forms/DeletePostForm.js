@@ -28,7 +28,7 @@ let DeletePostForm = props => {
 
 const mapStateToProps = (state, ownProps) => ({
   initialValues: {
-    id: ownProps.post.id,
+    id: ownProps.postId,
   },
 });
 

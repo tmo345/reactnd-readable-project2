@@ -42,7 +42,7 @@ class App extends React.Component {
   render() {
     return (
       <Grid columns={1}>
-        <ReadableHeader />
+        <ReadableHeader history={this.props.history} />
         {!this.props.hydratingPostsComplete ||
         !this.props.hydratingCommentsComplete ? (
           <Loader active />
@@ -52,13 +52,19 @@ class App extends React.Component {
             <Route
               exact
               path="/:category?"
-              render={props => (
-                <PostListDisplay
-                  posts={this.props.posts}
-                  urlCategory={props.match.params.category}
-                  {...props}
-                />
-              )}
+              render={props => {
+                // Temporarily display delete post successful message with redirect to main page
+                if (this.props.deletePostFormSubmitted) {
+                  return <PostDeletedMessage />;
+                }
+                return (
+                  <PostListDisplay
+                    posts={this.props.posts}
+                    urlCategory={props.match.params.category}
+                    {...props}
+                  />
+                );
+              }}
             />
             {/* Single post display with comment list */}
             <Route

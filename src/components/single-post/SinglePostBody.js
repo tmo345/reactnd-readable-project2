@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '../../utils/helpers';
 import { Item, Segment } from 'semantic-ui-react';
-import EditPostDisplay from '../forms/EditPostDisplay';
-import DeletePostDisplay from '../forms/DeletePostDisplay';
+import OpenModalButton from '../modals/OpenModalButton';
 
 const Body = styled.div`
   margin-top: 0.5rem;
@@ -16,7 +15,7 @@ const CommentNumber = styled.div`
 const ClearFloat = styled.div`
   clear: both;
 `;
-const EditButtonContainer = styled.div`
+const ButtonContainer = styled.div`
   float: right;
 `;
 
@@ -35,14 +34,19 @@ const SinglePostBody = props => {
             <CommentNumber>
               Number of comments: {props.commentNumber}
             </CommentNumber>
-            <EditButtonContainer>
-              <DeletePostDisplay
-                post={post}
-                postId={props.urlId}
-                history={props.history}
+            <ButtonContainer>
+              <OpenModalButton
+                openModal={() => props.openEditPostModal(post.id)}
+                buttonText="Edit"
+                icon="edit"
               />
-              <EditPostDisplay post={post} postId={props.urlId} />
-            </EditButtonContainer>
+              <OpenModalButton
+                openModal={() => props.openDeletePostModal(post.id)}
+                buttonText="Delete"
+                icon="delete"
+                color="red"
+              />
+            </ButtonContainer>
             <ClearFloat />
           </Segment>
         </div>

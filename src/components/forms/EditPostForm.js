@@ -28,12 +28,12 @@ let EditPostForm = props => {
     </form>
   );
 };
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     initialValues: {
-      id: ownProps.post.id,
-      title: ownProps.post.title,
-      body: ownProps.post.body,
+      id: state.ui.modals.editPostModal.forPostId,
+      title: state.posts[state.ui.modals.editPostModal.forPostId]['title'],
+      body: state.posts[state.ui.modals.editPostModal.forPostId]['body'],
     },
   };
 };
