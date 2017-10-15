@@ -4,6 +4,7 @@ import VoteButtons from '../voting/VoteButtons';
 import PostBodySnippet from './PostBodySnippet';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { formatTime } from '../../utils/helpers';
 
 const PostCardContainer = styled.li`
   margin-bottom: 25px;
@@ -79,7 +80,7 @@ const PostCard = props => {
         </PostCardHeader>
         <Card.Content>
           <Card.Meta>
-            <PostMeta>{new Date(timestamp).toDateString()}</PostMeta>
+            <PostMeta>{formatTime(timestamp)}</PostMeta>
             <br />
             <PostMeta>
               Category: <PostCategory>{category}</PostCategory>
