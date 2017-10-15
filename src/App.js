@@ -48,7 +48,7 @@ class App extends React.Component {
           <Loader active />
         ) : (
           <Container>
-            // List of posts with sorting and category filter controls
+            {/*List of posts with sorting and category filter controls*/}
             <Route
               exact
               path="/:category?"
@@ -60,7 +60,7 @@ class App extends React.Component {
                 />
               )}
             />
-            // Single post display with comment list
+            {/* Single post display with comment list */}
             <Route
               exact
               path="/:category/:id"
