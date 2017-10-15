@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { Link, Route, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './App.css';
-import { Container, Grid, Menu, Loader } from 'semantic-ui-react';
+import { Container, Grid, Loader } from 'semantic-ui-react';
 
 import { getAllPosts } from './actions/post-actions';
 import { setCommentsForPost } from './actions/comment-actions';
