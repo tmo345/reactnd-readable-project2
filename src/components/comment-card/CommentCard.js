@@ -20,13 +20,24 @@ const Avatar = styled(Icon)`
   padding-top: 10px;
 `;
 
-const CommentButtons = styled(Comment.Actions)`
+const CommentButtonsContainer = styled(Comment.Actions)`
   float: right;
   text-align: right;
 `;
 
+const VoteButtonsContainer = styled(Comment.Actions)`
+  float: left;
+  text-align: left;
+`;
+
 const CommentBody = styled(Comment.Text)`
   margin-bottom: 12.5px !important;
+`;
+
+const VotesText = styled.p`
+  font-size: 1.2rem;
+  margin-bottom: 7.5px;
+  margin-top: 15px;
 `;
 
 const CommentCard = props => {
@@ -42,7 +53,7 @@ const CommentCard = props => {
             {formatTime(props.comment.timestamp)}
           </Comment.Metadata>
           <Comment.Text as={CommentBody}>{props.comment.body}</Comment.Text>
-          <Comment.Content>
+          <Comment.Content as={CommentButtonsContainer}>
             <OpenModalButton
               openModal={props.openEditCommentModal}
               id={props.comment.id}
@@ -61,8 +72,8 @@ const CommentCard = props => {
               color="red"
             />
           </Comment.Content>
-          <Comment.Content as={CommentButtons}>
-            <p>Votes: {props.comment.voteScore}</p>
+          <Comment.Content as={VoteButtonsContainer}>
+            <VotesText>Votes: {props.comment.voteScore}</VotesText>
             <VoteButtons
               votingOn={props.comment}
               handleVote={props.handlePostVote}
