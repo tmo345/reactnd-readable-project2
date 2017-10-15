@@ -7,8 +7,6 @@ import {
 import Sorting from './Sorting';
 
 class SortingDisplay extends Component {
-  handleSortFlagChange = event => {};
-
   render() {
     const {
       toSort,

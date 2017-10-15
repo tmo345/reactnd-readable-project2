@@ -1,16 +1,22 @@
 import { stateObjectToArray, stateArraytoObject } from './helpers';
+import {
+  GET_ALL_POSTS_SUCCEEDED,
+  ADD_POST_SERVER_SUCCESS,
+  EDIT_POST_SERVER_SUCCESS,
+  DELETE_POST_SERVER_SUCCESS,
+  VOTE_FOR_POST_SUCCEEDED,
+} from '../actions/post-actions';
 
 const initialPosts = {};
 
 const posts = (state = initialPosts, action) => {
   switch (action.type) {
-    case 'GET_ALL_POSTS_SUCCEEDED':
+    case GET_ALL_POSTS_SUCCEEDED:
       return stateArraytoObject(
         action.posts.filter(post => post.deleted === false),
       );
 
-    case 'ADD_POST_SERVER_SUCCESS': {
-      // block scope for declarations of action properties
+    case ADD_POST_SERVER_SUCCESS: {
       const {
         id,
         timestamp,
@@ -36,7 +42,7 @@ const posts = (state = initialPosts, action) => {
       };
     }
 
-    case 'EDIT_POST_SERVER_SUCCESS':
+    case EDIT_POST_SERVER_SUCCESS:
       return {
         ...state,
         [action.post.id]: {
@@ -46,14 +52,14 @@ const posts = (state = initialPosts, action) => {
         },
       };
 
-    case 'DELETE_POST_SERVER_SUCCESS': {
+    case DELETE_POST_SERVER_SUCCESS: {
       const { id } = action;
       const postArray = stateObjectToArray(state);
       const remainingPosts = postArray.filter((post: Post) => post.id !== id);
       return stateArraytoObject(remainingPosts);
     }
 
-    case 'VOTE_FOR_POST_SUCCEEDED':
+    case VOTE_FOR_POST_SUCCEEDED:
       return {
         ...state,
         [action.post.id]: {

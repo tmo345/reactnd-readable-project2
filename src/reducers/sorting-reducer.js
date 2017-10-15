@@ -1,3 +1,8 @@
+import {
+  SET_SORT_POST_FLAG,
+  SET_SORT_COMMENT_FLAG,
+} from '../actions/sorting-actions';
+
 const initialSorting = {
   posts: {
     flag: 'voteScore',
@@ -13,7 +18,7 @@ const initialSorting = {
 
 const sorting = (state = initialSorting, action) => {
   switch (action.type) {
-    case 'SET_SORT_POST_FLAG':
+    case SET_SORT_POST_FLAG:
       return {
         ...state,
         posts: {
@@ -23,7 +28,7 @@ const sorting = (state = initialSorting, action) => {
         },
       };
 
-    case 'SET_SORT_COMMENT_FLAG':
+    case SET_SORT_COMMENT_FLAG:
       return {
         ...state,
         comments: {

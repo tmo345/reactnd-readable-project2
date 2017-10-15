@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CommentList from './CommentList';
-import { Grid, Button, Header, Loader, Comment } from 'semantic-ui-react';
+import { Grid, Header, Loader, Comment } from 'semantic-ui-react';
 import AddCommentDisplay from '../forms/AddCommentDisplay';
 import EditCommentDisplay from '../forms/EditCommentDisplay';
 import DeleteCommentDisplay from '../forms/DeleteCommentDisplay';
 import SortingDisplay from '../sorting/SortingDisplay';
-import { convertToList, sortListBy } from '../../utils/helpers';
-import { pipe } from 'ramda';
+import { buildSortFunction } from '../../utils/helpers';
 
 class CommentListDisplay extends Component {
   render() {
     const { flag, direction } = this.props.sorting;
-    const sortComments = pipe(convertToList, sortListBy(flag, direction));
+    const sortComments = buildSortFunction(flag, direction);
+
     return (
       <Comment.Group size="large">
         <Header>Comments</Header>

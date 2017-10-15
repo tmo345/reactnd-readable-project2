@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import OpenModalButton from '../modals/OpenModalButton';
 import ModalWithHeader from '../modals/ModalWithHeader';
-import FormSubmittedMessage from '../form-fields/FormSubmittedMessage';
 import DeletePostForm from '../forms/DeletePostForm';
 import { deletePostServer } from '../../actions/post-actions';
 import {
@@ -13,7 +12,6 @@ import {
   openDeletePostModal,
   closeDeletePostModal,
 } from '../../actions/ui/modal';
-import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 
 class DeletePostDisplay extends Component {

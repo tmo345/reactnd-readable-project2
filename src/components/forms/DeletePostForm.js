@@ -6,7 +6,7 @@ import { IdHiddenInputField } from '../form-fields/readableFormFields';
 import { SubmitButton, ResetButton } from '../form-fields/formButtons';
 
 let DeletePostForm = props => {
-  const { handleSubmit, pristine } = props;
+  const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit} className="ui form">
       <Loader active={props.processingDeletePost} />

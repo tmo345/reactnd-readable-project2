@@ -1,14 +1,4 @@
-import React, { Component } from 'react';
-import { List, Icon } from 'semantic-ui-react';
-
-const handleSetPostFlag = e => {
-  const order = e.target.value;
-  this.setActiveSort(order);
-
-  const flag = order.split('-')[0];
-  const direction = order.split('-')[1];
-  this.props.setSortPostFlag(flag, direction);
-};
+import React from 'react';
 
 const sortOrders = [
   {

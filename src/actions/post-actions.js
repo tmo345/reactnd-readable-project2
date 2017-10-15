@@ -8,73 +8,66 @@ import {
 import { hydratingPostsComplete } from './ui/hydration';
 import uuidv4 from 'uuid/v4';
 
+export const GET_ALL_POSTS_STARTED = 'GET_ALL_POSTS_STARTED';
+export const GET_ALL_POSTS_SUCCEEDED = ' GET_ALL_POSTS_SUCCEEDED';
+
+export const ADD_POST_SERVER_STARTED = 'ADD_POST_SERVER_STARTED';
+export const ADD_POST_SERVER_SUCCESS = 'ADD_POST_SERVER_SUCCESS';
+
+export const EDIT_POST_SERVER_STARTED = 'EDIT_POST_SERVER_STARTED';
+export const EDIT_POST_SERVER_SUCCESS = 'EDIT_POST_SERVER_SUCCESS';
+
+export const DELETE_POST_SERVER_STARTED = 'DELETE_POST_SERVER_STARTED';
+export const DELETE_POST_SERVER_SUCCESS = 'DELETE_POST_SERVER_SUCCESS';
+
+export const VOTE_FOR_POST_STARTED = 'VOTE_FOR_POST_STARTED';
+export const VOTE_FOR_POST_SUCCEEDED = 'VOTE_FOR_POST_SUCCEEDED';
+
 // Synchronous actions
 
-export const editPost = ({ id, title, body }) => ({
-  type: 'EDIT_POST',
-  id,
-  title,
-  body,
-});
-
-export const deletePost = id => ({
-  type: 'DELETE_POST',
-  id,
-});
-
-export const upVotePost = id => ({
-  type: 'UP_VOTE_POST',
-  id,
-});
-
-export const downVotePost = id => ({
-  type: 'DOWN_VOTE_POST',
-  id,
-});
-
 export const getAllPostsStarted = () => ({
-  type: 'GET_ALL_POSTS_STARTED',
+  type: GET_ALL_POSTS_STARTED,
 });
 
 export const getAllPostsSucceeded = posts => ({
-  type: 'GET_ALL_POSTS_SUCCEEDED',
+  type: GET_ALL_POSTS_SUCCEEDED,
   posts,
 });
 
 export const addPostServerStarted = () => ({
-  type: 'ADD_POST_SERVER_STARTED',
+  type: ADD_POST_SERVER_STARTED,
 });
 
 export const addPostServerSuccess = post => ({
-  type: 'ADD_POST_SERVER_SUCCESS',
+  type: ADD_POST_SERVER_SUCCESS,
   post,
 });
 
 export const editPostServerStarted = () => ({
-  type: 'EDIT_POST_SERVER_STARTED',
+  type: EDIT_POST_SERVER_STARTED,
 });
 
 export const editPostServerSuccess = post => ({
-  type: 'EDIT_POST_SERVER_SUCCESS',
+  type: EDIT_POST_SERVER_SUCCESS,
   post,
 });
 
 export const deletePostServerStarted = () => ({
-  type: 'DELETE_POST_SERVER_STARTED',
+  type: DELETE_POST_SERVER_STARTED,
 });
 
 export const deletePostServerSuccess = id => ({
-  type: 'DELETE_POST_SERVER_SUCCESS',
+  type: DELETE_POST_SERVER_SUCCESS,
   id,
 });
 
 export const voteForPostStarted = id => ({
-  type: 'VOTE_FOR_POST_STARTED',
+  type: VOTE_FOR_POST_STARTED,
   id,
 });
 
 export const voteForPostSucceeded = (post, id) => ({
-  type: 'VOTE_FOR_POST_SUCCEEDED',
+  type: VOTE_FOR_POST_SUCCEEDED,
   post,
   id,
 });

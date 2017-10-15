@@ -1,14 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, initialize } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { Loader } from 'semantic-ui-react';
-import {
-  BodyTextAreaField,
-  IdHiddenInputField,
-} from '../form-fields/readableFormFields';
+import { BodyTextAreaField } from '../form-fields/readableFormFields';
 import { SubmitButton, ResetButton } from '../form-fields/formButtons';
 import { Field } from 'redux-form';
-import uuidv4 from 'uuid/v4';
 
 class EditCommentForm extends React.Component {
   render() {
