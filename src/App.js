@@ -1,21 +1,20 @@
 import React from 'react';
-import './App.css';
+import axios from 'axios';
 import { Link, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import AddPostDisplay from './components/forms/AddPostDisplay';
+
+import './App.css';
 import { Container, Grid, Menu, Loader } from 'semantic-ui-react';
-import PostListDisplay from './components/post-list/PostListDisplay';
+
 import { getAllPosts } from './actions/post-actions';
 import { setCommentsForPost } from './actions/comment-actions';
-import SinglePostDisplay from './components/single-post/SinglePostDisplay';
-import styled from 'styled-components';
 import { hydratingCommentsComplete } from './actions/ui/hydration';
-import axios from 'axios';
 
-const SiteBranding = styled(Menu.Menu)`
-  border-left: 1px solid #333;
-  border-right: 1px solud #333;
-`;
+import ReadableHeader from './components/ReadableHeader';
+import PostListDisplay from './components/post-list/PostListDisplay';
+import SinglePostDisplay from './components/single-post/SinglePostDisplay';
+import PostDeletedMessage from './components/messages/PostDeletedMessage';
+import PostNotFoundMessage from './components/messages/PostNotFoundMessage';
 
 class App extends React.Component {
   componentDidMount() {
@@ -43,26 +42,13 @@ class App extends React.Component {
   render() {
     return (
       <Grid columns={1}>
-        <Grid.Row>
-          <Menu inverted={true} attached="top">
-            <Container>
-              <SiteBranding>
-                <Menu.Item as={Link} to="/">
-                  <h1>Readable</h1>
-                </Menu.Item>
-              </SiteBranding>
-
-              <Menu.Menu position="right">
-                <AddPostDisplay />
-              </Menu.Menu>
-            </Container>
-          </Menu>
-        </Grid.Row>
+        <ReadableHeader />
         {!this.props.hydratingPostsComplete ||
         !this.props.hydratingCommentsComplete ? (
           <Loader active />
         ) : (
           <Container>
+            // List of posts with sorting and category filter controls
             <Route
               exact
               path="/:category?"
@@ -74,19 +60,18 @@ class App extends React.Component {
                 />
               )}
             />
+            // Single post display with comment list
             <Route
               exact
               path="/:category/:id"
               render={props => {
+                // Temporarily display delete post successful message with redirect to main page
                 if (this.props.deletePostFormSubmitted) {
-                  return (
-                    <div>
-                      <Loader active />
-                      <h2>Post successfully deleted.</h2>
-                      <p>Redirecting you to main page...</p>
-                    </div>
-                  );
+                  return <PostDeletedMessage />;
                 }
+                // Check to see if post exists (for example, user might visit the url of a
+                // previously deleted post). If it exists, render SinglePostDisplay. If it does not
+                // exist, then render PostNotFoundMessage.
                 return this.props.posts.hasOwnProperty(
                   props.match.params.id,
                 ) ? (
@@ -96,11 +81,7 @@ class App extends React.Component {
                     {...props}
                   />
                 ) : (
-                  <div>
-                    <h2>Post Not Found</h2>
-                    <p>Looks like the post you were looking for isn't here.</p>
-                    <Link to="/">Back to All Posts</Link>
-                  </div>
+                  <PostNotFoundMessage />
                 );
               }}
             />
