@@ -21,20 +21,23 @@ const sortOrders = [
 
 const Sorting = ({ currentSort, setSortFlags }) => {
   return (
-    <select
-      onChange={e => {
-        const order = e.target.value;
-        const [flag, direction] = order.split('-');
-        setSortFlags(flag, direction);
-      }}
-      value={currentSort}
-    >
-      {sortOrders.map(order => (
-        <option key={order.value} value={order.value}>
-          {order.text}
-        </option>
-      ))}
-    </select>
+    <div>
+      <span>Sort By:  </span>
+      <select
+        onChange={e => {
+          const order = e.target.value;
+          const [flag, direction] = order.split('-');
+          setSortFlags(flag, direction);
+        }}
+        value={currentSort}
+      >
+        {sortOrders.map(order => (
+          <option key={order.value} value={order.value}>
+            {order.text}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
